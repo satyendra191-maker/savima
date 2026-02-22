@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api https://sav/
+
+Sitemap: https://saviman.com/sitemap.xml

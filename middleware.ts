@@ -1,0 +1,1 @@
+// Middleware is not supported in Vite SPA. Auth is handled in Context/Routes.
