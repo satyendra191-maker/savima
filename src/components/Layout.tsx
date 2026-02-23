@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Settings, Search, ChevronDown, ChevronRight, Phone, Mail, MapPin, ArrowRight, Heart } from 'lucide-react';
+import { Menu, X, Settings, Search, ChevronDown, ChevronRight, Phone, Mail, MapPin, ArrowRight, Heart, Home, Package, Building2, FileText, MessageSquare, MoreHorizontal, Briefcase, Globe } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { VisitorAIAssistant } from './VisitorAIAssistant';
 import { DarkModeToggle } from './ui/DarkModeToggle';
@@ -460,15 +460,84 @@ export const Footer: React.FC = () => {
 };
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const location = useLocation();
+    const [moreMenuOpen, setMoreMenuOpen] = useState(false);
+
+    const mobileNavItems = [
+        { name: 'Home', href: '/', icon: Home },
+        { name: 'Products', href: '/products', icon: Package },
+        { name: 'Industries', href: '/industries', icon: Building2 },
+        { name: 'Catalog', href: '/catalog', icon: FileText },
+    ];
+
+    const moreNavItems = [
+        { name: 'Careers', href: '/careers', icon: Briefcase },
+        { name: 'Blog', href: '/blog', icon: FileText },
+        { name: 'About', href: '/about', icon: Globe },
+        { name: 'Contact', href: '/contact', icon: MessageSquare },
+        { name: 'Donate', href: '/donate', icon: Heart },
+    ];
+
     return (
         <div className="min-h-screen flex flex-col bg-neutral-50 dark:bg-background-dark transition-colors duration-300">
             <ProgressBar />
             <Navbar />
             <AnnouncementBar />
-            <main className="flex-grow">
+            <main className="flex-grow pb-16 md:pb-0">
                 {children}
             </main>
             <Footer />
+            
+            {/* Mobile Bottom Navigation */}
+            <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 z-50 safe-area-pb">
+                <div className="flex items-center justify-around h-14">
+                    {mobileNavItems.map((item) => (
+                        <Link
+                            key={item.name}
+                            to={item.href}
+                            className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${
+                                location.pathname === item.href
+                                    ? 'text-brass-600'
+                                    : 'text-gray-500 dark:text-gray-400'
+                            }`}
+                        >
+                            <item.icon size={20} />
+                            <span className="text-[10px] font-medium">{item.name}</span>
+                        </Link>
+                    ))}
+                    <div className="relative">
+                        <button
+                            onClick={() => setMoreMenuOpen(!moreMenuOpen)}
+                            className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${
+                                moreMenuOpen ? 'text-brass-600' : 'text-gray-500 dark:text-gray-400'
+                            }`}
+                        >
+                            <MoreHorizontal size={20} />
+                            <span className="text-[10px] font-medium">More</span>
+                        </button>
+                        
+                        {moreMenuOpen && (
+                            <div className="absolute bottom-full mb-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-2 min-w-[180px]">
+                                {moreNavItems.map((item) => (
+                                    <Link
+                                        key={item.name}
+                                        to={item.href}
+                                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${
+                                            item.name === 'Donate' 
+                                                ? 'text-red-600' 
+                                                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                                        }`}
+                                    >
+                                        <item.icon size={16} />
+                                        {item.name}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </nav>
+
             <ShipmentTracker />
             <LogisticsPartners />
             <VisitorAIAssistant />
@@ -477,6 +546,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             <WhatsAppWidget />
             <CookieConsent />
             <BackToTop />
+            <style>{`.safe-area-pb { padding-bottom: env(safe-area-inset-bottom, 0); }`}</style>
         </div>
     );
 };

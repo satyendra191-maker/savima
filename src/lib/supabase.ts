@@ -6,6 +6,7 @@ import { Product, Inquiry, SiteSettings, CMSPage } from '../types';
 // Do not use dynamic property access (e.g. process.env[key]).
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY || '';
+const SUPABASE_ADMIN_KEY = process.env.VITE_SUPABASE_ADMIN_KEY || 'saviman_admin_2024';
 
 console.log("Supabase Config:", {
   hasUrl: !!SUPABASE_URL,
@@ -47,7 +48,13 @@ const createMockChain = () => {
 // Create client only if URL is present.
 // We cast the mock to 'any' to bypass strict type checks for the complex Supabase client type.
 export const supabase = (SUPABASE_URL && SUPABASE_ANON_KEY)
-  ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      global: {
+        headers: {
+          'x-admin-key': SUPABASE_ADMIN_KEY
+        }
+      }
+    })
   : {
     from: () => createMockChain(),
     storage: {

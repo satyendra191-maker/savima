@@ -23,21 +23,24 @@ import { TermsOfService } from './src/pages/TermsOfService';
 import { NotFound } from './src/pages/NotFound';
 import { Donate } from './src/pages/Donate';
 import { Login } from './pages/admin/Login';
+import { ToastProvider } from './src/admin/components';
 import { 
   CMSLayout, 
   CMSDashboard, 
-  CMSProducts, 
-  CMSCatalog,
-  CMSIndustries, 
-  CMSInquiries, 
-  CMSCareers,
-  CMSDonations,
-  CMSShipments,
-  CMSLogistics,
-  CMSBlogs, 
-  CMSAnalytics, 
-  CMSSettings 
 } from './src/pages/admin/CMS';
+import {
+  AdminProductsPage,
+  AdminCatalogPage,
+  AdminIndustriesPage,
+  AdminInquiriesPage,
+  AdminCareersPage,
+  AdminDonationsPage,
+  AdminShipmentsPage,
+  AdminLogisticsPage,
+  AdminBlogPage,
+  AdminAnalyticsPage,
+  AdminSettingsPage
+} from './src/admin/pages';
 import { Analytics } from './src/lib/analytics';
 import { I18nProvider } from './src/components/ui/I18n';
 
@@ -110,17 +113,17 @@ const AppRoutes = () => {
       <Route element={<CMSRoute />}>
         <Route path="/admin" element={<CMSDashboard />} />
         <Route path="/admin/dashboard" element={<CMSDashboard />} />
-        <Route path="/admin/products" element={<CMSProducts />} />
-        <Route path="/admin/catalog" element={<CMSCatalog />} />
-        <Route path="/admin/industries" element={<CMSIndustries />} />
-        <Route path="/admin/inquiries" element={<CMSInquiries />} />
-        <Route path="/admin/careers" element={<CMSCareers />} />
-        <Route path="/admin/donations" element={<CMSDonations />} />
-        <Route path="/admin/shipments" element={<CMSShipments />} />
-        <Route path="/admin/logistics" element={<CMSLogistics />} />
-        <Route path="/admin/blogs" element={<CMSBlogs />} />
-        <Route path="/admin/analytics" element={<CMSAnalytics />} />
-        <Route path="/admin/settings" element={<CMSSettings />} />
+        <Route path="/admin/products" element={<AdminProductsPage />} />
+        <Route path="/admin/catalog" element={<AdminCatalogPage />} />
+        <Route path="/admin/industries" element={<AdminIndustriesPage />} />
+        <Route path="/admin/inquiries" element={<AdminInquiriesPage />} />
+        <Route path="/admin/careers" element={<AdminCareersPage />} />
+        <Route path="/admin/donations" element={<AdminDonationsPage />} />
+        <Route path="/admin/shipments" element={<AdminShipmentsPage />} />
+        <Route path="/admin/logistics" element={<AdminLogisticsPage />} />
+        <Route path="/admin/blogs" element={<AdminBlogPage />} />
+        <Route path="/admin/analytics" element={<AdminAnalyticsPage />} />
+        <Route path="/admin/settings" element={<AdminSettingsPage />} />
       </Route>
     </Routes>
   )
@@ -130,13 +133,15 @@ function App() {
   return (
     <ThemeProvider>
       <I18nProvider>
-        <AuthProvider>
-          <Analytics />
-          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-            <ScrollToTop />
-            <AppRoutes />
-          </Router>
-        </AuthProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <Analytics />
+            <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+              <ScrollToTop />
+              <AppRoutes />
+            </Router>
+          </AuthProvider>
+        </ToastProvider>
       </I18nProvider>
     </ThemeProvider>
   );
