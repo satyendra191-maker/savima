@@ -40,6 +40,7 @@ export const LogisticsPartners: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'national' | 'international'>('all');
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadPartners();
@@ -47,20 +48,27 @@ export const LogisticsPartners: React.FC = () => {
 
   const loadPartners = async () => {
     try {
+      setError(null);
       const data = await CMSLogisticsService.getAll();
-      setPartners(data);
-    } catch (error) {
-      console.error('Error loading partners:', error);
+      setPartners(data || []);
+    } catch (err: any) {
+      console.error('Error loading partners:', err);
+      setError(err?.message || 'Failed to load partners');
+      setPartners([]);
     } finally {
       setLoading(false);
     }
   };
 
   const filteredPartners = filter === 'all' 
-    ? partners 
-    : partners.filter(p => p.type === filter);
+    ? (partners || []) 
+    : (partners || []).filter(p => p && p.type === filter);
 
   const displayPartners = showAll ? filteredPartners : filteredPartners.slice(0, 4);
+
+  if (error) {
+    return null;
+  }
 
   if (loading) {
     return (
@@ -107,15 +115,18 @@ export const LogisticsPartners: React.FC = () => {
 
       <div className="p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {displayPartners.map((partner) => {
-            const TypeIcon = TYPE_CONFIG[partner.type].icon;
+          {(displayPartners || []).filter(Boolean).map((partner) => {
+            if (!partner || !partner.id) return null;
+            const partnerType = partner?.type || 'national';
+            const typeConfig = TYPE_CONFIG[partnerType as keyof typeof TYPE_CONFIG] || TYPE_CONFIG.national;
+            const TypeIcon = typeConfig?.icon || MapPin;
             return (
               <div
                 key={partner.id}
                 className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:shadow-lg transition-all hover:border-primary-500/50 group"
               >
                 <div className="flex items-start justify-between mb-3">
-                  <div className={`w-10 h-10 rounded-lg ${TYPE_CONFIG[partner.type].color} flex items-center justify-center`}>
+                  <div className={`w-10 h-10 rounded-lg ${typeConfig.color} flex items-center justify-center`}>
                     <TypeIcon size={20} className="text-white" />
                   </div>
                   <span className={`px-2 py-0.5 text-xs rounded-full ${partner.status === 'active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-700'}`}>
@@ -131,7 +142,7 @@ export const LogisticsPartners: React.FC = () => {
                 </p>
 
                 <div className="flex flex-wrap gap-1 mb-3">
-                  {partner.services.slice(0, 3).map((service, idx) => {
+                  {(partner.services || []).slice(0, 3).map((service, idx) => {
                     const Icon = SERVICE_ICONS[service] || Package;
                     return (
                       <span key={idx} className="flex items-center gap-1 px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs text-gray-600 dark:text-gray-400">
@@ -140,20 +151,20 @@ export const LogisticsPartners: React.FC = () => {
                       </span>
                     );
                   })}
-                  {partner.services.length > 3 && (
+                  {(partner.services || []).length > 3 && (
                     <span className="px-2 py-0.5 text-xs text-gray-500">
-                      +{partner.services.length - 3} more
+                      +{(partner.services || []).length - 3} more
                     </span>
                   )}
                 </div>
 
                 <div className="flex flex-wrap gap-1">
-                  {partner.coverage.slice(0, 3).map((country, idx) => (
+                  {(partner.coverage || []).slice(0, 3).map((country, idx) => (
                     <span key={idx} className="px-1.5 py-0.5 bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs rounded">
                       {country}
                     </span>
                   ))}
-                  {partner.coverage.length > 3 && (
+                  {(partner.coverage || []).length > 3 && (
                     <span className="px-1.5 py-0.5 text-xs text-gray-500">
                       +{partner.coverage.length - 3}
                     </span>

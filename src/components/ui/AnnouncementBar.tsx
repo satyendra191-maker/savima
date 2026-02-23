@@ -34,7 +34,7 @@ export const AnnouncementBar: React.FC = () => {
     <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-2.5 px-4 relative z-40 border-b border-slate-700">
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-3">
         <div className="flex items-center gap-2 text-amber-400">
-          {current.icon}
+          {current?.icon}
         </div>
         
         <div className="flex-1 text-center overflow-hidden">
