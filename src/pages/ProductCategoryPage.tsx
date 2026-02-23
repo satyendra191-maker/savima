@@ -4,6 +4,7 @@ import { Search, Grid, List, ChevronRight } from 'lucide-react';
 import { ProductCard, ProductCardSkeleton } from '../components/product/ProductCard';
 import type { Product } from '../types';
 import { supabase } from '../lib/supabase';
+import { DEFAULT_ICON, safeArray as useSafeArray } from '../lib/safeUtils';
 
 interface ProductCategoryPageProps {
   category?: string;
@@ -104,8 +105,8 @@ export const ProductCategoryPage: React.FC<ProductCategoryPageProps> = ({ catego
             <span className="text-white font-semibold">{info.title}</span>
           </div>
           <div className="flex items-center gap-4 mb-4">
-            <span className="text-4xl">{info.icon}</span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">{info.title}</h1>
+            <span className="text-4xl">{info?.icon || DEFAULT_ICON}</span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">{info?.title || 'Products'}</h1>
           </div>
           <p className="text-white/90 max-w-2xl text-lg leading-relaxed">
             {info.description}
@@ -167,8 +168,8 @@ export const ProductCategoryPage: React.FC<ProductCategoryPageProps> = ({ catego
           </div>
         ) : (
           <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {useSafeArray<Product>(products).map((product) => (
+              <ProductCard key={product?.id ?? Math.random()} product={product} />
             ))}
           </div>
         )}

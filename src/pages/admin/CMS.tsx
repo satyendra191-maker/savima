@@ -27,6 +27,7 @@ import {
   supabase
 } from '../../lib/supabase';
 import { Product, Inquiry } from '../../types';
+import { safeArray } from '../../lib/safeUtils';
 
 type Permission = 'create' | 'read' | 'update' | 'delete';
 type Role = 'admin' | 'editor' | 'viewer';
@@ -140,7 +141,7 @@ export const CMSLayout: React.FC<{ children?: React.ReactNode }> = ({ children }
         </div>
         
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-          {MENU_ITEMS.map((item) => {
+          {(MENU_ITEMS ?? []).filter(Boolean).map((item) => {
             const isActive = currentPath === item.path || (item.path !== '/admin' && currentPath.startsWith(item.path));
             return (
               <Link
@@ -152,7 +153,7 @@ export const CMSLayout: React.FC<{ children?: React.ReactNode }> = ({ children }
                     : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
               >
-                <item.icon size={20} />
+                {item?.icon ? <item.icon size={20} /> : null}
                 {sidebarOpen && <span>{item.name}</span>}
               </Link>
             );
@@ -197,10 +198,10 @@ export const CMSDashboard: React.FC = () => {
           CMSShipmentsService.getAll()
         ]);
         setStats({
-          products: products.length,
-          inquiries: inquiries.length,
-          donations: donations.reduce((sum, d) => sum + (d.amount || 0), 0),
-          shipments: shipments.length
+          products: (products || []).length,
+          inquiries: (inquiries || []).length,
+          donations: (donations || []).reduce((sum, d) => sum + (d.amount || 0), 0),
+          shipments: (shipments || []).length
         });
       } catch (error) {
         console.error('Error fetching stats:', error);
@@ -215,12 +216,12 @@ export const CMSDashboard: React.FC = () => {
     return <div className="flex items-center justify-center h-64"><Loader2 className="w-8 h-8 animate-spin text-brass-500" /></div>;
   }
 
-  const cards = [
+  const cards = stats ? [
     { title: 'Total Products', value: stats.products, icon: Package, color: 'bg-blue-500' },
     { title: 'Total Inquiries', value: stats.inquiries, icon: MessageSquare, color: 'bg-green-500' },
-    { title: 'Total Donations', value: `$${stats.donations.toLocaleString()}`, icon: Heart, color: 'bg-pink-500' },
+    { title: 'Total Donations', value: stats.donations ? `$${stats.donations.toLocaleString()}` : '$0', icon: Heart, color: 'bg-pink-500' },
     { title: 'Active Shipments', value: stats.shipments, icon: Truck, color: 'bg-orange-500' },
-  ];
+  ] : [];
 
   return (
     <div className="space-y-6">
@@ -230,15 +231,15 @@ export const CMSDashboard: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {cards.map((card, index) => (
+        {(cards ?? []).map((card, index) => (
           <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">{card.title}</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{card.value}</p>
+                <p className="text-sm text-gray-500">{card?.title}</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{card?.value}</p>
               </div>
-              <div className={`w-12 h-12 ${card.color} rounded-xl flex items-center justify-center`}>
-                <card.icon className="text-white" size={24} />
+              <div className={`w-12 h-12 ${card?.color || 'bg-gray-500'} rounded-xl flex items-center justify-center`}>
+                {card?.icon ? <card.icon className="text-white" size={24} /> : null}
               </div>
             </div>
           </div>
@@ -303,7 +304,7 @@ export const CMSProducts: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const data = await CMSProductsService.getAll();
-        setProducts(data);
+        setProducts(safeArray(data));
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {
@@ -470,7 +471,7 @@ export const CMSCatalog: React.FC = () => {
     const fetchCatalogs = async () => {
       try {
         const data = await CMSCatalogService.getAll();
-        setCatalogs(data);
+        setCatalogs(safeArray(data));
       } catch (error) {
         console.error('Error fetching catalogs:', error);
       } finally {
@@ -528,7 +529,7 @@ export const CMSIndustries: React.FC = () => {
     const fetchIndustries = async () => {
       try {
         const data = await CMSIndustriesService.getAll();
-        setIndustries(data);
+        setIndustries(safeArray(data));
       } catch (error) {
         console.error('Error fetching industries:', error);
       } finally {
@@ -586,7 +587,7 @@ export const CMSInquiries: React.FC = () => {
     const fetchInquiries = async () => {
       try {
         const data = await CMSInquiriesService.getAll();
-        setInquiries(data);
+        setInquiries(safeArray(data));
       } catch (error) {
         console.error('Error fetching inquiries:', error);
       } finally {
@@ -675,7 +676,7 @@ export const CMSCareers: React.FC = () => {
     const fetchCareers = async () => {
       try {
         const data = await CMSCareersService.getAll();
-        setCareers(data);
+        setCareers(safeArray(data));
       } catch (error) {
         console.error('Error fetching careers:', error);
       } finally {
@@ -743,7 +744,7 @@ export const CMSDonations: React.FC = () => {
     const fetchDonations = async () => {
       try {
         const data = await CMSDonationsService.getAll();
-        setDonations(data);
+        setDonations(safeArray(data));
       } catch (error) {
         console.error('Error fetching donations:', error);
       } finally {
@@ -813,7 +814,7 @@ export const CMSShipments: React.FC = () => {
     const fetchShipments = async () => {
       try {
         const data = await CMSShipmentsService.getAll();
-        setShipments(data);
+        setShipments(safeArray(data));
       } catch (error) {
         console.error('Error fetching shipments:', error);
       } finally {
@@ -905,7 +906,7 @@ export const CMSLogistics: React.FC = () => {
     const fetchPartners = async () => {
       try {
         const data = await CMSLogisticsService.getAll();
-        setPartners(data);
+        setPartners(safeArray(data));
       } catch (error) {
         console.error('Error fetching partners:', error);
       } finally {
@@ -974,7 +975,7 @@ export const CMSBlogs: React.FC = () => {
     const fetchBlogs = async () => {
       try {
         const data = await CMSBlogsService.getAll();
-        setBlogs(data);
+        setBlogs(safeArray(data));
       } catch (error) {
         console.error('Error fetching blogs:', error);
       } finally {
@@ -1034,7 +1035,7 @@ export const CMSAnalytics: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const data = await CMSProductsService.getAll();
-        setProducts(data);
+        setProducts(safeArray(data));
       } catch (error) {
         console.error('Error fetching products for analytics:', error);
       } finally {

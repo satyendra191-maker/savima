@@ -5,6 +5,7 @@ import { ProductService } from '../src/lib/supabase';
 import { Search, ArrowRight, Package, Settings, Cpu } from 'lucide-react';
 import { SEO } from '../src/components/SEO';
 import { ProductCard } from '../src/components/product/ProductCard';
+import { safeArray } from '../src/lib/safeUtils';
 
 const CATEGORY_METADATA: Record<string, { title: string; description: string; icon?: React.ReactNode }> = {
   brass: {
@@ -48,7 +49,7 @@ export const Products: React.FC = () => {
         const data = category
           ? await ProductService.getByCategory(category)
           : await ProductService.getAll();
-        setProducts(data);
+        setProducts(data || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -66,12 +67,12 @@ export const Products: React.FC = () => {
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
-  const filteredProducts = products.filter(p => {
+  const filteredProducts = safeArray<Product>(products).filter(p => {
     const term = debouncedSearch.toLowerCase();
     return (
-      p.name.toLowerCase().includes(term) ||
-      p.short_description.toLowerCase().includes(term) ||
-      (p.industry_usage && p.industry_usage.toLowerCase().includes(term))
+      p?.name?.toLowerCase().includes(term) ||
+      p?.short_description?.toLowerCase().includes(term) ||
+      (p?.industry_usage && p.industry_usage.toLowerCase().includes(term))
     );
   });
 
@@ -87,7 +88,7 @@ export const Products: React.FC = () => {
       description: "Explore the complete catalog of precision brass and stainless steel components by SAVIMAN. Custom manufacturing for Automotive, Electrical, and Plumbing sectors."
     };
 
-  const categoryInfo = category ? CATEGORY_METADATA[category] : null;
+  const categoryInfo = (category && CATEGORY_METADATA[category]) ? CATEGORY_METADATA[category] : { title: '', description: '', icon: null };
 
   return (
     <div className="bg-gray-50 dark:bg-primary-900 min-h-screen py-16 transition-colors duration-500">
@@ -97,9 +98,9 @@ export const Products: React.FC = () => {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-gray-200 dark:border-primary-700 pb-8">
           <div className="max-w-2xl">
-            {categoryInfo && (
+            {categoryInfo && categoryInfo.icon && (
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-800 text-primary-600 dark:text-primary-300 mb-4">
-                {categoryInfo.icon}
+                {categoryInfo?.icon}
               </div>
             )}
             <h1 className="text-4xl font-extrabold text-primary-900 dark:text-white tracking-tight mb-3">
@@ -186,8 +187,8 @@ export const Products: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {safeArray<Product>(filteredProducts).map((product) => (
+              <ProductCard key={product?.id ?? Math.random()} product={product} />
             ))}
           </div>
         )}

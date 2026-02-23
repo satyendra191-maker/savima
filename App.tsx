@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, Outlet }
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import { ThemeProvider } from './src/context/ThemeContext';
 import { Layout } from './src/components/Layout';
+import { ErrorBoundary } from './src/components/ErrorBoundary';
 import { Home } from './pages/Home';
 import { Products } from './pages/Products';
 import { ProductDetail } from './pages/ProductDetail';
@@ -131,19 +132,21 @@ const AppRoutes = () => {
 
 function App() {
   return (
-    <ThemeProvider>
-      <I18nProvider>
-        <ToastProvider>
-          <AuthProvider>
-            <Analytics />
-            <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-              <ScrollToTop />
-              <AppRoutes />
-            </Router>
-          </AuthProvider>
-        </ToastProvider>
-      </I18nProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <I18nProvider>
+          <ToastProvider>
+            <AuthProvider>
+              <Analytics />
+              <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                <ScrollToTop />
+                <AppRoutes />
+              </Router>
+            </AuthProvider>
+          </ToastProvider>
+        </I18nProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 
