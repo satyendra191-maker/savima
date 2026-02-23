@@ -268,15 +268,16 @@ ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
 -- RLS Policies for site_settings
 DROP POLICY IF EXISTS "Public can read site_settings" ON site_settings;
 CREATE POLICY "Public can read site_settings" ON site_settings FOR SELECT USING (true);
-DROP POLICY IF EXISTS "Admin can manage site_settings" ON site_settings FOR ALL USING (true) WITH CHECK (true);
 
 -- RLS Policies for analytics_events
-DROP POLICY IF EXISTS "Anyone can create analytics" ON analytics_events FOR INSERT WITH CHECK (true);
+DROP POLICY IF EXISTS "Anyone can create analytics" ON analytics_events;
 CREATE POLICY "Anyone can create analytics" ON analytics_events FOR INSERT WITH CHECK (true);
-DROP POLICY IF EXISTS "Admin can view analytics" ON analytics_events FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Admin can view analytics" ON analytics_events;
+CREATE POLICY "Admin can view analytics" ON analytics_events FOR SELECT USING (true);
 
 -- RLS Policies for admin_users
-DROP POLICY IF EXISTS "Admin can manage admin_users" ON admin_users FOR ALL USING (true) WITH CHECK (true);
+DROP POLICY IF EXISTS "Admin can manage admin_users" ON admin_users;
+CREATE POLICY "Admin can manage admin_users" ON admin_users FOR ALL USING (true) WITH CHECK (true);
 
 -- ============================================
 -- DONE!
