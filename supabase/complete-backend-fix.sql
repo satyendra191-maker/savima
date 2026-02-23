@@ -176,8 +176,28 @@ ALTER TABLE logistics_quotes ADD COLUMN IF NOT EXISTS status VARCHAR(50) DEFAULT
 ALTER TABLE logistics_quotes ADD COLUMN IF NOT EXISTS notes TEXT;
 
 -- ============================================
--- 14. CMS_PAGES TABLE - Add missing columns
+-- 14. CMS_PAGES TABLE - Create if not exists, then add missing columns
 -- ============================================
+
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_tables WHERE tablename = 'cms_pages') THEN
+        CREATE TABLE cms_pages (
+            id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+            title VARCHAR(255) NOT NULL,
+            slug VARCHAR(255) UNIQUE NOT NULL,
+            content TEXT,
+            sections JSONB DEFAULT '[]',
+            meta_title VARCHAR(255),
+            meta_description TEXT,
+            status VARCHAR(50) DEFAULT 'draft',
+            featured BOOLEAN DEFAULT false,
+            template VARCHAR(50) DEFAULT 'default',
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+            updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+        );
+    END IF;
+END $$;
 
 ALTER TABLE cms_pages ADD COLUMN IF NOT EXISTS content TEXT;
 ALTER TABLE cms_pages ADD COLUMN IF NOT EXISTS sections JSONB DEFAULT '[]';
