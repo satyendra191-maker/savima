@@ -117,31 +117,10 @@ CREATE TABLE IF NOT EXISTS blog_posts (
 );
 
 -- ============================================
--- SITE SETTINGS TABLE
--- ============================================
-CREATE TABLE IF NOT EXISTS site_settings (
-    id INT PRIMARY KEY DEFAULT 1,
-    site_name VARCHAR(255),
-    tagline VARCHAR(255),
-    contact_email VARCHAR(255),
-    contact_phone VARCHAR(50),
-    whatsapp VARCHAR(50),
-    address TEXT,
-    google_maps_embed TEXT,
-    footer_text TEXT,
-    logo_url TEXT,
-    favicon_url TEXT,
-    social_links JSONB DEFAULT '{}',
-    seo_settings JSONB DEFAULT '{}',
-    theme_settings JSONB DEFAULT '{}',
-    updated_by UUID REFERENCES admin_users(id),
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Insert default settings
-INSERT INTO site_settings (id, site_name, tagline, contact_email, footer_text)
-VALUES (1, 'Saviman Industries', 'Precision Manufacturing Excellence', 'export@saviman.com', '© 2024 Saviman Industries. All rights reserved.')
-ON CONFLICT (id) DO NOTHING;
+-- SITE SETTINGS TABLE (Skip if already exists)
+-- The existing table doesn't have all columns, so we skip this
+-- If you need to add columns, do it manually:
+-- ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS tagline VARCHAR(255);
 
 -- ============================================
 -- CMS PAGES TABLE
@@ -260,7 +239,7 @@ ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 ALTER TABLE inquiries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE industries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE blog_posts ENABLE ROW LEVEL SECURITY;
-ALTER TABLE site_settings ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE site_settings ENABLE ROW LEVEL SECURITY; -- Skipped
 ALTER TABLE cms_pages ENABLE ROW LEVEL SECURITY;
 ALTER TABLE analytics_events ENABLE ROW LEVEL SECURITY;
 
@@ -347,15 +326,8 @@ CREATE POLICY "Admins can manage blogs" ON blog_posts
 -- SITE SETTINGS POLICIES
 -- ============================================
 
--- Public read access
-DROP POLICY IF EXISTS "Public can view settings" ON site_settings;
-CREATE POLICY "Public can view settings" ON site_settings
-    FOR SELECT USING (true);
-
--- Admin full access
-DROP POLICY IF EXISTS "Admins can update settings" ON site_settings;
-CREATE POLICY "Admins can manage settings" ON site_settings
-    FOR ALL USING (is_admin());
+-- Site Settings - Skip (table already exists with different schema)
+-- RLS for site_settings skipped to avoid conflicts
 
 -- ============================================
 -- CMS PAGES POLICIES
@@ -485,9 +457,7 @@ DROP TRIGGER IF EXISTS update_cms_pages_updated_at ON cms_pages;
 CREATE TRIGGER update_cms_pages_updated_at BEFORE UPDATE ON cms_pages
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
-DROP TRIGGER IF EXISTS update_site_settings_updated_at ON site_settings;
-CREATE TRIGGER update_site_settings_updated_at BEFORE UPDATE ON site_settings
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+-- DROP TRIGGER IF EXISTS update_site_settings_updated_at ON site_settings; -- Skipped
 
 DROP TRIGGER IF EXISTS update_admin_users_updated_at ON admin_users;
 CREATE TRIGGER update_admin_users_updated_at BEFORE UPDATE ON admin_users
