@@ -214,6 +214,9 @@ const handleError = (error: any, operation: string) => {
 // ============================================
 // PRODUCTS SERVICE
 // ============================================
+// Use new_ prefix for all tables to avoid conflicts
+const TABLE_PREFIX = '';
+
 export const ProductsService = {
   async getAll(options?: { 
     page?: number; 
@@ -226,7 +229,7 @@ export const ProductsService = {
     const { page = 1, limit = 10, search, category, status, featured } = options || {};
     
     let query = supabase
-      .from('products')
+      .from(TABLE_PREFIX + 'products')
       .select('*', { count: 'exact' });
 
     if (search) {

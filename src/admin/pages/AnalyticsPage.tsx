@@ -74,10 +74,10 @@ export const AdminAnalyticsPage: React.FC = () => {
     fetchData();
   }, [toast]);
 
-  const cards = [
+  const cards = stats ? [
     { 
       title: 'Total Products', 
-      value: stats.totalProducts, 
+      value: stats.totalProducts || 0, 
       icon: Package, 
       color: 'bg-blue-500',
       trend: '+12%',
@@ -85,7 +85,7 @@ export const AdminAnalyticsPage: React.FC = () => {
     },
     { 
       title: 'Total Inquiries', 
-      value: stats.totalInquiries, 
+      value: stats.totalInquiries || 0, 
       icon: MessageSquare, 
       color: 'bg-green-500',
       trend: '+8%',
@@ -93,7 +93,7 @@ export const AdminAnalyticsPage: React.FC = () => {
     },
     { 
       title: 'Total Donations', 
-      value: `$${stats.totalDonations.toLocaleString()}`, 
+      value: stats.totalDonations ? `$${stats.totalDonations.toLocaleString()}` : '$0', 
       icon: Heart, 
       color: 'bg-pink-500',
       trend: '+23%',
@@ -101,7 +101,7 @@ export const AdminAnalyticsPage: React.FC = () => {
     },
     { 
       title: 'Active Shipments', 
-      value: stats.totalShipments, 
+      value: stats.totalShipments || 0, 
       icon: Truck, 
       color: 'bg-orange-500',
       trend: '-5%',
@@ -109,13 +109,13 @@ export const AdminAnalyticsPage: React.FC = () => {
     },
     { 
       title: 'Job Openings', 
-      value: stats.totalCareers, 
+      value: stats.totalCareers || 0, 
       icon: Briefcase, 
       color: 'bg-purple-500',
       trend: '+2',
       trendUp: true
     }
-  ];
+  ] : [];
 
   if (loading) {
     return (
@@ -137,19 +137,19 @@ export const AdminAnalyticsPage: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-        {cards.map((card, index) => (
+        {(cards ?? []).map((card, index) => (
           <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{card.title}</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{card.value}</p>
-                <div className={`flex items-center gap-1 mt-2 text-sm ${card.trendUp ? 'text-green-500' : 'text-red-500'}`}>
-                  {card.trendUp ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
-                  <span>{card.trend} from last month</span>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{card?.title}</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{card?.value}</p>
+                <div className={`flex items-center gap-1 mt-2 text-sm ${card?.trendUp ? 'text-green-500' : 'text-red-500'}`}>
+                  {card?.trendUp ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
+                  <span>{card?.trend} from last month</span>
                 </div>
               </div>
-              <div className={`w-12 h-12 ${card.color} rounded-xl flex items-center justify-center`}>
-                <card.icon className="text-white" size={24} />
+              <div className={`w-12 h-12 ${card?.color || 'bg-gray-500'} rounded-xl flex items-center justify-center`}>
+                {card?.icon ? <card.icon className="text-white" size={24} /> : null}
               </div>
             </div>
           </div>

@@ -68,10 +68,10 @@ export const About: React.FC = () => {
             ].map((value, i) => (
               <div key={i} className="text-center">
                 <div className="w-16 h-16 bg-brass-50 dark:bg-brass-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="text-brass-600" size={32} />
+                  {value?.icon ? <value.icon className="text-brass-600" size={32} /> : <Shield className="text-brass-600" size={32} />}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{value.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">{value.desc}</p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{value?.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-sm">{value?.desc}</p>
               </div>
             ))}
           </div>

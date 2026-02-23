@@ -69,23 +69,23 @@ export const ProcessTimeline: React.FC = () => {
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200 dark:bg-gray-800 hidden md:block"></div>
 
           <div className="space-y-12">
-            {STEPS.map((step, index) => (
-              <div key={step.id} className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+            {(STEPS ?? []).map((step, index) => (
+              <div key={step?.id || index} className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                 
                 {/* Content */}
                 <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
                   <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{step.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{step?.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{step?.description}</p>
                     <div className={`mt-2 text-sm text-brass-600 font-medium ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                      {step.duration}
+                      {step?.duration}
                     </div>
                   </div>
                 </div>
 
                 {/* Icon / Dot */}
                 <div className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-brass-500 text-white shadow-lg z-10 flex-shrink-0">
-                  <step.icon size={20} />
+                  {step?.icon ? <step.icon size={20} /> : <CheckCircle size={20} />}
                 </div>
 
                 {/* Empty space for alternating layout */}

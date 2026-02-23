@@ -53,8 +53,8 @@ export const AdminProductsPage: React.FC = () => {
         category: categoryFilter || undefined,
         status: statusFilter || undefined
       });
-      setProducts(result.data);
-      setTotalCount(result.count);
+      setProducts(result?.data ?? []);
+      setTotalCount(result?.count ?? 0);
     } catch (error: any) {
       toast.error(error.message || 'Failed to fetch products');
     } finally {

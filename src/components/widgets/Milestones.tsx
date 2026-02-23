@@ -76,24 +76,24 @@ export const Milestones: React.FC = () => {
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200 dark:bg-gray-700 hidden md:block"></div>
 
           <div className="space-y-12">
-            {MILESTONES.map((milestone, index) => (
+            {(MILESTONES ?? []).map((milestone, index) => (
               <div key={index} className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                 
                 {/* Content */}
                 <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
                   <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl hover:shadow-md transition-shadow">
-                    <div className="text-brass-600 font-bold text-lg mb-1">{milestone.year}</div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{milestone.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">{milestone.description}</p>
+                    <div className="text-brass-600 font-bold text-lg mb-1">{milestone?.year}</div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{milestone?.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">{milestone?.description}</p>
                     <div className={`inline-flex items-center gap-2 text-sm font-medium text-brass-500 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                      <milestone.icon size={16} /> {milestone.stats}
+                      {milestone?.icon ? <milestone.icon size={16} /> : <Award size={16} />} {milestone?.stats}
                     </div>
                   </div>
                 </div>
 
                 {/* Icon / Dot */}
                 <div className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-brass-500 text-white shadow-lg z-10 flex-shrink-0 mx-4">
-                  <milestone.icon size={20} />
+                  {milestone?.icon ? <milestone.icon size={20} /> : <Award size={20} />}
                 </div>
 
                 {/* Empty space */}

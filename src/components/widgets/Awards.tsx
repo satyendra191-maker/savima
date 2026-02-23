@@ -64,24 +64,24 @@ export const Awards: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {AWARDS.map((award, index) => (
+          {(AWARDS ?? []).map((award, index) => (
             <div 
               key={index}
               className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border border-gray-100 dark:border-gray-800"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="w-14 h-14 bg-brass-100 dark:bg-brass-900/30 rounded-xl flex items-center justify-center">
-                  <award.icon className="text-brass-600" size={28} />
+                  {award?.icon ? <award.icon className="text-brass-600" size={28} /> : <Award className="text-brass-600" size={28} />}
                 </div>
                 <span className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-bold text-gray-600 dark:text-gray-300">
-                  {award.category}
+                  {award?.category}
                 </span>
               </div>
               
-              <div className="text-sm text-brass-600 font-bold mb-1">{award.year}</div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{award.title}</h3>
-              <p className="text-sm font-medium text-gray-500 mb-3">{award.organization}</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{award.description}</p>
+              <div className="text-sm text-brass-600 font-bold mb-1">{award?.year}</div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{award?.title}</h3>
+              <p className="text-sm font-medium text-gray-500 mb-3">{award?.organization}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{award?.description}</p>
             </div>
           ))}
         </div>

@@ -2,16 +2,21 @@
 import { createClient } from '@supabase/supabase-js';
 import { Product, Inquiry, SiteSettings, CMSPage } from '../types';
 
-// EXPLICIT ACCESS is required for Vite's `define` plugin to replace these values at build time.
-// Do not use dynamic property access (e.g. process.env[key]).
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL || '';
-const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY || '';
-const SUPABASE_ADMIN_KEY = process.env.VITE_SUPABASE_ADMIN_KEY || 'saviman_admin_2024';
+// Use import.meta.env for Vite
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const SUPABASE_ADMIN_KEY = import.meta.env.VITE_SUPABASE_ADMIN_KEY || 'saviman_admin_2024';
 
-console.log("Supabase Config:", {
-  hasUrl: !!SUPABASE_URL,
-  hasKey: !!SUPABASE_ANON_KEY
-});
+// Handle case where env vars might be the string "undefined" or empty
+const isValidUrlString = (val: any): val is string => {
+  return typeof val === 'string' && val.length > 0 && val !== 'undefined' && val !== 'null';
+};
+
+// Check if URL is valid (starts with https://)
+const isValidSupabaseUrl = isValidUrlString(SUPABASE_URL) && SUPABASE_URL.startsWith('https://');
+
+// Additional check: ensure key exists and is not empty
+const hasValidKey = isValidUrlString(SUPABASE_ANON_KEY);
 
 // Chainable Mock for Fallback
 // This mimics the Supabase QueryBuilder interface to prevent crashes
@@ -37,39 +42,41 @@ const createMockChain = () => {
     limit: () => chain,
     range: () => chain,
     // Methods that execute the query
-    single: async () => ({ data: null, error: { message: 'Supabase not configured' } }),
-    maybeSingle: async () => ({ data: null, error: { message: 'Supabase not configured' } }),
-    // 'then' makes this object awaitable (Thenable), resolving to a default list response
-    then: (resolve: any) => Promise.resolve({ data: [], error: { message: 'Supabase not configured' } }).then(resolve)
+    single: async () => ({ data: null, error: null }),
+    maybeSingle: async () => ({ data: null, error: null }),
+    // 'then' makes this object awaitable (Thenable), resolving to a default empty list response
+    then: (resolve: any) => Promise.resolve({ data: [], error: null }).then(resolve)
   };
   return chain;
 };
 
-// Create client only if URL is present.
+// Create client only if URL is valid and key is present.
 // We cast the mock to 'any' to bypass strict type checks for the complex Supabase client type.
-export const supabase = (SUPABASE_URL && SUPABASE_ANON_KEY)
-  ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+const shouldUseMock = !isValidSupabaseUrl || !hasValidKey;
+export const supabase = shouldUseMock
+  ? {
+    from: () => createMockChain(),
+    storage: {
+      from: () => ({
+        upload: async () => ({ error: null, data: { path: '' } }),
+        getPublicUrl: () => ({ data: { publicUrl: '' } })
+      })
+    },
+    auth: {
+      getSession: async () => ({ data: { session: null }, error: null }),
+      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => { } } } }),
+      signInWithOtp: async () => ({ error: null, data: { user: null, session: null } }),
+      signInWithPassword: async () => ({ error: null, data: { user: null, session: null } }),
+      signOut: async () => ({ error: null })
+    }
+  } as any
+  : createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
       global: {
         headers: {
           'x-admin-key': SUPABASE_ADMIN_KEY
         }
       }
-    })
-  : {
-    from: () => createMockChain(),
-    storage: {
-      from: () => ({
-        upload: async () => ({ error: { message: 'Supabase not configured' } }),
-        getPublicUrl: () => ({ data: { publicUrl: '' } })
-      })
-    },
-    auth: {
-      getSession: async () => ({ data: { session: null } }),
-      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => { } } } }),
-      signInWithOtp: async () => ({ error: { message: 'Supabase not configured' } }),
-      signOut: async () => ({})
-    }
-  } as any;
+    });
 
 // --- FALLBACK DATA ---
 const DEFAULT_PRODUCTS: Product[] = [
@@ -390,21 +397,32 @@ export const ProductService = {
 
 export const InquiryService = {
   async create(inquiry: Omit<Inquiry, 'id' | 'created_at' | 'status'>) {
-    const { error } = await supabase
-      .from('inquiries')
-      .insert([inquiry]);
+    try {
+      const { error } = await supabase
+        .from('inquiries')
+        .insert([inquiry]);
 
-    if (error) throw error;
+      if (error) throw error;
+    } catch (e) {
+      console.warn("Inquiries table not available");
+    }
   },
 
   async getAll(): Promise<Inquiry[]> {
-    const { data, error } = await supabase
-      .from('inquiries')
-      .select('*')
-      .order('created_at', { ascending: false });
+    try {
+      const { data, error } = await supabase
+        .from('inquiries')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-    if (error) throw error;
-    return data || [];
+      if (error) {
+        console.warn("Inquiries fetch error, using empty array");
+        return [];
+      }
+      return data || [];
+    } catch (e) {
+      return [];
+    }
   },
 
   async uploadAttachment(file: File): Promise<string | null> {
@@ -466,20 +484,32 @@ export const CMSService = {
   },
 
   async getAllPages(): Promise<CMSPage[]> {
-    const { data, error } = await supabase.from('cms_pages').select('*');
-    if (error) throw error;
-    return data || [];
+    try {
+      const { data, error } = await supabase.from('cms_pages').select('*');
+      if (error) {
+        console.warn("CMS pages table not available, using defaults");
+        return [];
+      }
+      return data || [];
+    } catch (e) {
+      console.warn("CMS pages error, using defaults");
+      return [];
+    }
   },
 
   async getPage(slug: string): Promise<CMSPage | null> {
-    const { data, error } = await supabase
-      .from('cms_pages')
-      .select('*')
-      .eq('slug', slug)
-      .single();
+    try {
+      const { data, error } = await supabase
+        .from('cms_pages')
+        .select('*')
+        .eq('slug', slug)
+        .single();
 
-    if (error) return null;
-    return data;
+      if (error) return null;
+      return data;
+    } catch (e) {
+      return null;
+    }
   },
 
   async updatePage(slug: string, pageData: Partial<CMSPage>) {

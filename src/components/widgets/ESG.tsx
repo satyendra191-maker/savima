@@ -43,25 +43,25 @@ export const ESG: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {INITIATIVES.map((item, index) => (
+          {(INITIATIVES ?? []).map((item, index) => (
             <div key={index} className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-brass-500/50 transition-colors">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-brass-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <item.icon className="text-brass-400" size={24} />
+                  {item?.icon ? <item.icon className="text-brass-400" size={24} /> : <Leaf className="text-brass-400" size={24} />}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-gray-400 text-sm mb-4">{item.description}</p>
+                  <h3 className="text-xl font-bold mb-2">{item?.title}</h3>
+                  <p className="text-gray-400 text-sm mb-4">{item?.description}</p>
                   
                   <div className="relative h-2 bg-gray-700 rounded-full overflow-hidden">
                     <div 
                       className="absolute top-0 left-0 h-full bg-brass-500 rounded-full transition-all duration-1000"
-                      style={{ width: `${item.progress}%` }}
+                      style={{ width: `${item?.progress || 0}%` }}
                     ></div>
                   </div>
                   <div className="flex justify-between mt-2 text-xs text-gray-400">
                     <span>Progress</span>
-                    <span>{item.progress}%</span>
+                    <span>{item?.progress}%</span>
                   </div>
                 </div>
               </div>

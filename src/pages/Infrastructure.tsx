@@ -99,9 +99,9 @@ export const Infrastructure: React.FC = () => {
               { icon: Truck, value: '500+', unit: 'Containers/Year' },
             ].map((stat, i) => (
               <div key={i} className="text-white">
-                <stat.icon className="mx-auto mb-3 text-brass-400" size={32} />
-                <div className="text-3xl font-bold mb-1">{stat.value}</div>
-                <div className="text-gray-400">{stat.unit}</div>
+                {stat?.icon ? <stat.icon className="mx-auto mb-3 text-brass-400" size={32} /> : <Factory className="mx-auto mb-3 text-brass-400" size={32} />}
+                <div className="text-3xl font-bold mb-1">{stat?.value}</div>
+                <div className="text-gray-400">{stat?.unit}</div>
               </div>
             ))}
           </div>

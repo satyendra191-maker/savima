@@ -489,54 +489,63 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             <Footer />
             
             {/* Mobile Bottom Navigation */}
-            <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 z-50 safe-area-pb">
-                <div className="flex items-center justify-around h-14">
-                    {mobileNavItems.map((item) => (
+            <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:    gray-700 z-50 safe-area-pb">
+            <div className="flex items-center justify-around h-14">
+                {(mobileNavItems ?? []).filter(Boolean).map((item) => {
+                    const Icon = item?.icon;
+                    return (
                         <Link
-                            key={item.name}
-                            to={item.href}
+                            key={item?.name || Math.random()}
+                            to={item?.href || "/"}
                             className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${
-                                location.pathname === item.href
+                                location.pathname === item?.href
                                     ? 'text-brass-600'
                                     : 'text-gray-500 dark:text-gray-400'
                             }`}
                         >
-                            <item.icon size={20} />
-                            <span className="text-[10px] font-medium">{item.name}</span>
+                            {Icon ? <Icon size={20} /> : null}
+                            <span className="text-[10px] font-medium">
+                                {item?.name}
+                            </span>
                         </Link>
-                    ))}
-                    <div className="relative">
-                        <button
-                            onClick={() => setMoreMenuOpen(!moreMenuOpen)}
-                            className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${
-                                moreMenuOpen ? 'text-brass-600' : 'text-gray-500 dark:text-gray-400'
-                            }`}
-                        >
-                            <MoreHorizontal size={20} />
-                            <span className="text-[10px] font-medium">More</span>
-                        </button>
-                        
-                        {moreMenuOpen && (
-                            <div className="absolute bottom-full mb-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-2 min-w-[180px]">
-                                {moreNavItems.map((item) => (
+                    );
+                })}
+
+                <div className="relative">
+                    <button
+                        onClick={() => setMoreMenuOpen(!moreMenuOpen)}
+                        className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${
+                            moreMenuOpen ? 'text-brass-600' : 'text-gray-500 dark:text-gray-400'
+                        }`}
+                    >
+                        <MoreHorizontal size={20} />
+                        <span className="text-[10px] font-medium">More</span>
+                    </button>
+
+                    {moreMenuOpen && (
+                        <div className="absolute bottom-full mb-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-2 min-w-[180px]">
+                            {(moreNavItems ?? []).filter(Boolean).map((item) => {
+                                const Icon = item?.icon;
+                                return (
                                     <Link
-                                        key={item.name}
-                                        to={item.href}
+                                        key={item?.name || Math.random()}
+                                        to={item?.href || "/"}
                                         className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${
-                                            item.name === 'Donate' 
-                                                ? 'text-red-600' 
+                                            item?.name === 'Donate'
+                                                ? 'text-red-600'
                                                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                                         }`}
                                     >
-                                        <item.icon size={16} />
-                                        {item.name}
+                                        {Icon ? <Icon size={16} /> : null}
+                                        {item?.name}
                                     </Link>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
                 </div>
-            </nav>
+            </div>
+        </nav>
 
             <ShipmentTracker />
             <LogisticsPartners />

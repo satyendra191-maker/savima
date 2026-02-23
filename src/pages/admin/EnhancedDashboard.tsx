@@ -123,19 +123,19 @@ export const EnhancedDashboard: React.FC = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {kpis.map((kpi, index) => (
+        {(kpis ?? []).map((kpi, index) => (
           <div key={index} className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
             <div className="flex items-center justify-between mb-4">
-              <div className={`p-2 rounded-lg bg-opacity-10 ${kpi.color.replace('text', 'bg')}`}>
-                <kpi.icon className={`w-6 h-6 ${kpi.color}`} />
+              <div className={`p-2 rounded-lg bg-opacity-10 ${(kpi?.color || 'text-gray-600').replace('text', 'bg')}`}>
+                {kpi?.icon ? <kpi.icon className={`w-6 h-6 ${kpi?.color || 'text-gray-600'}`} /> : null}
               </div>
-              <div className={`flex items-center gap-1 text-sm font-medium ${kpi.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {kpi.change >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
-                {Math.abs(kpi.change)}%
+              <div className={`flex items-center gap-1 text-sm font-medium ${kpi?.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {kpi?.change >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
+                {Math.abs(kpi?.change || 0)}%
               </div>
             </div>
-            <h3 className="text-gray-500 dark:text-gray-400 text-sm">{kpi.title}</h3>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{kpi.value}</p>
+            <h3 className="text-gray-500 dark:text-gray-400 text-sm">{kpi?.title}</h3>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{kpi?.value}</p>
           </div>
         ))}
       </div>

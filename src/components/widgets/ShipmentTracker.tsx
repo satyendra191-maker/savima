@@ -56,7 +56,7 @@ export const ShipmentTracker: React.FC = () => {
   const loadShipments = async () => {
     try {
       const data = await CMSShipmentsService.getAll();
-      setShipments(data.slice(0, 3));
+      setShipments((data || []).slice(0, 3));
     } catch (err) {
       console.error('Error loading shipments:', err);
     }

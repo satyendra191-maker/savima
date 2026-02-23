@@ -308,7 +308,7 @@ export const AdminAIAssistant: React.FC<AdminAIAssistantProps> = ({ isOpen: prop
                   : 'text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700'
               }`}
             >
-              <tab.icon size={14} />
+              {tab?.icon ? <tab.icon size={14} /> : null}
               {tab.label}
             </button>
           ))}
@@ -321,13 +321,13 @@ export const AdminAIAssistant: React.FC<AdminAIAssistantProps> = ({ isOpen: prop
           <div className="px-3 py-2 bg-neutral-50 dark:bg-neutral-800/30 border-b border-neutral-200 dark:border-neutral-700">
             <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wider mb-2">Quick Commands</p>
             <div className="flex flex-wrap gap-1">
-              {adminCommands.map((cmd) => (
+              {(adminCommands ?? []).map((cmd) => (
                 <button
                   key={cmd.cmd}
                   onClick={() => setInput(cmd.cmd.toLowerCase())}
                   className="flex items-center gap-1 px-2 py-1 text-xs bg-white dark:bg-surface-dark border border-neutral-200 dark:border-neutral-600 rounded-md text-neutral-600 dark:text-neutral-300 hover:border-accent-400 hover:text-accent-600 transition-colors"
                 >
-                  <cmd.icon size={10} />
+                  {cmd?.icon ? <cmd.icon size={10} /> : null}
                   {cmd.cmd}
                 </button>
               ))}

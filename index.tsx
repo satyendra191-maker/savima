@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './src/index.css';
 
-class ErrorBoundary extends React.Component<{ children: ReactNode }, { hasError: boolean, error: any }> {
+class ErrorBoundary extends React.Component<{ children: ReactNode }, { hasError: boolean, error: any, errorInfo: any }> {
   constructor(props: { children: ReactNode }) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null, errorInfo: null };
   }
 
   static getDerivedStateFromError(error: any) {
@@ -15,25 +15,27 @@ class ErrorBoundary extends React.Component<{ children: ReactNode }, { hasError:
 
   componentDidCatch(error: any, errorInfo: any) {
     console.error("Critical Application Error:", error, errorInfo);
+    this.setState({ errorInfo });
   }
 
   render() {
     if (this.state.hasError) {
+      const errorMessage = this.state.error?.message || this.state.error?.toString() || 'Unknown error';
+      const errorStack = this.state.error?.stack || this.state.errorInfo?.componentStack || '';
+      
       return (
-        <div style={{ padding: '20px', fontFamily: 'system-ui', textAlign: 'center' }}>
-          <h2 style={{ color: '#e11d48' }}>Something went wrong.</h2>
-          <pre style={{ 
-            background: '#f3f4f6', 
-            padding: '10px', 
-            borderRadius: '4px', 
-            textAlign: 'left', 
-            overflow: 'auto', 
-            fontSize: '12px',
-            marginTop: '20px',
-            color: '#000'
-          }}>
-            {this.state.error?.message || JSON.stringify(this.state.error)}
-          </pre>
+        <div style={{ padding: '40px', fontFamily: 'system-ui', textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ color: '#e11d48', fontSize: '24px', marginBottom: '20px' }}>Something went wrong</h2>
+          <div style={{ background: '#fee2e2', padding: '15px', borderRadius: '8px', marginBottom: '20px', textAlign: 'left' }}>
+            <strong style={{ color: '#991b1b' }}>Error:</strong>
+            <pre style={{ margin: '10px 0', whiteSpace: 'pre-wrap', fontSize: '13px', color: '#dc2626' }}>{errorMessage}</pre>
+          </div>
+          {errorStack && (
+            <div style={{ background: '#f3f4f6', padding: '15px', borderRadius: '8px', textAlign: 'left' }}>
+              <strong>Stack trace:</strong>
+              <pre style={{ margin: '10px 0', whiteSpace: 'pre-wrap', fontSize: '11px', overflow: 'auto', maxHeight: '300px' }}>{errorStack}</pre>
+            </div>
+          )}
         </div>
       );
     }

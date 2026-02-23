@@ -69,13 +69,13 @@ export const Quality: React.FC = () => {
             <p className="text-gray-500 dark:text-gray-400">A systematic approach to quality management</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PROCESSES.map((process, i) => (
+            {(PROCESSES ?? []).map((process, i) => (
               <div key={i} className="text-center p-6">
                 <div className="w-14 h-14 bg-brass-100 dark:bg-brass-900/30 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <process.icon className="text-brass-600" size={28} />
+                  {process?.icon ? <process.icon className="text-brass-600" size={28} /> : <Shield className="text-brass-600" size={28} />}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{process.title}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{process.desc}</p>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{process?.title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{process?.desc}</p>
               </div>
             ))}
           </div>
