@@ -226,45 +226,61 @@ export const ProductsService = {
     status?: string;
     featured?: boolean;
   }) {
-    const { page = 1, limit = 10, search, category, status, featured } = options || {};
-    
-    let query = supabase
-      .from(TABLE_PREFIX + 'products')
-      .select('*', { count: 'exact' });
+    try {
+      const { page = 1, limit = 10, search, category, status, featured } = options || {};
+      
+      let query = supabase
+        .from(TABLE_PREFIX + 'products')
+        .select('*', { count: 'exact' });
 
-    if (search) {
-      query = query.or(`name.ilike.%${search}%,slug.ilike.%${search}%`);
-    }
-    if (category) {
-      query = query.eq('category', category);
-    }
-    if (status) {
-      query = query.eq('status', status);
-    }
-    if (featured !== undefined) {
-      query = query.eq('featured', featured);
-    }
+      if (search) {
+        query = query.or(`name.ilike.%${search}%,slug.ilike.%${search}%`);
+      }
+      if (category) {
+        query = query.eq('category', category);
+      }
+      if (status) {
+        query = query.eq('status', status);
+      }
+      if (featured !== undefined) {
+        query = query.eq('featured', featured);
+      }
 
-    const from = (page - 1) * limit;
-    const to = from + limit - 1;
+      const from = (page - 1) * limit;
+      const to = from + limit - 1;
 
-    const { data, error, count } = await query
-      .order('created_at', { ascending: false })
-      .range(from, to);
+      const { data, error, count } = await query
+        .order('created_at', { ascending: false })
+        .range(from, to);
 
-    if (error) handleError(error, 'fetching products');
-    return { data: data || [], count: count || 0 };
+      if (error) {
+        console.warn("Products fetch error:", error.message);
+        return { data: [], count: 0 };
+      }
+      return { data: data || [], count: count || 0 };
+    } catch (e: any) {
+      console.warn("Products fetch exception:", e.message);
+      return { data: [], count: 0 };
+    }
   },
 
   async getById(id: string) {
-    const { data, error } = await supabase
-      .from('products')
-      .select('*')
-      .eq('id', id)
-      .single();
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('id', id)
+        .single();
 
-    if (error) handleError(error, 'fetching product');
-    return data;
+      if (error) {
+        console.warn("Product getById error:", error.message);
+        return null;
+      }
+      return data;
+    } catch (e: any) {
+      console.warn("Product getById exception:", e.message);
+      return null;
+    }
   },
 
   async create(product: Partial<Product>) {
