@@ -114,8 +114,9 @@ export const Login: React.FC = () => {
                 </div>
                 <input
                   id="email"
+                  name="email"
                   type="email"
-                  autoComplete="off"
+                  autoComplete="username"
                   required
                   placeholder="admin@example.com"
                   value={email}
@@ -135,8 +136,9 @@ export const Login: React.FC = () => {
                 </div>
                 <input
                   id="password"
+                  name="password"
                   type={showPassword ? 'text' : 'password'}
-                  autoComplete="off"
+                  autoComplete="current-password"
                   required
                   placeholder="Enter your password"
                   value={password}

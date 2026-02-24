@@ -109,6 +109,8 @@ export const ScheduleCall: React.FC = () => {
 
             <div className="space-y-3 mb-4">
               <input 
+                id="schedule-name"
+                name="name"
                 type="text" 
                 placeholder="Your Name"
                 className="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800"
@@ -116,6 +118,8 @@ export const ScheduleCall: React.FC = () => {
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
               />
               <input 
+                id="schedule-email"
+                name="email"
                 type="email" 
                 placeholder="Email Address"
                 className="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800"

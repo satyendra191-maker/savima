@@ -63,6 +63,8 @@ export const QuoteCalculator: React.FC = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Material</label>
           <select 
+            id="material"
+            name="material"
             value={material} 
             onChange={(e) => setMaterial(e.target.value)}
             className="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800"
@@ -77,6 +79,8 @@ export const QuoteCalculator: React.FC = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Manufacturing Process</label>
           <select 
+            id="process"
+            name="process"
             value={process} 
             onChange={(e) => setProcess(e.target.value)}
             className="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800"
@@ -91,6 +95,8 @@ export const QuoteCalculator: React.FC = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Quantity</label>
           <input 
+            id="quantity"
+            name="quantity"
             type="number" 
             value={quantity}
             onChange={(e) => setQuantity(parseInt(e.target.value))}

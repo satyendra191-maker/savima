@@ -8,11 +8,6 @@ import { CookieConsent, BackToTop } from './ui/CookieConsent';
 import { AnnouncementBar } from './ui/AnnouncementBar';
 import { ProgressBar } from './ui/ProgressBar';
 import { LanguageSwitcher } from './ui/I18n';
-import { QuoteCalculator } from './widgets/QuoteCalculator';
-import { ScheduleCall } from './widgets/ScheduleCall';
-import { WhatsAppWidget } from './widgets/WhatsAppWidget';
-import { ShipmentTracker } from './widgets/ShipmentTracker';
-import { LogisticsPartners } from './widgets/LogisticsPartners';
 import { useTheme } from '../context/ThemeContext';
 import { CMSService } from '../lib/supabase';
 
@@ -186,7 +181,7 @@ export const Navbar: React.FC = () => {
         { name: 'Industries', path: '/industries' },
         { name: 'Case Studies', path: '/case-studies' },
         { name: 'Donate', path: '/donate' },
-        { name: 'About', path: '/about' },
+        { name: 'About Us', path: '/about' },
         { name: 'Contact', path: '/contact' },
     ];
 
@@ -452,6 +447,7 @@ export const Footer: React.FC = () => {
                         <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
                         <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
                         <span className="flex items-center gap-1"><span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> ISO 9001:2015</span>
+                        <span className="text-amber-400">Designed by SaviTech</span>
                     </div>
                 </div>
             </div>
@@ -547,12 +543,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             </div>
         </nav>
 
-            <ShipmentTracker />
-            <LogisticsPartners />
             <VisitorAIAssistant />
-            <QuoteCalculator />
-            <ScheduleCall />
-            <WhatsAppWidget />
             <CookieConsent />
             <BackToTop />
             <style>{`.safe-area-pb { padding-bottom: env(safe-area-inset-bottom, 0); }`}</style>
