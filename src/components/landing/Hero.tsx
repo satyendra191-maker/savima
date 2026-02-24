@@ -17,7 +17,7 @@ export const Hero: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-screen min-h-[600px] overflow-hidden bg-saviman-900">
+    <div className="relative min-h-[700px] md:h-screen md:min-h-[800px] overflow-hidden bg-saviman-900">
       {/* Background Video / Animation */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-saviman-900 via-saviman-800/80 to-saviman-900/60 z-10"></div>
@@ -27,10 +27,10 @@ export const Hero: React.FC = () => {
           className="absolute inset-0 w-full h-full object-cover opacity-60"
         />
         {/* Animated Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] animate-pulse z-20"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] animate-pulse z-0"></div>
       </div>
 
-      <div ref={heroRef} className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 pt-16">
+      <div ref={heroRef} className="relative z-30 h-full flex flex-col items-center justify-center text-center px-4 pt-16 pb-24 md:pb-0">
         <div className="max-w-5xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brass-500/10 border border-brass-500/20 text-brass-400 text-sm font-medium mb-6 animate-fade-in-up">
             <span className="w-2 h-2 rounded-full bg-brass-500 animate-pulse"></span>
@@ -51,9 +51,9 @@ export const Hero: React.FC = () => {
             <Link to="/products" className="btn-primary group flex items-center gap-2 text-lg px-8 py-4">
               Explore Products <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <button className="flex items-center gap-2 px-8 py-4 rounded-xl border border-white/20 text-white hover:bg-white/10 backdrop-blur-md transition-all font-bold text-lg">
+            <Link to="/infrastructure" className="flex items-center gap-2 px-8 py-4 rounded-xl border border-white/20 text-white hover:bg-white/10 backdrop-blur-md transition-all font-bold text-lg">
               <Play size={20} className="fill-current text-brass-500" /> Watch Factory Tour
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Stats Bar */}
-      <div className="absolute bottom-0 w-full bg-black/60 backdrop-blur-md border-t border-white/10 py-6 z-10">
+      <div className="relative md:absolute bottom-0 w-full bg-black/60 backdrop-blur-md border-t border-white/10 py-6 z-40">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
             <div className="text-3xl font-bold text-white mb-1">30+</div>

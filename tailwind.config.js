@@ -22,6 +22,7 @@ export default {
           700: '#0A1A2E',
           800: '#081522',
           900: '#060F17',
+          950: '#03080C',
         },
         steel: {
           DEFAULT: '#1F3A5F',
@@ -35,6 +36,7 @@ export default {
           700: '#152A41',
           800: '#102132',
           900: '#0B1923',
+          950: '#050D11',
         },
         surface: {
           DEFAULT: '#F4F6F8',
@@ -111,6 +113,7 @@ export default {
           700: '#0A1A2E',
           800: '#081522',
           900: '#060F17',
+          950: '#03080C',
         },
         brass: {
           DEFAULT: '#D4AF37',
@@ -124,6 +127,7 @@ export default {
           700: '#806921',
           800: '#554616',
           900: '#2B230B',
+          950: '#151105',
         },
         saviman: {
           DEFAULT: '#D4AF37',
@@ -137,6 +141,7 @@ export default {
           700: '#806921',
           800: '#554616',
           900: '#2B230B',
+          950: '#151105',
         },
       },
       fontFamily: {
@@ -167,13 +172,33 @@ export default {
         'card': '8px',
       },
       animation: {
-        'fade-in': 'fadeIn 0.2s ease-out',
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
+        'fade-in-up': 'fadeInUp 0.7s ease-out forwards',
+        'slide-in-right': 'slideInRight 0.5s ease-out forwards',
+        'scale-in': 'scaleIn 0.3s ease-out forwards',
+        'bounce-soft': 'bounceSoft 2s infinite',
       },
       keyframes: {
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideInRight: {
+          '0%': { opacity: '0', transform: 'translateX(30px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        bounceSoft: {
+          '0%, 100%': { transform: 'translateY(-5%)' },
+          '50%': { transform: 'translateY(0)' },
+        }
       },
     },
   },

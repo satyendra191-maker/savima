@@ -227,7 +227,7 @@ export const CMSDashboard: React.FC = () => {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h2>
-        <p className="text-gray-500">Welcome back! Here's what's happening today.</p>
+        <p className="text-gray-500 dark:text-gray-400">Welcome back! Here's what's happening today.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -235,7 +235,7 @@ export const CMSDashboard: React.FC = () => {
           <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">{card?.title}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{card?.title}</p>
                 <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{card?.value}</p>
               </div>
               <div className={`w-12 h-12 ${card?.color || 'bg-gray-500'} rounded-xl flex items-center justify-center`}>
@@ -346,7 +346,7 @@ export const CMSProducts: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Products</h2>
-          <p className="text-gray-500">Manage your product catalog</p>
+          <p className="text-gray-500 dark:text-gray-400">Manage your product catalog</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="relative">
@@ -394,7 +394,7 @@ export const CMSProducts: React.FC = () => {
                     {product.image_url && <img src={product.image_url} alt={product.name} className="w-10 h-10 rounded-lg object-cover" />}
                     <div>
                       <p className="font-medium text-gray-900 dark:text-white">{product.name}</p>
-                      <p className="text-sm text-gray-500">{product.slug}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{product.slug}</p>
                     </div>
                   </div>
                 </td>
@@ -490,7 +490,7 @@ export const CMSCatalog: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Catalog</h2>
-          <p className="text-gray-500">Manage downloadable catalogs</p>
+          <p className="text-gray-500 dark:text-gray-400">Manage downloadable catalogs</p>
         </div>
         <button className="flex items-center gap-2 px-4 py-2 bg-brass-500 text-white rounded-xl hover:bg-brass-600">
           <Plus size={20} /> Add Catalog
@@ -506,7 +506,7 @@ export const CMSCatalog: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white">{catalog.title}</h3>
-                <p className="text-sm text-gray-500">{catalog.downloads} downloads</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{catalog.downloads} downloads</p>
               </div>
             </div>
             <div className="flex gap-2 mt-4">
@@ -548,7 +548,7 @@ export const CMSIndustries: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Industries</h2>
-          <p className="text-gray-500">Manage industry served</p>
+          <p className="text-gray-500 dark:text-gray-400">Manage industry served</p>
         </div>
         <button className="flex items-center gap-2 px-4 py-2 bg-brass-500 text-white rounded-xl hover:bg-brass-600">
           <Plus size={20} /> Add Industry
@@ -564,7 +564,7 @@ export const CMSIndustries: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white">{industry.name}</h3>
-                <p className="text-sm text-gray-500">{industry.productsCount} products</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{industry.productsCount} products</p>
               </div>
             </div>
             <div className="flex gap-2 mt-4">
@@ -615,7 +615,7 @@ export const CMSInquiries: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Inquiries</h2>
-          <p className="text-gray-500">Manage customer inquiries</p>
+          <p className="text-gray-500 dark:text-gray-400">Manage customer inquiries</p>
         </div>
       </div>
 
@@ -623,11 +623,11 @@ export const CMSInquiries: React.FC = () => {
         <table className="w-full">
           <thead className="bg-gray-50 dark:bg-gray-900">
             <tr>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Name</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Email</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Product</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Status</th>
-              <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">Actions</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Name</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Email</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Product</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Status</th>
+              <th className="px-6 py-4 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -695,7 +695,7 @@ export const CMSCareers: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Careers</h2>
-          <p className="text-gray-500">Manage job openings</p>
+          <p className="text-gray-500 dark:text-gray-400">Manage job openings</p>
         </div>
         <button className="flex items-center gap-2 px-4 py-2 bg-brass-500 text-white rounded-xl hover:bg-brass-600">
           <Plus size={20} /> Add Job
@@ -706,11 +706,11 @@ export const CMSCareers: React.FC = () => {
         <table className="w-full">
           <thead className="bg-gray-50 dark:bg-gray-900">
             <tr>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Position</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Department</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Location</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Type</th>
-              <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">Actions</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Position</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Department</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Location</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Type</th>
+              <th className="px-6 py-4 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -765,10 +765,10 @@ export const CMSDonations: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Donations</h2>
-          <p className="text-gray-500">Track donations for children education</p>
+          <p className="text-gray-500 dark:text-gray-400">Track donations for children education</p>
         </div>
         <div className="text-right">
-          <p className="text-sm text-gray-500">Total Raised</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Total Raised</p>
           <p className="text-3xl font-bold text-green-600">${totalAmount.toLocaleString()}</p>
         </div>
       </div>
@@ -777,11 +777,11 @@ export const CMSDonations: React.FC = () => {
         <table className="w-full">
           <thead className="bg-gray-50 dark:bg-gray-900">
             <tr>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Donor</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Email</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Amount</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Currency</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Status</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Donor</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Email</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Amount</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Currency</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Status</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -833,7 +833,7 @@ export const CMSShipments: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Shipments</h2>
-          <p className="text-gray-500">Track and manage shipments</p>
+          <p className="text-gray-500 dark:text-gray-400">Track and manage shipments</p>
         </div>
         <button className="flex items-center gap-2 px-4 py-2 bg-brass-500 text-white rounded-xl hover:bg-brass-600">
           <Plus size={20} /> Add Shipment
@@ -842,19 +842,19 @@ export const CMSShipments: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <p className="text-sm text-gray-500">Pending</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Pending</p>
           <p className="text-2xl font-bold text-yellow-600">{shipments.filter(s => s.status === 'pending').length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <p className="text-sm text-gray-500">In Transit</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">In Transit</p>
           <p className="text-2xl font-bold text-blue-600">{shipments.filter(s => s.status === 'in_transit').length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <p className="text-sm text-gray-500">Delivered</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Delivered</p>
           <p className="text-2xl font-bold text-green-600">{shipments.filter(s => s.status === 'delivered').length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <p className="text-sm text-gray-500">Total</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Total</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-white">{shipments.length}</p>
         </div>
       </div>
@@ -863,11 +863,11 @@ export const CMSShipments: React.FC = () => {
         <table className="w-full">
           <thead className="bg-gray-50 dark:bg-gray-900">
             <tr>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Tracking #</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Destination</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Partner</th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Status</th>
-              <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">Actions</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Tracking #</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Destination</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Partner</th>
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-400">Status</th>
+              <th className="px-6 py-4 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -925,7 +925,7 @@ export const CMSLogistics: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Logistics Partners</h2>
-          <p className="text-gray-500">Manage shipping and logistics partners</p>
+          <p className="text-gray-500 dark:text-gray-400">Manage shipping and logistics partners</p>
         </div>
         <button className="flex items-center gap-2 px-4 py-2 bg-brass-500 text-white rounded-xl hover:bg-brass-600">
           <Plus size={20} /> Add Partner
@@ -942,7 +942,7 @@ export const CMSLogistics: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 dark:text-white">{partner.name}</h3>
-                  <p className="text-sm text-gray-500">{partner.type}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{partner.type}</p>
                 </div>
               </div>
               <span className={`px-2 py-1 text-xs rounded-full ${partner.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
@@ -994,7 +994,7 @@ export const CMSBlogs: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Blog Posts</h2>
-          <p className="text-gray-500">Manage blog content</p>
+          <p className="text-gray-500 dark:text-gray-400">Manage blog content</p>
         </div>
         <button className="flex items-center gap-2 px-4 py-2 bg-brass-500 text-white rounded-xl hover:bg-brass-600">
           <Plus size={20} /> New Post
@@ -1010,10 +1010,10 @@ export const CMSBlogs: React.FC = () => {
                 <span className={`px-2 py-1 text-xs rounded-full ${blog.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
                   {blog.status}
                 </span>
-                <span className="text-sm text-gray-500">{blog.date}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{blog.date}</span>
               </div>
               <h3 className="font-bold text-gray-900 dark:text-white mb-2">{blog.title}</h3>
-              <p className="text-sm text-gray-500 line-clamp-2">{blog.excerpt}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">{blog.excerpt}</p>
               <div className="flex gap-2 mt-4">
                 <button className="flex-1 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">Edit</button>
                 <button className="flex-1 py-2 text-sm bg-red-500 text-white rounded-lg hover:bg-red-600">Delete</button>
@@ -1053,27 +1053,27 @@ export const CMSAnalytics: React.FC = () => {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Analytics</h2>
-        <p className="text-gray-500">Track your website performance</p>
+        <p className="text-gray-500 dark:text-gray-400">Track your website performance</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
-          <p className="text-sm text-gray-500">Total Visitors</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Total Visitors</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">45,620</p>
           <p className="text-sm text-green-500 mt-2">↑ 12.5% from last month</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
-          <p className="text-sm text-gray-500">Page Views</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Page Views</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">128,450</p>
           <p className="text-sm text-green-500 mt-2">↑ 8.2% from last month</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
-          <p className="text-sm text-gray-500">Avg. Session</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Avg. Session</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">3m 24s</p>
           <p className="text-sm text-green-500 mt-2">↑ 5.1% from last month</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
-          <p className="text-sm text-gray-500">Bounce Rate</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Bounce Rate</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">42.3%</p>
           <p className="text-sm text-red-500 mt-2">↓ 2.1% from last month</p>
         </div>
@@ -1088,7 +1088,7 @@ export const CMSAnalytics: React.FC = () => {
                 <span className="w-6 h-6 bg-brass-500 text-white rounded-full flex items-center justify-center text-xs font-bold">{index + 1}</span>
                 <span className="text-gray-900 dark:text-white">{product.name}</span>
               </div>
-              <span className="text-gray-500">{index * 120 + 50} views</span>
+              <span className="text-gray-500 dark:text-gray-400">{index * 120 + 50} views</span>
             </div>
           ))}
         </div>
@@ -1162,7 +1162,7 @@ export const CMSSettings: React.FC = () => {
     <div className="space-y-6 max-w-4xl">
       <div>
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Settings</h2>
-        <p className="text-gray-500">Manage your website settings</p>
+        <p className="text-gray-500 dark:text-gray-400">Manage your website settings</p>
       </div>
 
       {/* Company Information */}
@@ -1190,7 +1190,7 @@ export const CMSSettings: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-bold text-gray-900 dark:text-white">Header Navigation</h3>
-            <p className="text-sm text-gray-500">Manage header navigation links</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Manage header navigation links</p>
           </div>
           <button onClick={() => { setEditingHeaderLink(undefined); setShowHeaderModal(true); }} className="flex items-center gap-2 px-4 py-2 bg-brass-500 text-white rounded-lg text-sm hover:bg-brass-600">
             <Plus size={16} /> Add Link
@@ -1202,7 +1202,7 @@ export const CMSSettings: React.FC = () => {
               <div className="flex items-center gap-3">
                 <GripVertical className="text-gray-400 cursor-move" size={16} />
                 <span className="font-medium text-gray-900 dark:text-white">{link.label}</span>
-                <span className="text-gray-500 text-sm">→ {link.href}</span>
+                <span className="text-gray-500 dark:text-gray-400 text-sm">→ {link.href}</span>
               </div>
               <div className="flex items-center gap-2">
                 <button onClick={() => editHeaderLink(index)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"><Edit size={14} /></button>
@@ -1218,7 +1218,7 @@ export const CMSSettings: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-bold text-gray-900 dark:text-white">Footer Links</h3>
-            <p className="text-sm text-gray-500">Manage footer columns and links</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Manage footer columns and links</p>
           </div>
           <button onClick={() => setShowFooterModal(true)} className="flex items-center gap-2 px-4 py-2 bg-brass-500 text-white rounded-lg text-sm hover:bg-brass-600">
             <Plus size={16} /> Add Column
@@ -1250,7 +1250,7 @@ export const CMSSettings: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-bold text-gray-900 dark:text-white">Announcement Bar</h3>
-            <p className="text-sm text-gray-500">Manage top announcement bar</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Manage top announcement bar</p>
           </div>
           <button onClick={() => { setEditingAnnouncement(undefined); setShowAnnouncementModal(true); }} className="flex items-center gap-2 px-4 py-2 bg-brass-500 text-white rounded-lg text-sm hover:bg-brass-600">
             <Plus size={16} /> Add Announcement

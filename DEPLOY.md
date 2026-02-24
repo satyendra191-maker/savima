@@ -73,6 +73,6 @@ Click "Deploy" in Vercel.
 
 ## Admin Credentials
 
-- URL: https://savimavercel.vercel.app/admin
+- URL: https://saviman.vercel.app/admin
 - Email: satyendra191@gmail.com
 - Password: saviman2024

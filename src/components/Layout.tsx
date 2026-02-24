@@ -112,7 +112,7 @@ const MegaMenu: React.FC<{ isOpen: boolean, onClose: () => void, onMouseEnter?: 
     ];
 
     return (
-        <div 
+        <div
             className="absolute top-full left-0 w-[500px] bg-white dark:bg-gray-900 shadow-xl border-t-4 border-primary-500 z-40 animate-fade-in-up rounded-b-xl"
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
@@ -128,13 +128,13 @@ const MegaMenu: React.FC<{ isOpen: boolean, onClose: () => void, onMouseEnter?: 
                         <span className="font-semibold text-gray-900 dark:text-white hover:text-primary-600">
                             {category.name}
                         </span>
-                        <span className="text-sm text-gray-500">{category.desc}</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{category.desc}</span>
                     </Link>
                 ))}
                 <div className="border-t border-gray-100 dark:border-gray-700 mt-1 pt-1">
-                    <Link 
-                        to="/products" 
-                        onClick={onClose} 
+                    <Link
+                        to="/products"
+                        onClick={onClose}
                         className="flex items-center justify-between px-5 py-3 text-primary-600 font-semibold hover:bg-primary-50 dark:hover:bg-primary-800/30"
                     >
                         View All Products
@@ -223,21 +223,20 @@ export const Navbar: React.FC = () => {
                                                 setIsMegaMenuOpen(!isMegaMenuOpen);
                                             }
                                         }}
-                                        className={`flex items-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 group ${
-                                            location.pathname === link.path
-                                                ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30'
-                                                : 'text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800/50'
-                                        }`}
+                                        className={`flex items-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 group ${location.pathname === link.path
+                                            ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30'
+                                            : 'text-slate-900 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                                            }`}
                                     >
                                         {link.name}
                                         {link.hasMegaMenu && <ChevronDown size={14} className={`ml-1 transition-transform duration-200 ${isMegaMenuOpen ? 'rotate-180' : ''}`} />}
                                     </Link>
                                     {link.hasMegaMenu && (
-                                        <MegaMenu 
-                                            isOpen={isMegaMenuOpen} 
-                                            onClose={() => setIsMegaMenuOpen(false)} 
-                                            onMouseEnter={handleMegaMenuEnter} 
-                                            onMouseLeave={handleMegaMenuLeave} 
+                                        <MegaMenu
+                                            isOpen={isMegaMenuOpen}
+                                            onClose={() => setIsMegaMenuOpen(false)}
+                                            onMouseEnter={handleMegaMenuEnter}
+                                            onMouseLeave={handleMegaMenuLeave}
                                         />
                                     )}
                                 </div>
@@ -309,11 +308,11 @@ export const Navbar: React.FC = () => {
                         <div className="mt-auto pb-12 pt-8 border-t border-gray-100 dark:border-gray-900">
                             <div className="flex flex-col gap-4">
                                 <div className="flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-gray-900 rounded-xl">
-                                    <span className="text-sm font-bold text-gray-500 uppercase tracking-widest">Theme Mode</span>
+                                    <span className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Theme Mode</span>
                                     <DarkModeToggle />
                                 </div>
                                 <div className="flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-gray-900 rounded-xl">
-                                    <span className="text-sm font-bold text-gray-500 uppercase tracking-widest">Language</span>
+                                    <span className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Language</span>
                                     <LanguageSwitcher />
                                 </div>
                             </div>
@@ -349,7 +348,7 @@ export const Footer: React.FC = () => {
                             A Unit of Savita Global Enterprises
                         </div>
                         <p className="text-slate-400 text-sm mt-4 leading-relaxed">
-                            Global manufacturer and exporter of precision Brass and Stainless Steel components. 
+                            Global manufacturer and exporter of precision Brass and Stainless Steel components.
                             Serving 50+ countries worldwide with ISO 9001:2015 Certification.
                         </p>
                         <div className="flex gap-3 mt-5">
@@ -363,7 +362,7 @@ export const Footer: React.FC = () => {
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.95 4.57a10 10 0 01-2.82.77 4.96 4.96 0 002.16-2.72 9.9 9.9 0 01-3.12 1.19 4.96 4.96 0 00-8.46 4.52A14 14 0 011.64 3.16 4.96 4.96 0 003.2 9.72 4.86 4.86 0 01.96 9.1v.06a4.96 4.96 0 003.97 4.86 4.96 4.96 0 01-2.22.08 4.96 4.96 0 004.63 3.44A9.93 9.93 0 010 20.54a14 14 0 007.5 2.22c9.24 0 14-7.67 14-14.34v-.8A9.87 9.87 0 0023.95 4.57z" /></svg>
                             </a>
                             <a href={socialLinks.telegram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-all hover:scale-110">
-                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
                             </a>
                             <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-all hover:scale-110">
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
@@ -379,51 +378,51 @@ export const Footer: React.FC = () => {
                     {/* Products */}
                     <div>
                         <h4 className="font-bold mb-5 text-white text-sm uppercase tracking-wider">Products</h4>
-                        <ul className="space-y-3 text-sm text-slate-400">
-                            <li><Link to="/products/brass" className="hover:text-amber-400 transition-colors">Brass Inserts</Link></li>
-                            <li><Link to="/products/precision" className="hover:text-amber-400 transition-colors">Precision Turned Parts</Link></li>
-                            <li><Link to="/products/steel" className="hover:text-amber-400 transition-colors">SS Fasteners</Link></li>
-                            <li><Link to="/products/hydraulic" className="hover:text-amber-400 transition-colors">Hydraulic Fittings</Link></li>
-                            <li><Link to="/products" className="hover:text-amber-400 transition-colors">View All Products</Link></li>
+                        <ul className="space-y-3 text-sm">
+                            <li><Link to="/products/brass" className="text-slate-400 hover:text-amber-400 transition-colors">Brass Inserts</Link></li>
+                            <li><Link to="/products/precision" className="text-slate-400 hover:text-amber-400 transition-colors">Precision Turned Parts</Link></li>
+                            <li><Link to="/products/steel" className="text-slate-400 hover:text-amber-400 transition-colors">SS Fasteners</Link></li>
+                            <li><Link to="/products/hydraulic" className="text-slate-400 hover:text-amber-400 transition-colors">Hydraulic Fittings</Link></li>
+                            <li><Link to="/products" className="text-slate-400 hover:text-amber-400 transition-colors">View All Products</Link></li>
                         </ul>
                     </div>
 
                     {/* Company */}
                     <div>
                         <h4 className="font-bold mb-5 text-white text-sm uppercase tracking-wider">Company</h4>
-                        <ul className="space-y-3 text-sm text-slate-400">
-                            <li><Link to="/about" className="hover:text-amber-400 transition-colors">About Us</Link></li>
-                            <li><Link to="/infrastructure" className="hover:text-amber-400 transition-colors">Infrastructure</Link></li>
-                            <li><Link to="/quality" className="hover:text-amber-400 transition-colors">Quality Control</Link></li>
-                            <li><Link to="/careers" className="hover:text-amber-400 transition-colors">Careers</Link></li>
-                            <li><Link to="/contact" className="hover:text-amber-400 transition-colors">Contact</Link></li>
+                        <ul className="space-y-3 text-sm">
+                            <li><Link to="/about" className="text-slate-400 hover:text-amber-400 transition-colors">About Us</Link></li>
+                            <li><Link to="/infrastructure" className="text-slate-400 hover:text-amber-400 transition-colors">Infrastructure</Link></li>
+                            <li><Link to="/quality" className="text-slate-400 hover:text-amber-400 transition-colors">Quality Control</Link></li>
+                            <li><Link to="/careers" className="text-slate-400 hover:text-amber-400 transition-colors">Careers</Link></li>
+                            <li><Link to="/contact" className="text-slate-400 hover:text-amber-400 transition-colors">Contact</Link></li>
                         </ul>
                     </div>
 
                     {/* Resources */}
                     <div>
                         <h4 className="font-bold mb-5 text-white text-sm uppercase tracking-wider">Resources</h4>
-                        <ul className="space-y-3 text-sm text-slate-400">
-                            <li><Link to="/case-studies" className="hover:text-amber-400 transition-colors">Case Studies</Link></li>
-                            <li><Link to="/blog" className="hover:text-amber-400 transition-colors">Blog</Link></li>
-                            <li><Link to="/catalog" className="hover:text-amber-400 transition-colors">Download Catalog</Link></li>
-                            <li><Link to="/rfq" className="hover:text-amber-400 transition-colors">Request Quote</Link></li>
-                            <li><Link to="/industries" className="hover:text-amber-amber-400 transition-colors">Industries Served</Link></li>
+                        <ul className="space-y-3 text-sm">
+                            <li><Link to="/case-studies" className="text-slate-400 hover:text-amber-400 transition-colors">Case Studies</Link></li>
+                            <li><Link to="/blog" className="text-slate-400 hover:text-amber-400 transition-colors">Blog</Link></li>
+                            <li><Link to="/catalog" className="text-slate-400 hover:text-amber-400 transition-colors">Download Catalog</Link></li>
+                            <li><Link to="/rfq" className="text-slate-400 hover:text-amber-400 transition-colors">Request Quote</Link></li>
+                            <li><Link to="/industries" className="text-slate-400 hover:text-amber-400 transition-colors">Industries Served</Link></li>
                         </ul>
                     </div>
 
                     {/* Support & Donate */}
                     <div>
                         <h4 className="font-bold mb-5 text-white text-sm uppercase tracking-wider">Support Us</h4>
-                        <ul className="space-y-3 text-sm text-slate-400">
-                            <li><Link to="/donate" className="flex items-center gap-2 hover:text-amber-400 transition-colors">
+                        <ul className="space-y-3 text-sm">
+                            <li><Link to="/donate" className="flex items-center gap-2 text-slate-400 hover:text-amber-400 transition-colors">
                                 <Heart size={14} className="text-amber-400" />
                                 Donate Now
                             </Link></li>
-                            <li><Link to="/contact" className="hover:text-amber-400 transition-colors">Get Quote</Link></li>
-                            <li><Link to="/careers" className="hover:text-amber-400 transition-colors">Careers</Link></li>
+                            <li><Link to="/contact" className="text-slate-400 hover:text-amber-400 transition-colors">Get Quote</Link></li>
+                            <li><Link to="/careers" className="text-slate-400 hover:text-amber-400 transition-colors">Careers</Link></li>
                         </ul>
-                        
+
 
                     </div>
 
@@ -447,7 +446,7 @@ export const Footer: React.FC = () => {
                     </div>
                 </div>
                 <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
-                    <p>&copy; 2024 Saviman Industries. All rights reserved. | Exporting to 50+ Countries Worldwide</p>
+                    <p>&copy; {new Date().getFullYear()} Saviman Industries. All rights reserved. | Exporting to 50+ Countries Worldwide</p>
                     <div className="flex gap-6 mt-4 md:mt-0">
                         <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
                         <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
@@ -488,65 +487,62 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 {children}
             </main>
             <Footer />
-            
+
             {/* Mobile Bottom Navigation */}
             <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:    gray-700 z-50 safe-area-pb">
-            <div className="flex items-center justify-around h-14">
-                {(mobileNavItems ?? []).filter(Boolean).map((item) => {
-                    const Icon = item?.icon;
-                    return (
-                        <Link
-                            key={item?.name || Math.random()}
-                            to={item?.href || "/"}
-                            className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${
-                                location.pathname === item?.href
+                <div className="flex items-center justify-around h-14">
+                    {(mobileNavItems ?? []).filter(Boolean).map((item) => {
+                        const Icon = item?.icon;
+                        return (
+                            <Link
+                                key={item?.name || Math.random()}
+                                to={item?.href || "/"}
+                                className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${location.pathname === item?.href
                                     ? 'text-brass-600'
                                     : 'text-gray-500 dark:text-gray-400'
-                            }`}
+                                    }`}
+                            >
+                                {Icon ? <Icon size={20} /> : null}
+                                <span className="text-[10px] font-medium">
+                                    {item?.name}
+                                </span>
+                            </Link>
+                        );
+                    })}
+
+                    <div className="relative">
+                        <button
+                            onClick={() => setMoreMenuOpen(!moreMenuOpen)}
+                            className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${moreMenuOpen ? 'text-brass-600' : 'text-gray-500 dark:text-gray-400'
+                                }`}
                         >
-                            {Icon ? <Icon size={20} /> : null}
-                            <span className="text-[10px] font-medium">
-                                {item?.name}
-                            </span>
-                        </Link>
-                    );
-                })}
+                            <MoreHorizontal size={20} />
+                            <span className="text-[10px] font-medium">More</span>
+                        </button>
 
-                <div className="relative">
-                    <button
-                        onClick={() => setMoreMenuOpen(!moreMenuOpen)}
-                        className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${
-                            moreMenuOpen ? 'text-brass-600' : 'text-gray-500 dark:text-gray-400'
-                        }`}
-                    >
-                        <MoreHorizontal size={20} />
-                        <span className="text-[10px] font-medium">More</span>
-                    </button>
-
-                    {moreMenuOpen && (
-                        <div className="absolute bottom-full mb-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-2 min-w-[180px]">
-                            {(moreNavItems ?? []).filter(Boolean).map((item) => {
-                                const Icon = item?.icon;
-                                return (
-                                    <Link
-                                        key={item?.name || Math.random()}
-                                        to={item?.href || "/"}
-                                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${
-                                            item?.name === 'Donate'
+                        {moreMenuOpen && (
+                            <div className="absolute bottom-full mb-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-2 min-w-[180px]">
+                                {(moreNavItems ?? []).filter(Boolean).map((item) => {
+                                    const Icon = item?.icon;
+                                    return (
+                                        <Link
+                                            key={item?.name || Math.random()}
+                                            to={item?.href || "/"}
+                                            className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${item?.name === 'Donate'
                                                 ? 'text-red-600'
                                                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                                        }`}
-                                    >
-                                        {Icon ? <Icon size={16} /> : null}
-                                        {item?.name}
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    )}
+                                                }`}
+                                        >
+                                            {Icon ? <Icon size={16} /> : null}
+                                            {item?.name}
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
 
             <ChatWidget />
             <CookieConsent />

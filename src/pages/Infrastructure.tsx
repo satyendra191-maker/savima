@@ -11,7 +11,7 @@ const FACILITIES = [
       'Tolerance: +/- 0.005mm',
       '24/7 Operations'
     ],
-    image: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800'
   },
   {
     title: 'Cold Forging Unit',
@@ -22,7 +22,7 @@ const FACILITIES = [
       'Annual Capacity: 500+ Tons',
       'Automated Feeding'
     ],
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?w=800'
   },
   {
     title: 'Quality Control Lab',
@@ -33,7 +33,7 @@ const FACILITIES = [
       'Spectral Analyzer',
       'Hardness Testers'
     ],
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80'
   },
   {
     title: 'Warehouse & Logistics',

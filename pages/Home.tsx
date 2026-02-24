@@ -18,20 +18,20 @@ export const Home: React.FC = () => {
       <LiveTicker />
 
       {/* Trust Signals / Stats */}
-      <section className="py-20 bg-saviman-950 text-white overflow-hidden relative">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.1),transparent_50%)]"></div>
+      <section className="py-20 bg-slate-50 dark:bg-saviman-950 transition-colors relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(212,175,55,0.05),transparent_50%)]"></div>
         <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-xl font-bold mb-12 tracking-[0.3em] uppercase opacity-50 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-brass-500"></div>
+          <h2 className="text-xl font-bold mb-12 tracking-[0.3em] uppercase flex items-center justify-center gap-4 text-slate-400 dark:text-brass-500/50">
+            <div className="h-px w-12 bg-current"></div>
             Global Partners
-            <div className="h-px w-12 bg-brass-500"></div>
+            <div className="h-px w-12 bg-current"></div>
           </h2>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-            <div className="text-3xl font-black italic tracking-tighter">TATA</div>
-            <div className="text-3xl font-black italic tracking-tighter">BHEL</div>
-            <div className="text-3xl font-black italic tracking-tighter">L&T</div>
-            <div className="text-3xl font-black italic tracking-tighter">ABB</div>
-            <div className="text-3xl font-black italic tracking-tighter">GODREJ</div>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 dark:opacity-80 grayscale hover:grayscale-0 transition-all duration-700">
+            <div className="text-3xl font-black italic tracking-tighter text-slate-900 dark:text-white">TATA</div>
+            <div className="text-3xl font-black italic tracking-tighter text-slate-900 dark:text-white">BHEL</div>
+            <div className="text-3xl font-black italic tracking-tighter text-slate-900 dark:text-white">L&T</div>
+            <div className="text-3xl font-black italic tracking-tighter text-slate-900 dark:text-white">ABB</div>
+            <div className="text-3xl font-black italic tracking-tighter text-slate-900 dark:text-white">GODREJ</div>
           </div>
         </div>
       </section>
@@ -50,28 +50,28 @@ export const Home: React.FC = () => {
             {[
               {
                 name: 'Brass Inserts',
-                img: 'https://images.unsplash.com/photo-1616432043562-3671ea0e5e84?auto=format&fit=crop&w=600&q=80',
+                img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80',
                 desc: 'Precision brass knurled inserts for plastic injection molding, superior torque & pull-out resistance.',
                 specs: ['CW614N Brass', '±0.01mm Tolerance', 'RoHS Compliant'],
                 path: '/products/brass'
               },
               {
                 name: 'Precision Turned Parts',
-                img: 'https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=600&q=80',
+                img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80',
                 desc: 'CNC turned components with tight tolerances, ideal for automotive & electronics.',
                 specs: ['5-Axis CNC', '±0.005mm', 'Custom Designs'],
                 path: '/products/other'
               },
               {
                 name: 'SS Fasteners',
-                img: 'https://images.unsplash.com/photo-1535952642077-c77874e28633?auto=format&fit=crop&w=600&q=80',
+                img: 'https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=600&q=80',
                 desc: 'Stainless steel nuts, bolts, anchor bolts & custom fasteners for industrial applications.',
                 specs: ['SS 304/316/316L', 'High Tensile', 'ISO Certified'],
                 path: '/products/steel'
               },
               {
                 name: 'Hydraulic Fittings',
-                img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
+                img: 'https://images.unsplash.com/photo-1495033041221-59995144dc92?auto=format&fit=crop&w=600&q=80',
                 desc: 'Zero-leakage hydraulic fittings for oil & gas, marine & heavy industrial use.',
                 specs: ['SS 316L', '10,000 PSI', 'ISO 8434-1'],
                 path: '/products/steel'

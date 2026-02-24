@@ -23,7 +23,7 @@ const INDUSTRIES = [
     id: 'energy',
     title: 'Energy & Power',
     description: 'Durable components for renewable energy and power generation systems.',
-    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1466611653911-954554331f4f?auto=format&fit=crop&w=800&q=80',
     capabilities: ['Corrosion Resistant', 'High Temperature Grades', 'Pressure Rated', 'Long Lifecycle'],
     applications: ['Solar Panel Mounts', 'Wind Turbine Parts', 'Nuclear Equipment', 'Oil & Gas Drilling']
   },
@@ -47,7 +47,7 @@ const INDUSTRIES = [
     id: 'plumbing',
     title: 'Plumbing & Sanitary',
     description: 'Premium brass fixtures and fittings for residential and commercial plumbing.',
-    image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
     capabilities: ['Lead-Free Options', 'WRAS Certified', 'Multiple Finishes', 'International Standards'],
     applications: ['Bathroom Fixtures', 'Kitchen Fittings', 'Water Treatment', 'Irrigation']
   }
@@ -57,7 +57,7 @@ export const Industries: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-12 pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Industries We Serve</h1>
           <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
@@ -68,7 +68,7 @@ export const Industries: React.FC = () => {
         <div className="space-y-24">
           {INDUSTRIES.map((industry, index) => (
             <div key={industry.id} className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12`}>
-              
+
               {/* Image */}
               <div className="lg:w-1/2">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl">

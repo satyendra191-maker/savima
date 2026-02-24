@@ -118,7 +118,7 @@ export const Quality: React.FC = () => {
                 </div>
                 <div>
                   <div className="font-bold text-gray-900 dark:text-white">Zero Defect Policy</div>
-                  <div className="text-sm text-gray-500">Every part verified</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">Every part verified</div>
                 </div>
               </div>
             </div>

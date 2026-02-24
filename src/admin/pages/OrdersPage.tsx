@@ -255,14 +255,14 @@ export const AdminOrdersPage: React.FC = () => {
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {loading ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-8 text-center text-gray-500">
+                  <td colSpan={7} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
                     <RefreshCw className="animate-spin mx-auto" size={24} />
                     <p className="mt-2">Loading orders...</p>
                   </td>
                 </tr>
               ) : filteredOrders.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-8 text-center text-gray-500">
+                  <td colSpan={7} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
                     <Package className="mx-auto mb-2" size={48} />
                     <p>No orders found</p>
                   </td>
@@ -275,7 +275,7 @@ export const AdminOrdersPage: React.FC = () => {
                     </td>
                     <td className="px-4 py-3">
                       <p className="font-medium text-gray-900 dark:text-white">{order.customer_name}</p>
-                      <p className="text-sm text-gray-500">{order.email}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{order.email}</p>
                     </td>
                     <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">
                       {formatCurrency(order.total_amount, order.currency)}
@@ -290,7 +290,7 @@ export const AdminOrdersPage: React.FC = () => {
                         {order.order_status}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-500">
+                    <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
                       {new Date(order.created_at).toLocaleDateString()}
                     </td>
                     <td className="px-4 py-3">

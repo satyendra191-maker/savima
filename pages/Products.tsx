@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Search, ArrowRight, Package, Settings, Cpu, Wrench, 
+import {
+  Search, ArrowRight, Package, Settings, Cpu, Wrench,
   Shield, Zap, Clock, CheckCircle, X, ChevronLeft, ChevronRight,
   Layers, Box, Hexagon, Circle, Triangle, Maximize2
 } from 'lucide-react';
@@ -34,7 +34,7 @@ const PRODUCTS = [
       industries: 'Aerospace, Medical Devices, Electronics, Telecommunications',
       leadTime: '7-10 days for prototypes, 3-4 weeks for production'
     },
-    image: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'vmc-parts',
@@ -62,7 +62,7 @@ const PRODUCTS = [
       industries: 'Aerospace, Defense, Medical, Automotive Racing',
       leadTime: '10-15 days prototypes, 4-6 weeks production'
     },
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'shafts-pins',
@@ -76,7 +76,7 @@ const PRODUCTS = [
       industries: 'Automotive, Medical, Industrial Automation, Furniture',
       leadTime: '3-5 days prototypes, 1-2 weeks production'
     },
-    image: 'https://images.unsplash.com/photo-1535952642077-c77874e28633?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'bushings-sleeves',
@@ -104,7 +104,7 @@ const PRODUCTS = [
       industries: 'Oil & Gas, Petrochemical, Process Industries, Desalination',
       leadTime: '2-3 weeks for standard, 4-6 weeks for custom'
     },
-    image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1605336306598-a83d3683bf90?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'couplings-adapters',
@@ -179,7 +179,7 @@ const PRODUCTS = [
 ];
 
 const INDUSTRIES = [
-  'Automotive', 'Aerospace', 'Medical', 'Electronics', 
+  'Automotive', 'Aerospace', 'Medical', 'Electronics',
   'Oil & Gas', 'Industrial Machinery', 'Defense', 'Telecommunications'
 ];
 
@@ -230,7 +230,7 @@ export const Products: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <SEO 
+      <SEO
         title="Precision CNC Machined Components | Saviman Manufacturing Gujarat"
         description="Leading precision CNC manufacturing in Jamnagar, Gujarat. ISO 9001:2015 certified. Turning, Milling, VMC, 5-Axis machining. Automotive, Aerospace, Medical sectors. Request quote today."
       />
@@ -243,31 +243,31 @@ export const Products: React.FC = () => {
           <div className="absolute top-0 right-0 w-96 h-96 bg-amber-400 rounded-full blur-[150px]"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-[150px]"></div>
         </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
             Precision Machined <span className="text-amber-400">Components</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">
-            World-class CNC manufacturing from <strong>Jamnagar, Gujarat</strong>. German & Japanese machines. 
+            World-class CNC manufacturing from <strong>Jamnagar, Gujarat</strong>. German & Japanese machines.
             ±0.005mm tolerances. Serving global OEMs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              to="/rfq" 
+            <Link
+              to="/rfq"
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-900 bg-amber-400 hover:bg-amber-500 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
               Request Quote
               <ArrowRight className="ml-2" size={22} />
             </Link>
-            <a 
-              href="#products" 
+            <a
+              href="#products"
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white border-2 border-white/30 hover:bg-white/10 rounded-xl transition-all"
             >
               Browse Products
             </a>
           </div>
-          
+
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-400">
             <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> ISO 9001:2015</span>
             <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> ±0.005mm Tolerance</span>
@@ -286,11 +286,10 @@ export const Products: React.FC = () => {
             <button
               key={process.id}
               onClick={() => setSelectedProcess(process.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold transition-all ${
-                selectedProcess === process.id
-                  ? 'bg-amber-500 text-slate-900 shadow-lg'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold transition-all ${selectedProcess === process.id
+                ? 'bg-amber-500 text-slate-900 shadow-lg'
+                : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
             >
               <process.icon size={18} />
               {process.name}
@@ -329,14 +328,14 @@ export const Products: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
-            <div 
+            <div
               key={product.id}
               onClick={() => openModal(product)}
               className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer group"
             >
               <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 relative overflow-hidden">
-                <img 
-                  src={product.image} 
+                <img
+                  src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -359,7 +358,7 @@ export const Products: React.FC = () => {
           <div className="text-center py-20">
             <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No Products Found</h3>
-            <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
+            <p className="text-gray-500 dark:text-gray-400">Try adjusting your search or filter criteria.</p>
           </div>
         )}
       </section>
@@ -375,13 +374,13 @@ export const Products: React.FC = () => {
                 Precision CNC Machining <span className="text-amber-500">Jamnagar Gujarat</span>
               </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-                Saviman is a leading precision CNC machining company based in Jamnagar, Gujarat, India. 
-                We specialize in high-accuracy CNC turning, CNC milling, VMC, and 5-axis machining for global OEMs. 
+                Saviman is a leading precision CNC machining company based in Jamnagar, Gujarat, India.
+                We specialize in high-accuracy CNC turning, CNC milling, VMC, and 5-axis machining for global OEMs.
                 Our facility houses German and Japanese CNC machines capable of achieving tolerances up to ±0.005mm.
               </p>
               <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                We serve diverse industries including <strong>automotive, aerospace, medical devices, electronics, 
-                oil & gas, and industrial machinery</strong>. With ISO 9001:2015 certification and export to 25+ 
+                We serve diverse industries including <strong>automotive, aerospace, medical devices, electronics,
+                  oil & gas, and industrial machinery</strong>. With ISO 9001:2015 certification and export to 25+
                 countries, we deliver world-class quality at competitive Indian pricing.
               </p>
               <div className="grid grid-cols-2 gap-4">
@@ -432,7 +431,7 @@ export const Products: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeModal}></div>
           <div className="relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <button 
+            <button
               onClick={closeModal}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
@@ -441,8 +440,8 @@ export const Products: React.FC = () => {
 
             {/* Image Gallery */}
             <div className="relative h-64 md:h-80 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700">
-              <img 
-                src={selectedProduct.image} 
+              <img
+                src={selectedProduct.image}
                 alt={selectedProduct.name}
                 className="w-full h-full object-cover"
               />
@@ -458,7 +457,7 @@ export const Products: React.FC = () => {
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 {selectedProduct.name}
               </h2>
-              
+
               <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
                 {selectedProduct.fullDescription}
               </p>
@@ -500,16 +499,16 @@ export const Products: React.FC = () => {
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link 
-                  to="/rfq" 
+                <Link
+                  to="/rfq"
                   onClick={closeModal}
                   className="flex-1 inline-flex items-center justify-center px-6 py-4 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl transition-colors"
                 >
                   Request Quote
                   <ArrowRight className="ml-2" size={20} />
                 </Link>
-                <Link 
-                  to="/contact" 
+                <Link
+                  to="/contact"
                   onClick={closeModal}
                   className="flex-1 inline-flex items-center justify-center px-6 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-bold rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 >

@@ -184,14 +184,14 @@ export const ShipmentTracker: React.FC = () => {
               <div className="flex items-center justify-between mb-2">
                 <div>
                   <p className="font-mono font-bold text-gray-900 dark:text-white text-sm">{shipment.tracking_number}</p>
-                  <p className="text-xs text-gray-500">{shipment.logistic_partner}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{shipment.logistic_partner}</p>
                 </div>
                 <span className={`px-2 py-0.5 rounded-full text-white text-xs ${STATUS_CONFIG[shipment.status]?.color || 'bg-gray-500'}`}>
                   {STATUS_CONFIG[shipment.status]?.label || shipment.status}
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 text-xs text-gray-500 mb-3">
+              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 mb-3">
                 <MapPin size={12} />
                 <span>{shipment.current_location}</span>
                 <span className="mx-1">•</span>
@@ -205,7 +205,7 @@ export const ShipmentTracker: React.FC = () => {
                     <div className={`w-2 h-2 rounded-full mt-1 ${STATUS_CONFIG[update.status]?.color || 'bg-gray-400'}`}></div>
                     <div>
                       <p className="text-gray-900 dark:text-white font-medium">{update.description}</p>
-                      <p className="text-gray-500">{update.location} • {formatDate(update.timestamp || '')}</p>
+                      <p className="text-gray-500 dark:text-gray-400">{update.location} • {formatDate(update.timestamp || '')}</p>
                     </div>
                   </div>
                 ))}
@@ -221,7 +221,7 @@ export const ShipmentTracker: React.FC = () => {
 
           {!shipment && !error && (
             <div>
-              <p className="text-xs text-gray-500 mb-2">Recent Shipments:</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Recent Shipments:</p>
               <div className="space-y-2">
                 {shipments.map((s) => (
                   <button
@@ -233,7 +233,7 @@ export const ShipmentTracker: React.FC = () => {
                       <p className="font-mono text-xs text-gray-900 dark:text-white">{s.tracking_number}</p>
                       <div className="flex items-center gap-1 mt-1">
                         <span className={`w-2 h-2 rounded-full ${STATUS_CONFIG[s.status]?.color || 'bg-gray-400'}`}></span>
-                        <span className="text-xs text-gray-500">{s.current_location}</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">{s.current_location}</span>
                       </div>
                     </div>
                     <span className={`px-2 py-0.5 rounded text-white text-[10px] ${STATUS_CONFIG[s.status]?.color || 'bg-gray-500'}`}>
@@ -244,7 +244,7 @@ export const ShipmentTracker: React.FC = () => {
               </div>
               
               <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700">
-                <p className="text-xs text-gray-500 mb-2">Track with other partners:</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Track with other partners:</p>
                 <div className="flex gap-2">
                   {LOGO_PARTNERS.map((partner) => (
                     <button
