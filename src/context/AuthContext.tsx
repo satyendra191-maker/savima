@@ -80,7 +80,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
-      
+
       // Check if user is admin in Supabase
       if (session?.user) {
         checkSupabaseAdmin(session.user.email || '');
@@ -91,7 +91,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
-      
+
       if (session?.user) {
         checkSupabaseAdmin(session.user.email || '');
       } else {
@@ -112,7 +112,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .eq('email', email.toLowerCase())
         .eq('is_active', true)
         .single();
-      
+
       if (data && !error) {
         setAdminUser({
           id: data.id,
@@ -154,12 +154,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // ── Real Supabase Login ────────────────────────────────────
     const { error, data } = await supabase.auth.signInWithPassword({ email, password });
-    
+
     // Check for admin in database
     if (!error && data.user) {
       await checkSupabaseAdmin(email);
     }
-    
+
     setLoading(false);
 
     if (error) {
@@ -224,13 +224,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLoading(false);
   };
 
-  // isAdmin: true for demo admin or Supabase admin users
-  const isAdmin = isDemoUser || adminUser !== null || (() => {
-    if (!user) return false;
-    const userEmail = user.email?.toLowerCase() || '';
-    // Only satyendra191@gmail.com has full access
-    return userEmail === 'satyendra191@gmail.com' || userEmail === 'admin@saviman.com';
-  })();
+  // isAdmin: true for demo admin or any profile with admin/super_admin role
+  const isAdmin = isDemoUser ||
+    adminUser !== null ||
+    (adminUser?.role === 'super_admin' || adminUser?.role === 'admin') ||
+    (() => {
+      if (!user) return false;
+      const userEmail = user.email?.toLowerCase() || '';
+      return userEmail === 'satyendra191@gmail.com' || userEmail === 'admin@saviman.com';
+    })();
 
   return (
     <AuthContext.Provider value={{

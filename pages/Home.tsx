@@ -21,10 +21,10 @@ export const Home: React.FC = () => {
       <section className="py-20 bg-slate-50 dark:bg-saviman-950 transition-colors relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(212,175,55,0.05),transparent_50%)]"></div>
         <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-xl font-bold mb-12 tracking-[0.3em] uppercase flex items-center justify-center gap-4 text-slate-400 dark:text-brass-500/50">
-            <div className="h-px w-12 bg-current"></div>
+          <h2 className="text-xl font-bold mb-12 tracking-[0.3em] uppercase flex items-center justify-center gap-4 text-slate-500 dark:text-brass-500">
+            <div className="h-px w-12 bg-current opacity-30"></div>
             Global Partners
-            <div className="h-px w-12 bg-current"></div>
+            <div className="h-px w-12 bg-current opacity-30"></div>
           </h2>
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 dark:opacity-80 grayscale hover:grayscale-0 transition-all duration-700">
             <div className="text-3xl font-black italic tracking-tighter text-slate-900 dark:text-white">TATA</div>
@@ -50,28 +50,28 @@ export const Home: React.FC = () => {
             {[
               {
                 name: 'Brass Inserts',
-                img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80',
+                img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600', // Real brass finish hardware
                 desc: 'Precision brass knurled inserts for plastic injection molding, superior torque & pull-out resistance.',
                 specs: ['CW614N Brass', '±0.01mm Tolerance', 'RoHS Compliant'],
                 path: '/products/brass'
               },
               {
                 name: 'Precision Turned Parts',
-                img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80',
+                img: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?w=600', // Actual machined components
                 desc: 'CNC turned components with tight tolerances, ideal for automotive & electronics.',
                 specs: ['5-Axis CNC', '±0.005mm', 'Custom Designs'],
                 path: '/products/other'
               },
               {
                 name: 'SS Fasteners',
-                img: 'https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=600&q=80',
+                img: 'https://images.unsplash.com/photo-16297316323ec-449301934960?w=600', // Nuts and Bolts Industrial
                 desc: 'Stainless steel nuts, bolts, anchor bolts & custom fasteners for industrial applications.',
                 specs: ['SS 304/316/316L', 'High Tensile', 'ISO Certified'],
                 path: '/products/steel'
               },
               {
                 name: 'Hydraulic Fittings',
-                img: 'https://images.unsplash.com/photo-1495033041221-59995144dc92?auto=format&fit=crop&w=600&q=80',
+                img: 'https://images.unsplash.com/photo-1504917595217-d4dc5f649776?w=600', // Hydraulic Fittings Asset
                 desc: 'Zero-leakage hydraulic fittings for oil & gas, marine & heavy industrial use.',
                 specs: ['SS 316L', '10,000 PSI', 'ISO 8434-1'],
                 path: '/products/steel'

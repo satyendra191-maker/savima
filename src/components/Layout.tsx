@@ -192,6 +192,7 @@ export const Navbar: React.FC = () => {
         { name: 'Donate', path: '/donate' },
         { name: 'About Us', path: '/about' },
         { name: 'Contact', path: '/contact' },
+        { name: 'Track Order', path: '/tracking' },
     ];
 
     return (
@@ -421,6 +422,9 @@ export const Footer: React.FC = () => {
                             </Link></li>
                             <li><Link to="/contact" className="text-slate-400 hover:text-amber-400 transition-colors">Get Quote</Link></li>
                             <li><Link to="/careers" className="text-slate-400 hover:text-amber-400 transition-colors">Careers</Link></li>
+                            <li><Link to="/admin" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2">
+                                <Settings size={14} /> Admin Portal
+                            </Link></li>
                         </ul>
 
 

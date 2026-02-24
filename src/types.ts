@@ -36,8 +36,40 @@ export interface Inquiry {
 
 export interface UserProfile {
   id: string;
-  role: 'admin' | 'editor' | 'user';
+  role: 'super_admin' | 'admin' | 'sales_manager' | 'inventory_manager' | 'user' | 'guest';
   email: string;
+}
+
+export interface Lead {
+  id: string;
+  full_name: string;
+  email: string;
+  phone?: string;
+  company_name?: string;
+  requirement_description?: string;
+  source: 'website' | 'ai_chat' | 'rfq' | 'contact_form';
+  status: 'new' | 'contacted' | 'qualified' | 'quoted' | 'won' | 'lost';
+  priority: 'low' | 'normal' | 'high' | 'urgent';
+  buying_intent_score?: number;
+  created_at: string;
+}
+
+export interface Order {
+  id: string;
+  order_number: string;
+  total_amount: number;
+  payment_status: 'pending' | 'partial' | 'paid' | 'refunded';
+  shipment_status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  items: any[];
+  created_at: string;
+}
+
+export interface Shipment {
+  id: string;
+  tracking_number: string;
+  carrier: string;
+  current_status: string;
+  estimated_delivery?: string;
 }
 
 export type Category = 'brass' | 'steel' | 'other';

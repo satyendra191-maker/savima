@@ -104,7 +104,7 @@ const PRODUCTS = [
       industries: 'Oil & Gas, Petrochemical, Process Industries, Desalination',
       leadTime: '2-3 weeks for standard, 4-6 weeks for custom'
     },
-    image: 'https://images.unsplash.com/photo-1605336306598-a83d3683bf90?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800' // Precision Machined Flange Asset
   },
   {
     id: 'couplings-adapters',
@@ -132,7 +132,7 @@ const PRODUCTS = [
       industries: 'Automotive, Two-Wheelers, Commercial Vehicles',
       leadTime: '3-4 weeks for production (established parts)'
     },
-    image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?w=800'
   },
   {
     id: 'medical',
@@ -146,7 +146,7 @@ const PRODUCTS = [
       industries: 'Medical Devices, Surgical Instruments, Diagnostics, Pharma',
       leadTime: '4-6 weeks (with validation support)'
     },
-    image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800'
   },
   {
     id: 'aerospace-defense',
@@ -160,7 +160,7 @@ const PRODUCTS = [
       industries: 'Aerospace, Defense, Space, Naval',
       leadTime: '6-10 weeks (based on complexity)'
     },
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format\u0026fit=crop\u0026w=800\u0026q=80'
   },
   {
     id: 'prototypes',
@@ -174,7 +174,7 @@ const PRODUCTS = [
       industries: 'R&D, Product Development, Startups, Innovation Labs',
       leadTime: '3-7 days for prototypes'
     },
-    image: 'https://images.unsplash.com/photo-1581095790444-1dfa35e37b52?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?w=800' // Manufacturing Prototype Asset
   }
 ];
 
