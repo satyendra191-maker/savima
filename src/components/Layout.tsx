@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Settings, Search, ChevronDown, ChevronRight, Phone, Mail, MapPin, ArrowRight, Heart, Home, Package, Building2, FileText, MessageSquare, MoreHorizontal, Briefcase, Globe } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { VisitorAIAssistant } from './VisitorAIAssistant';
+import ChatWidget from './ChatWidget';
 import { DarkModeToggle } from './ui/DarkModeToggle';
 import { CookieConsent, BackToTop } from './ui/CookieConsent';
 import { AnnouncementBar } from './ui/AnnouncementBar';
@@ -539,7 +540,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             </div>
         </nav>
 
-            <VisitorAIAssistant />
+            <ChatWidget />
             <CookieConsent />
             <BackToTop />
             <style>{`.safe-area-pb { padding-bottom: env(safe-area-inset-bottom, 0); }`}</style>
