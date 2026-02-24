@@ -104,7 +104,7 @@ const PRODUCTS = [
       industries: 'Oil & Gas, Petrochemical, Process Industries, Desalination',
       leadTime: '2-3 weeks for standard, 4-6 weeks for custom'
     },
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800' // Precision Machined Flange Asset
+    image: 'https://images.unsplash.com/photo-1590950664535-64906f236ba5?w=800' // Real Industrial Flange
   },
   {
     id: 'couplings-adapters',
@@ -118,7 +118,7 @@ const PRODUCTS = [
       industries: 'Automotive, Industrial Drives, Hydraulic Systems, HVAC',
       leadTime: '5-7 days prototypes, 2-3 weeks production'
     },
-    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1542060717-d205166046e7?w=800' // Precision Couplings Asset
   },
   {
     id: 'automotive',
@@ -174,7 +174,7 @@ const PRODUCTS = [
       industries: 'R&D, Product Development, Startups, Innovation Labs',
       leadTime: '3-7 days for prototypes'
     },
-    image: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?w=800' // Manufacturing Prototype Asset
+    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5f649776?w=800' // Manufacturing Prototype Asset
   }
 ];
 
