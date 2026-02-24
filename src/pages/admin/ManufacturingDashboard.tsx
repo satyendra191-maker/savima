@@ -39,13 +39,13 @@ const columns = [
     header: 'Progress',
     render: (job: typeof productionJobs[0]) => (
       <div className="flex items-center gap-2">
-        <div className="w-24 h-2 bg-surface-200 rounded-full overflow-hidden">
+        <div className="w-24 h-2 bg-surface-200 dark:bg-slate-700 rounded-full overflow-hidden">
           <div 
             className="h-full bg-accent rounded-full" 
             style={{ width: `${job.progress}%` }}
           />
         </div>
-        <span className="text-small">{job.progress}%</span>
+        <span className="text-small dark:text-slate-300">{job.progress}%</span>
       </div>
     )
   },
@@ -64,9 +64,9 @@ export const ManufacturingDashboard: React.FC = () => {
   const [autoRefresh, setAutoRefresh] = useState(true);
   
   return (
-    <div className="min-h-screen bg-surface-100">
+    <div className="min-h-screen bg-surface-100 dark:bg-slate-900">
       {/* Header */}
-      <header className="bg-navy text-white px-6 py-4">
+      <header className="bg-navy dark:bg-slate-800 text-white px-6 py-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center gap-4">
             <LayoutDashboard size={24} />
@@ -74,7 +74,7 @@ export const ManufacturingDashboard: React.FC = () => {
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-small">Auto-refresh</span>
+              <span className="text-small text-white/80">Auto-refresh</span>
               <Toggle checked={autoRefresh} onChange={setAutoRefresh} />
             </div>
             <Button variant="secondary" size="sm" leftIcon={<RefreshCw size={16} />}>
@@ -96,8 +96,8 @@ export const ManufacturingDashboard: React.FC = () => {
                 <metric.icon className="text-white" size={24} />
               </div>
               <div>
-                <p className="text-small text-gray-500">{metric.label}</p>
-                <p className="text-h1 text-navy">{metric.value}</p>
+                <p className="text-small text-slate-500 dark:text-slate-400">{metric.label}</p>
+                <p className="text-h1 text-navy dark:text-white">{metric.value}</p>
               </div>
             </Card>
           ))}
@@ -120,32 +120,32 @@ export const ManufacturingDashboard: React.FC = () => {
                 key={machine.name}
                 className={`
                   p-4 rounded-lg border
-                  ${machine.status === 'running' ? 'bg-success/5 border-success/20' : ''}
-                  ${machine.status === 'idle' ? 'bg-surface-100 border-surface-200' : ''}
-                  ${machine.status === 'maintenance' ? 'bg-warning/5 border-warning/20' : ''}
+                  ${machine.status === 'running' ? 'bg-success/5 dark:bg-success/10 border-success/20 dark:border-success/30' : ''}
+                  ${machine.status === 'idle' ? 'bg-surface-100 dark:bg-slate-800 border-surface-200 dark:border-slate-700' : ''}
+                  ${machine.status === 'maintenance' ? 'bg-warning/5 dark:bg-warning/10 border-warning/20 dark:border-warning/30' : ''}
                 `}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-semibold text-navy">{machine.name}</span>
+                  <span className="font-semibold text-navy dark:text-white">{machine.name}</span>
                   <StatusBadge 
                     status={machine.status === 'running' ? 'active' : machine.status === 'idle' ? 'pending' : 'draft'} 
                   />
                 </div>
                 {machine.status === 'running' ? (
                   <>
-                    <p className="text-small text-gray-500 mb-2">Job: {machine.job}</p>
+                    <p className="text-small text-slate-500 dark:text-slate-400 mb-2">Job: {machine.job}</p>
                     <div className="flex items-center gap-2">
-                      <div className="flex-1 h-2 bg-surface-200 rounded-full overflow-hidden">
+                      <div className="flex-1 h-2 bg-surface-200 dark:bg-slate-700 rounded-full overflow-hidden">
                         <div 
                           className="h-full bg-success rounded-full" 
                           style={{ width: `${machine.utilization}%` }}
                         />
                       </div>
-                      <span className="text-small font-medium">{machine.utilization}%</span>
+                      <span className="text-small font-medium dark:text-white">{machine.utilization}%</span>
                     </div>
                   </>
                 ) : (
-                  <p className="text-small text-gray-500 capitalize">{machine.status}</p>
+                  <p className="text-small text-slate-500 dark:text-slate-400 capitalize">{machine.status}</p>
                 )}
               </div>
             ))}

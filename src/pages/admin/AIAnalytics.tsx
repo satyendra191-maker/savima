@@ -30,9 +30,9 @@ const languageBreakdown = [
 
 export const AIAnalytics: React.FC = () => {
   return (
-    <div className="min-h-screen bg-surface-100">
+    <div className="min-h-screen bg-surface-100 dark:bg-slate-900">
       {/* Header */}
-      <header className="bg-navy text-white px-6 py-4">
+      <header className="bg-navy dark:bg-slate-800 text-white px-6 py-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center gap-4">
             <Bot size={24} />
@@ -43,7 +43,7 @@ export const AIAnalytics: React.FC = () => {
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-small">AI Enabled</span>
+              <span className="text-small text-white/80">AI Enabled</span>
               <Toggle checked={true} onChange={() => {}} />
             </div>
             <Button variant="secondary" size="sm" leftIcon={<Download size={16} />}>
@@ -62,9 +62,9 @@ export const AIAnalytics: React.FC = () => {
                 <metric.icon className="text-white" size={24} />
               </div>
               <div>
-                <p className="text-small text-gray-500">{metric.label}</p>
+                <p className="text-small text-slate-500 dark:text-slate-400">{metric.label}</p>
                 <div className="flex items-center gap-2">
-                  <p className="text-h1 text-navy">{metric.value}</p>
+                  <p className="text-h1 text-navy dark:text-white">{metric.value}</p>
                   <Badge variant={metric.change.startsWith('+') ? 'success' : 'warning'}>
                     {metric.change}
                   </Badge>
@@ -83,20 +83,20 @@ export const AIAnalytics: React.FC = () => {
             />
             <div className="space-y-3">
               {recentQueries.map((item) => (
-                <div key={item.id} className="flex items-center justify-between p-3 bg-surface-50 rounded-lg">
+                <div key={item.id} className="flex items-center justify-between p-3 bg-surface-50 dark:bg-slate-800 rounded-lg">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center">
                       <Bot size={16} className="text-accent" />
                     </div>
                     <div>
-                      <p className="text-body font-medium text-navy">{item.query}</p>
-                      <p className="text-small text-gray-500">{item.timestamp}</p>
+                      <p className="text-body font-medium text-navy dark:text-white">{item.query}</p>
+                      <p className="text-small text-slate-500 dark:text-slate-400">{item.timestamp}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-small text-gray-500">Confidence:</span>
-                      <div className="w-16 h-2 bg-surface-200 rounded-full overflow-hidden">
+                      <span className="text-small text-slate-500 dark:text-slate-400">Confidence:</span>
+                      <div className="w-16 h-2 bg-surface-200 dark:bg-slate-700 rounded-full overflow-hidden">
                         <div 
                           className={`h-full rounded-full ${
                             item.confidence >= 80 ? 'bg-success' : 
@@ -105,7 +105,7 @@ export const AIAnalytics: React.FC = () => {
                           style={{ width: `${item.confidence}%` }}
                         />
                       </div>
-                      <span className="text-small font-medium">{item.confidence}%</span>
+                      <span className="text-small font-medium dark:text-white">{item.confidence}%</span>
                     </div>
                     {item.captured && (
                       <Badge variant="success">Lead</Badge>
@@ -126,12 +126,12 @@ export const AIAnalytics: React.FC = () => {
               {languageBreakdown.map((lang, index) => (
                 <div key={index}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-body text-navy">{lang.language}</span>
-                    <span className="text-small text-gray-500">
+                    <span className="text-body text-navy dark:text-white">{lang.language}</span>
+                    <span className="text-small text-slate-500 dark:text-slate-400">
                       {lang.queries} queries ({lang.percentage}%)
                     </span>
                   </div>
-                  <div className="h-3 bg-surface-200 rounded-full overflow-hidden">
+                  <div className="h-3 bg-surface-200 dark:bg-slate-700 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-accent rounded-full"
                       style={{ width: `${lang.percentage}%` }}
@@ -150,53 +150,53 @@ export const AIAnalytics: React.FC = () => {
             description="Manage AI behavior and suggestions"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="p-4 border border-surface-200 rounded-lg">
+            <div className="p-4 border border-surface-200 dark:border-slate-700 rounded-lg">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <Zap size={18} className="text-warning" />
-                  <span className="font-medium text-navy">Auto-Pricing</span>
+                  <span className="font-medium text-navy dark:text-white">Auto-Pricing</span>
                 </div>
                 <Toggle checked={true} onChange={() => {}} />
               </div>
-              <p className="text-small text-gray-500">
+              <p className="text-small text-slate-500 dark:text-slate-400">
                 AI suggests prices based on material, quantity, and complexity
               </p>
               <div className="mt-3 flex items-center gap-2">
-                <span className="text-small text-gray-500">Confidence threshold:</span>
+                <span className="text-small text-slate-500 dark:text-slate-400">Confidence threshold:</span>
                 <Badge variant="success">80%</Badge>
               </div>
             </div>
             
-            <div className="p-4 border border-surface-200 rounded-lg">
+            <div className="p-4 border border-surface-200 dark:border-slate-700 rounded-lg">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <Users size={18} className="text-success" />
-                  <span className="font-medium text-navy">Lead Capture</span>
+                  <span className="font-medium text-navy dark:text-white">Lead Capture</span>
                 </div>
                 <Toggle checked={true} onChange={() => {}} />
               </div>
-              <p className="text-small text-gray-500">
+              <p className="text-small text-slate-500 dark:text-slate-400">
                 Automatically capture leads after 3 messages
               </p>
               <div className="mt-3 flex items-center gap-2">
-                <span className="text-small text-gray-500">Messages before capture:</span>
+                <span className="text-small text-slate-500 dark:text-slate-400">Messages before capture:</span>
                 <Badge>3</Badge>
               </div>
             </div>
             
-            <div className="p-4 border border-surface-200 rounded-lg">
+            <div className="p-4 border border-surface-200 dark:border-slate-700 rounded-lg">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <MessageSquare size={18} className="text-accent" />
-                  <span className="font-medium text-navy">Manual Override</span>
+                  <span className="font-medium text-navy dark:text-white">Manual Override</span>
                 </div>
                 <Toggle checked={true} onChange={() => {}} />
               </div>
-              <p className="text-small text-gray-500">
+              <p className="text-small text-slate-500 dark:text-slate-400">
                 Allow users to override AI suggestions
               </p>
               <div className="mt-3 flex items-center gap-2">
-                <span className="text-small text-gray-500">Override requests:</span>
+                <span className="text-small text-slate-500 dark:text-slate-400">Override requests:</span>
                 <Badge variant="warning">12%</Badge>
               </div>
             </div>

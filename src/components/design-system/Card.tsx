@@ -23,10 +23,10 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div
       className={`
-        bg-white rounded-lg
-        shadow-card border border-surface-200
+        bg-white dark:bg-slate-800 rounded-lg
+        shadow-sm border border-slate-200 dark:border-slate-700
         ${paddingStyles[padding]}
-        ${hover ? 'hover:shadow-elevated transition-shadow duration-200' : ''}
+        ${hover ? 'hover:shadow-md transition-shadow duration-200' : ''}
         ${className}
       `}
     >
@@ -49,9 +49,11 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
   return (
     <div className="flex items-start justify-between mb-4">
       <div>
-        <h3 className="text-card-title text-navy">{title}</h3>
+        <h3 className="text-base font-semibold text-slate-900 dark:text-white">
+          {title}
+        </h3>
         {description && (
-          <p className="text-small text-gray-500 mt-1">{description}</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{description}</p>
         )}
       </div>
       {action && <div>{action}</div>}

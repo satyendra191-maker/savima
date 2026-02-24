@@ -29,8 +29,8 @@ export const Toggle: React.FC<ToggleProps> = ({
         className={`
           relative inline-flex h-6 w-11 items-center rounded-full
           transition-colors duration-200 ease-in-out
-          focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2
-          ${checked ? 'bg-accent' : 'bg-surface-300'}
+          focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2
+          ${checked ? 'bg-amber-500' : 'bg-slate-300 dark:bg-slate-600'}
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         `}
       >
@@ -43,7 +43,7 @@ export const Toggle: React.FC<ToggleProps> = ({
         />
       </button>
       {label && (
-        <label htmlFor={toggleId} className="text-body text-gray-700 cursor-pointer">
+        <label htmlFor={toggleId} className="text-sm text-slate-700 dark:text-slate-200 cursor-pointer">
           {label}
         </label>
       )}
@@ -81,24 +81,24 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-navy/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"
         onClick={onClose}
       />
       
       {/* Modal content */}
       <div className={`
         relative w-full ${sizeStyles[size]} mx-4
-        bg-white rounded-lg shadow-premium
+        bg-white dark:bg-slate-800 rounded-lg shadow-xl
         max-h-[90vh] overflow-hidden flex flex-col
       `}>
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-surface-200">
-            {title && <h2 className="text-h2 text-navy">{title}</h2>}
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+            {title && <h2 className="text-lg font-semibold text-slate-900 dark:text-white">{title}</h2>}
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

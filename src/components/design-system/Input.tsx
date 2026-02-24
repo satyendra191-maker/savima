@@ -15,14 +15,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={inputId} className="block text-small font-medium text-navy mb-1.5">
+          <label htmlFor={inputId} className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1.5">
             {label}
-            {props.required && <span className="text-danger ml-1">*</span>}
+            {props.required && <span className="text-red-500 ml-1">*</span>}
           </label>
         )}
         <div className="relative">
           {leftIcon && (
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
               {leftIcon}
             </div>
           )}
@@ -31,12 +31,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             className={`
               w-full px-4 py-2
-              text-body text-gray-900
-              bg-white rounded-md
-              border ${error ? 'border-danger' : 'border-surface-300'}
-              focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent
-              placeholder:text-gray-400
-              disabled:bg-surface-100 disabled:cursor-not-allowed
+              text-sm text-slate-900 dark:text-white
+              bg-white dark:bg-slate-800 rounded-md
+              border ${error ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'}
+              focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent
+              placeholder:text-slate-400 dark:placeholder:text-slate-500
+              disabled:bg-slate-100 dark:disabled:bg-slate-700 disabled:cursor-not-allowed
               ${leftIcon ? 'pl-10' : ''}
               ${rightIcon ? 'pr-10' : ''}
               ${className}
@@ -44,13 +44,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {rightIcon && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
               {rightIcon}
             </div>
           )}
         </div>
-        {error && <p className="mt-1 text-small text-danger">{error}</p>}
-        {helperText && !error && <p className="mt-1 text-small text-gray-500">{helperText}</p>}
+        {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+        {helperText && !error && <p className="mt-1 text-xs text-slate-500">{helperText}</p>}
       </div>
     );
   }
@@ -71,9 +71,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={inputId} className="block text-small font-medium text-navy mb-1.5">
+          <label htmlFor={inputId} className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1.5">
             {label}
-            {props.required && <span className="text-danger ml-1">*</span>}
+            {props.required && <span className="text-red-500 ml-1">*</span>}
           </label>
         )}
         <textarea
@@ -81,19 +81,19 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={inputId}
           className={`
             w-full px-4 py-2
-            text-body text-gray-900
-            bg-white rounded-md
-            border ${error ? 'border-danger' : 'border-surface-300'}
-            focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent
-            placeholder:text-gray-400
-            disabled:bg-surface-100 disabled:cursor-not-allowed
+            text-sm text-slate-900 dark:text-white
+            bg-white dark:bg-slate-800 rounded-md
+            border ${error ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'}
+            focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent
+            placeholder:text-slate-400 dark:placeholder:text-slate-500
+            disabled:bg-slate-100 dark:disabled:bg-slate-700 disabled:cursor-not-allowed
             resize-y min-h-[80px]
             ${className}
           `}
           {...props}
         />
-        {error && <p className="mt-1 text-small text-danger">{error}</p>}
-        {helperText && !error && <p className="mt-1 text-small text-gray-500">{helperText}</p>}
+        {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+        {helperText && !error && <p className="mt-1 text-xs text-slate-500">{helperText}</p>}
       </div>
     );
   }
@@ -114,9 +114,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={inputId} className="block text-small font-medium text-navy mb-1.5">
+          <label htmlFor={inputId} className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1.5">
             {label}
-            {props.required && <span className="text-danger ml-1">*</span>}
+            {props.required && <span className="text-red-500 ml-1">*</span>}
           </label>
         )}
         <select
@@ -124,11 +124,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           id={inputId}
           className={`
             w-full px-4 py-2
-            text-body text-gray-900
-            bg-white rounded-md
-            border ${error ? 'border-danger' : 'border-surface-300'}
-            focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent
-            disabled:bg-surface-100 disabled:cursor-not-allowed
+            text-sm text-slate-900 dark:text-white
+            bg-white dark:bg-slate-800 rounded-md
+            border ${error ? 'border-red-500' : 'border-slate-300 dark:border-slate-600'}
+            focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent
+            disabled:bg-slate-100 dark:disabled:bg-slate-700 disabled:cursor-not-allowed
             ${className}
           `}
           {...props}
@@ -139,7 +139,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             </option>
           ))}
         </select>
-        {error && <p className="mt-1 text-small text-danger">{error}</p>}
+        {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
       </div>
     );
   }

@@ -9,11 +9,11 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  default: 'bg-surface-200 text-gray-700',
-  success: 'bg-success/10 text-success',
-  warning: 'bg-warning/10 text-warning',
-  danger: 'bg-danger/10 text-danger',
-  info: 'bg-accent/10 text-accent',
+  default: 'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-200',
+  success: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400',
+  warning: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-400',
+  danger: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-400',
+  info: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-400',
 };
 
 export const Badge: React.FC<BadgeProps> = ({
@@ -24,8 +24,8 @@ export const Badge: React.FC<BadgeProps> = ({
   return (
     <span
       className={`
-        inline-flex items-center px-2 py-1
-        text-small font-medium rounded-full
+        inline-flex items-center px-2 py-0.5
+        text-xs font-medium rounded-full
         ${variantStyles[variant]}
         ${className}
       `}
@@ -42,15 +42,15 @@ interface StatusBadgeProps {
   showDot?: boolean;
 }
 
-const statusConfig: Record<Status, { label: string; variant: BadgeVariant; bgColor: string }> = {
-  active: { label: 'Active', variant: 'success', bgColor: 'bg-success' },
-  pending: { label: 'Pending', variant: 'warning', bgColor: 'bg-warning' },
-  rejected: { label: 'Rejected', variant: 'danger', bgColor: 'bg-danger' },
-  draft: { label: 'Draft', variant: 'default', bgColor: 'bg-steel' },
-  completed: { label: 'Completed', variant: 'info', bgColor: 'bg-accent' },
-  processing: { label: 'Processing', variant: 'info', bgColor: 'bg-accent' },
-  shipped: { label: 'Shipped', variant: 'info', bgColor: 'bg-accent' },
-  delivered: { label: 'Delivered', variant: 'success', bgColor: 'bg-success' },
+const statusConfig: Record<Status, { label: string; variant: BadgeVariant; bgClass: string }> = {
+  active: { label: 'Active', variant: 'success', bgClass: 'bg-green-500' },
+  pending: { label: 'Pending', variant: 'warning', bgClass: 'bg-amber-500' },
+  rejected: { label: 'Rejected', variant: 'danger', bgClass: 'bg-red-500' },
+  draft: { label: 'Draft', variant: 'default', bgClass: 'bg-slate-500' },
+  completed: { label: 'Completed', variant: 'info', bgClass: 'bg-blue-500' },
+  processing: { label: 'Processing', variant: 'info', bgClass: 'bg-blue-500' },
+  shipped: { label: 'Shipped', variant: 'info', bgClass: 'bg-blue-500' },
+  delivered: { label: 'Delivered', variant: 'success', bgClass: 'bg-green-500' },
 };
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
@@ -62,17 +62,17 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   return (
     <span
       className={`
-        inline-flex items-center gap-1.5 px-2.5 py-1
-        text-small font-medium rounded-full
-        ${config.variant === 'success' ? 'bg-success/10 text-success' : ''}
-        ${config.variant === 'warning' ? 'bg-warning/10 text-warning' : ''}
-        ${config.variant === 'danger' ? 'bg-danger/10 text-danger' : ''}
-        ${config.variant === 'info' ? 'bg-accent/10 text-accent' : ''}
-        ${config.variant === 'default' ? 'bg-surface-300 text-gray-600' : ''}
+        inline-flex items-center gap-1.5 px-2 py-0.5
+        text-xs font-medium rounded-full
+        ${config.variant === 'success' ? 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400' : ''}
+        ${config.variant === 'warning' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-400' : ''}
+        ${config.variant === 'danger' ? 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-400' : ''}
+        ${config.variant === 'info' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-400' : ''}
+        ${config.variant === 'default' ? 'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-200' : ''}
       `}
     >
       {showDot && (
-        <span className={`w-1.5 h-1.5 rounded-full ${config.bgColor}`} />
+        <span className={`w-1.5 h-1.5 rounded-full ${config.bgClass}`} />
       )}
       {config.label}
     </span>

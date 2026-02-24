@@ -12,16 +12,16 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-navy text-white hover:bg-navy-700 focus:ring-2 focus:ring-navy-300',
-  secondary: 'border-2 border-steel text-steel hover:bg-steel-50 focus:ring-2 focus:ring-steel-200',
+  primary: 'bg-navy text-white hover:bg-navy-700 focus:ring-2 focus:ring-navy-300 dark:bg-blue-600 dark:hover:bg-blue-500',
+  secondary: 'border-2 border-navy text-navy hover:bg-navy hover:text-white dark:border-slate-400 dark:text-slate-200 dark:hover:bg-slate-700',
   danger: 'bg-danger text-white hover:bg-danger-600 focus:ring-2 focus:ring-danger-300',
-  ghost: 'text-navy hover:bg-surface-200 focus:ring-2 focus:ring-steel-200',
+  ghost: 'text-navy hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-700',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'px-3 py-1.5 text-small',
-  md: 'px-4 py-2 text-body',
-  lg: 'px-6 py-3 text-card-title',
+  sm: 'px-3 py-1.5 text-xs',
+  md: 'px-4 py-2 text-sm',
+  lg: 'px-6 py-3 text-base',
 };
 
 export const Button: React.FC<ButtonProps> = ({
