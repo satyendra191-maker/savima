@@ -24,7 +24,7 @@ export const About: React.FC = () => {
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
               Precision Manufacturing <span className="text-amber-400">Excellence</span><br />
-              <span className="text-3xl md:text-4xl lg:text-5xl">From Ahmedabad, For the World</span>
+              <span className="text-3xl md:text-4xl lg:text-5xl">From Jamnagar, For the World</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
               World-class <strong>CNC machining in Gujarat</strong> — delivering high-accuracy precision components to global OEMs since 2010. 
@@ -82,7 +82,7 @@ export const About: React.FC = () => {
             </h2>
             <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
               <p>
-                <strong>Founded in 2010 by Satyendra</strong> with a vision to transform precision manufacturing in India, Saviman began as a small CNC turning unit in Ahmedabad's industrial zone.
+                <strong>Founded in 2010 by Satyendra</strong> with a vision to transform precision manufacturing in India, Saviman began as a small CNC turning unit in Jamnagar's industrial zone.
               </p>
               <p>
                 Recognizing the gap between global quality expectations and domestic capabilities, we invested in <strong>German and Japanese CNC machines</strong> — a bold move that set us apart from the beginning. Our commitment to <strong>±0.005mm tolerances</strong> quickly earned trust among automotive and aerospace suppliers.
@@ -219,7 +219,7 @@ export const About: React.FC = () => {
                   State-of-the-Art Facility
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Our 25,000 sq ft facility in Ahmedabad houses <strong>CNC turning centers, 4-axis and 5-axis machining centers, VMCs</strong>, and automated inspection equipment. We run triple-shift operations to meet global demand.
+                  Our 25,000 sq ft facility in Jamnagar houses <strong>CNC turning centers, 4-axis and 5-axis machining centers, VMCs</strong>, and automated inspection equipment. We run triple-shift operations to meet global demand.
                 </p>
               </div>
               <div>
@@ -348,9 +348,9 @@ export const About: React.FC = () => {
           ============================================ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Precision Manufacturing Ahmedabad | CNC Machining Gujarat</h3>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Precision Manufacturing Jamnagar | CNC Machining Gujarat</h3>
           <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-            Saviman is a leading precision manufacturing company in Ahmedabad, Gujarat, India, specializing in CNC turning, CNC milling, VMC, and 5-axis machining services. We manufacture custom precision parts for automotive, aerospace, defense, medical devices, electronics, and general engineering industries. With German and Japanese CNC machines, we achieve ±0.005mm tolerances and are ISO 9001:2015 certified. Our export footprint spans 25+ countries including USA, UK, Germany, Japan, and Australia. Contact us for high-accuracy machined components at competitive Indian pricing with global quality standards.
+            Saviman is a leading precision manufacturing company in Jamnagar, Gujarat, India, specializing in CNC turning, CNC milling, VMC, and 5-axis machining services. We manufacture custom precision parts for automotive, aerospace, defense, medical devices, electronics, and general engineering industries. With German and Japanese CNC machines, we achieve ±0.005mm tolerances and are ISO 9001:2015 certified. Our export footprint spans 25+ countries including USA, UK, Germany, Japan, and Australia. Contact us for high-accuracy machined components at competitive Indian pricing with global quality standards.
           </p>
         </div>
       </section>
