@@ -133,7 +133,7 @@
   }
 
   .dark *:focus-visible {
-    @apply ring-offset-background-dark;
+    @apply ring-offset-navy-900;
   }
 }
 
