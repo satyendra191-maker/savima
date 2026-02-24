@@ -16,5 +16,17 @@
         { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
     }
-  ]
+  ],
+  "env": {
+    "VITE_SUPABASE_URL": "https://nvqntsrpxphgafsfpkjq.supabase.co",
+    "VITE_SUPABASE_ANON_KEY": "sb_publishable_Dz_jVnQzr8KKRXnOn7twdg_BXNyJVdk",
+    "VITE_SUPABASE_ADMIN_KEY": "saviman_admin_2024"
+  },
+  "build": {
+    "env": {
+      "VITE_SUPABASE_URL": "https://nvqntsrpxphgafsfpkjq.supabase.co",
+      "VITE_SUPABASE_ANON_KEY": "sb_publishable_Dz_jVnQzr8KKRXnOn7twdg_BXNyJVdk",
+      "VITE_SUPABASE_ADMIN_KEY": "saviman_admin_2024"
+    }
+  }
 }
