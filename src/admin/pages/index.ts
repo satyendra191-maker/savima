@@ -10,3 +10,4 @@ export { AdminLogisticsPage } from './LogisticsPage';
 export { AdminBlogPage } from './BlogPage';
 export { AdminAnalyticsPage } from './AnalyticsPage';
 export { AdminSettingsPage } from './SettingsPage';
+export { AdminOrdersPage } from './OrdersPage';

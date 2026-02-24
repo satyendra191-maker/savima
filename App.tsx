@@ -40,7 +40,8 @@ import {
   AdminLogisticsPage,
   AdminBlogPage,
   AdminAnalyticsPage,
-  AdminSettingsPage
+  AdminSettingsPage,
+  AdminOrdersPage
 } from './src/admin/pages';
 import { Analytics } from './src/lib/analytics';
 import { I18nProvider } from './src/components/ui/I18n';
@@ -125,6 +126,7 @@ const AppRoutes = () => {
         <Route path="/admin/blogs" element={<AdminBlogPage />} />
         <Route path="/admin/analytics" element={<AdminAnalyticsPage />} />
         <Route path="/admin/settings" element={<AdminSettingsPage />} />
+        <Route path="/admin/orders" element={<AdminOrdersPage />} />
       </Route>
     </Routes>
   )

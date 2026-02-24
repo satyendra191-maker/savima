@@ -1512,3 +1512,586 @@ const DEMO_LOGISTICS_PARTNERS = [
     description: 'Global container logistics leader'
   }
 ];
+
+// ============================================
+// VISITOR TRACKING SERVICE (Cookie Lead Intelligence)
+// ============================================
+
+const SESSION_COOKIE_NAME = 'antigravit_session';
+const SESSION_DURATION_DAYS = 30;
+
+function generateSessionId(): string {
+  return 'sess_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 15);
+}
+
+function getCookie(name: string): string | null {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? decodeURIComponent(match[2]) : null;
+}
+
+function setCookie(name: string, value: string, days: number = SESSION_DURATION_DAYS): void {
+  if (typeof document === 'undefined') return;
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+}
+
+function getUTMParams(): { source?: string; medium?: string; campaign?: string; term?: string; content?: string } {
+  if (typeof window === 'undefined') return {};
+  
+  const params = new URLSearchParams(window.location.search);
+  return {
+    source: params.get('utm_source') || undefined,
+    medium: params.get('utm_medium') || undefined,
+    campaign: params.get('utm_campaign') || undefined,
+    term: params.get('utm_term') || undefined,
+    content: params.get('utm_content') || undefined
+  };
+}
+
+function getDeviceInfo(): { device_type?: string; browser?: string; os?: string } {
+  if (typeof navigator === 'undefined') return {};
+  
+  const ua = navigator.userAgent;
+  let device_type = 'desktop';
+  if (/mobile/i.test(ua)) device_type = 'mobile';
+  else if (/tablet/i.test(ua)) device_type = 'tablet';
+  
+  let browser = 'Unknown';
+  if (/chrome/i.test(ua) && !/edge/i.test(ua)) browser = 'Chrome';
+  else if (/safari/i.test(ua) && !/chrome/i.test(ua)) browser = 'Safari';
+  else if (/firefox/i.test(ua)) browser = 'Firefox';
+  else if (/edge/i.test(ua)) browser = 'Edge';
+  
+  let os = 'Unknown';
+  if (/windows/i.test(ua)) os = 'Windows';
+  else if (/mac/i.test(ua)) os = 'MacOS';
+  else if (/linux/i.test(ua)) os = 'Linux';
+  else if (/android/i.test(ua)) os = 'Android';
+  else if (/ios|iphone|ipad/i.test(ua)) os = 'iOS';
+  
+  return { device_type, browser, os };
+}
+
+export const VisitorTrackingService = {
+  getSessionId: (): string => {
+    let sessionId = getCookie(SESSION_COOKIE_NAME);
+    if (!sessionId) {
+      sessionId = generateSessionId();
+      setCookie(SESSION_COOKIE_NAME, sessionId);
+    }
+    return sessionId;
+  },
+
+  initSession: async (): Promise<string> => {
+    const sessionId = VisitorTrackingService.getSessionId();
+    const utm = getUTMParams();
+    const device = getDeviceInfo();
+    const referrer = typeof document !== 'undefined' ? document.referrer : '';
+
+    try {
+      await supabase
+        .from('visitor_sessions')
+        .upsert([{
+          session_id: sessionId,
+          visited_pages: [window.location.pathname],
+          referrer,
+          utm_source: utm.source,
+          utm_medium: utm.medium,
+          utm_campaign: utm.campaign,
+          utm_term: utm.term,
+          utm_content: utm.content,
+          device_type: device.device_type,
+          browser: device.browser,
+          os: device.os,
+          cookies_consented: localStorage.getItem('cookie_consent') === 'accepted'
+        }], { onConflict: 'session_id' });
+    } catch (e) {
+      console.warn('Visitor session tracking not available');
+    }
+
+    return sessionId;
+  },
+
+  trackPageVisit: async (pageUrl: string): Promise<void> => {
+    const sessionId = getCookie(SESSION_COOKIE_NAME);
+    if (!sessionId) {
+      await VisitorTrackingService.initSession();
+      return;
+    }
+
+    try {
+      const { data: session } = await supabase
+        .from('visitor_sessions')
+        .select('visited_pages')
+        .eq('session_id', sessionId)
+        .single();
+
+      if (session) {
+        const pages = session.visited_pages || [];
+        if (!pages.includes(pageUrl)) {
+          pages.push(pageUrl);
+          await supabase
+            .from('visitor_sessions')
+            .update({
+              visited_pages: pages,
+              last_visit_at: new Date().toISOString()
+            })
+            .eq('session_id', sessionId);
+        }
+      }
+    } catch (e) {
+      console.warn('Page visit tracking not available');
+    }
+  },
+
+  updateConsent: async (consented: boolean): Promise<void> => {
+    const sessionId = getCookie(SESSION_COOKIE_NAME);
+    if (!sessionId) return;
+
+    try {
+      await supabase
+        .from('visitor_sessions')
+        .update({ cookies_consented: consented })
+        .eq('session_id', sessionId);
+    } catch (e) {
+      console.warn('Consent update failed');
+    }
+  },
+
+  getSession: async (): Promise<any | null> => {
+    const sessionId = getCookie(SESSION_COOKIE_NAME);
+    if (!sessionId) return null;
+
+    try {
+      const { data } = await supabase
+        .from('visitor_sessions')
+        .select('*')
+        .eq('session_id', sessionId)
+        .single();
+      return data;
+    } catch (e) {
+      return null;
+    }
+  }
+};
+
+// ============================================
+// LEAD SERVICE
+// ============================================
+
+export const LeadService = {
+  async create(lead: {
+    full_name: string;
+    company_name?: string;
+    email: string;
+    phone?: string;
+    country_code?: string;
+    message?: string;
+    material_details?: string;
+    file_url?: string;
+    source_page?: string;
+  }): Promise<any> {
+    const sessionId = getCookie(SESSION_COOKIE_NAME);
+    
+    const { data, error } = await supabase
+      .from('leads')
+      .insert([{
+        ...lead,
+        session_id: sessionId,
+        status: 'new'
+      }])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async getAll(filters?: { status?: string; assigned_to?: string }): Promise<any[]> {
+    let query = supabase
+      .from('leads')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (filters?.status) {
+      query = query.eq('status', filters.status);
+    }
+    if (filters?.assigned_to) {
+      query = query.eq('assigned_to', filters.assigned_to);
+    }
+
+    const { data, error } = await query;
+    if (error) return [];
+    return data || [];
+  },
+
+  async update(id: string, updates: {
+    status?: string;
+    priority?: string;
+    notes?: string;
+    assigned_to?: string;
+    buying_intent_score?: number;
+  }): Promise<void> {
+    const { error } = await supabase
+      .from('leads')
+      .update(updates)
+      .eq('id', id);
+
+    if (error) throw error;
+  },
+
+  async delete(id: string): Promise<void> {
+    const { error } = await supabase
+      .from('leads')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
+  }
+};
+
+// ============================================
+// AUDIT LOG SERVICE
+// ============================================
+
+export const AuditLogService = {
+  async log(action: string, tableName: string, recordId: string, oldValues?: any, newValues?: any): Promise<void> {
+    try {
+      await supabase
+        .from('audit_logs')
+        .insert([{
+          action,
+          table_name: tableName,
+          record_id: recordId,
+          old_values: oldValues,
+          new_values: newValues,
+          created_at: new Date().toISOString()
+        }]);
+    } catch (e) {
+      console.warn('Audit log failed:', e);
+    }
+  },
+
+  async getRecent(limit: number = 50): Promise<any[]> {
+    try {
+      const { data } = await supabase
+        .from('audit_logs')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(limit);
+      return data || [];
+    } catch (e) {
+      return [];
+    }
+  },
+
+  async getByTable(tableName: string, limit: number = 50): Promise<any[]> {
+    try {
+      const { data } = await supabase
+        .from('audit_logs')
+        .select('*')
+        .eq('table_name', tableName)
+        .order('created_at', { ascending: false })
+        .limit(limit);
+      return data || [];
+    } catch (e) {
+      return [];
+    }
+  },
+
+  async getByActor(actorId: string, limit: number = 50): Promise<any[]> {
+    try {
+      const { data } = await supabase
+        .from('audit_logs')
+        .select('*')
+        .eq('actor_id', actorId)
+        .order('created_at', { ascending: false })
+        .limit(limit);
+      return data || [];
+    } catch (e) {
+      return [];
+    }
+  }
+};
+
+// ============================================
+// ORDER SERVICE
+// ============================================
+
+export const OrderService = {
+  async create(order: {
+    customer_name: string;
+    customer_company?: string;
+    email: string;
+    phone?: string;
+    billing_address?: string;
+    shipping_address?: string;
+    items?: any[];
+    total_amount: number;
+    currency?: string;
+    payment_gateway?: string;
+    payment_method?: string;
+  }): Promise<any> {
+    const { data, error } = await supabase
+      .from('orders')
+      .insert([{
+        ...order,
+        payment_status: 'pending',
+        order_status: 'Order Confirmed'
+      }])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async getAll(filters?: { status?: string; payment_status?: string }): Promise<any[]> {
+    let query = supabase
+      .from('orders')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (filters?.status) {
+      query = query.eq('order_status', filters.status);
+    }
+    if (filters?.payment_status) {
+      query = query.eq('payment_status', filters.payment_status);
+    }
+
+    const { data, error } = await query;
+    if (error) return DEMO_ORDERS;
+    return data || [];
+  },
+
+  async getByTransaction(transactionId: string): Promise<any | null> {
+    const { data, error } = await supabase
+      .from('orders')
+      .select('*')
+      .eq('transaction_id', transactionId)
+      .single();
+
+    if (error) return DEMO_ORDERS.find(o => o.transaction_id === transactionId) || null;
+    return data;
+  },
+
+  async updateStatus(id: string, status: string, paymentStatus?: string): Promise<void> {
+    const updates: any = { order_status: status };
+    if (paymentStatus) updates.payment_status = paymentStatus;
+
+    const { error } = await supabase
+      .from('orders')
+      .update(updates)
+      .eq('id', id);
+
+    if (error) throw error;
+
+    // Add tracking entry
+    await supabase
+      .from('order_tracking')
+      .insert([{
+        order_id: id,
+        status,
+        description: `Order status updated to ${status}`,
+        created_at: new Date().toISOString()
+      }]);
+  },
+
+  async getTracking(orderId: string): Promise<any[]> {
+    const { data } = await supabase
+      .from('order_tracking')
+      .select('*')
+      .eq('order_id', orderId)
+      .order('created_at', { ascending: true });
+    return data || [];
+  },
+
+  async delete(id: string): Promise<void> {
+    const { error } = await supabase
+      .from('orders')
+      .delete()
+      .eq('id', id);
+    if (error) throw error;
+  }
+};
+
+// Demo Orders
+const DEMO_ORDERS = [
+  {
+    id: '1',
+    transaction_id: 'ORD-000001',
+    customer_name: 'John Smith',
+    customer_company: 'TechCorp Industries',
+    email: 'john@techcorp.com',
+    phone: '+1 555-123-4567',
+    total_amount: 25000,
+    currency: 'USD',
+    payment_status: 'completed',
+    order_status: 'Delivered',
+    items: [{ name: 'Brass Inserts', quantity: 1000, price: 25 }],
+    created_at: '2024-02-15'
+  },
+  {
+    id: '2',
+    transaction_id: 'ORD-000002',
+    customer_name: 'Maria Garcia',
+    customer_company: 'AutoParts Ltd',
+    email: 'maria@autoparts.com',
+    phone: '+34 612 345 678',
+    total_amount: 45000,
+    currency: 'USD',
+    payment_status: 'completed',
+    order_status: 'Dispatched',
+    items: [{ name: 'SS Hydraulic Fittings', quantity: 500, price: 90 }],
+    created_at: '2024-02-20'
+  },
+  {
+    id: '3',
+    transaction_id: 'ORD-000003',
+    customer_name: 'Hans Mueller',
+    customer_company: 'GermanEng GmbH',
+    email: 'hans@germaneng.de',
+    phone: '+49 171 2345678',
+    total_amount: 12500,
+    currency: 'USD',
+    payment_status: 'pending',
+    order_status: 'Order Confirmed',
+    items: [{ name: 'Precision CNC Parts', quantity: 50, price: 250 }],
+    created_at: '2024-02-22'
+  }
+];
+
+// ============================================
+// DONATION SERVICE
+// ============================================
+
+export const DonationService = {
+  async create(donation: {
+    donor_name: string;
+    donor_email?: string;
+    donor_phone?: string;
+    amount: number;
+    currency?: string;
+    payment_gateway?: string;
+    payment_method?: string;
+    message?: string;
+    anonymous?: boolean;
+    campaign?: string;
+  }): Promise<any> {
+    const { data, error } = await supabase
+      .from('donations')
+      .insert([{
+        ...donation,
+        payment_status: 'pending'
+      }])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async getAll(filters?: { status?: string }): Promise<any[]> {
+    let query = supabase
+      .from('donations')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (filters?.status) {
+      query = query.eq('payment_status', filters.status);
+    }
+
+    const { data, error } = await query;
+    if (error) return DEMO_DONATIONS;
+    return data || [];
+  },
+
+  async updateStatus(id: string, status: string): Promise<void> {
+    const { error } = await supabase
+      .from('donations')
+      .update({ payment_status: status })
+      .eq('id', id);
+
+    if (error) throw error;
+  },
+
+  async getTotal(): Promise<number> {
+    const { data } = await supabase
+      .from('donations')
+      .select('amount')
+      .eq('payment_status', 'completed');
+
+    if (!data) return 0;
+    return data.reduce((sum, d) => sum + (parseFloat(d.amount) || 0), 0);
+  }
+};
+
+// ============================================
+// ANALYTICS TRACKING
+// ============================================
+
+export const AnalyticsService = {
+  async trackEvent(eventType: string, eventName: string, metadata: Record<string, any> = {}): Promise<void> {
+    try {
+      const sessionId = getCookie(SESSION_COOKIE_NAME);
+      
+      await supabase
+        .from('analytics_events')
+        .insert([{
+          event_type: eventType,
+          event_name: eventName,
+          session_id: sessionId,
+          page_url: typeof window !== 'undefined' ? window.location.href : '',
+          referrer: typeof document !== 'undefined' ? document.referrer : '',
+          metadata,
+          created_at: new Date().toISOString()
+        }]);
+    } catch (e) {
+      console.warn('Analytics tracking failed:', e);
+    }
+  },
+
+  async getEventsByType(eventType: string, days: number = 30): Promise<any[]> {
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days);
+
+    const { data } = await supabase
+      .from('analytics_events')
+      .select('*')
+      .eq('event_type', eventType)
+      .gte('created_at', startDate.toISOString())
+      .order('created_at', { ascending: false });
+
+    return data || [];
+  },
+
+  async getPageViews(days: number = 30): Promise<number> {
+    const { count } = await supabase
+      .from('analytics_events')
+      .select('*', { count: 'exact', head: true })
+      .eq('event_type', 'page_view');
+
+    return count || 0;
+  },
+
+  async getTopPages(limit: number = 10): Promise<{ page_url: string; count: number }[]> {
+    const { data } = await supabase
+      .from('analytics_events')
+      .select('page_url')
+      .eq('event_type', 'page_view');
+
+    if (!data) return [];
+
+    const pageCounts: Record<string, number> = {};
+    data.forEach((event: any) => {
+      const page = event.page_url;
+      pageCounts[page] = (pageCounts[page] || 0) + 1;
+    });
+
+    return Object.entries(pageCounts)
+      .map(([page_url, count]) => ({ page_url, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, limit);
+  }
+};

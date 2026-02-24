@@ -1,87 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://saviman.com/</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://saviman.com/products</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/products</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://saviman.com/products/brass</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/products/brass</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://saviman.com/products/steel</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/products/steel</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://saviman.com/industries</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://saviman.com/case-studies</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/products/other</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://saviman.com/about</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/industries</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/case-studies</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://saviman.com/infrastructure</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/infrastructure</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://saviman.com/quality</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/quality</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://saviman.com/careers</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/careers</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://saviman.com/blog</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://saviman.com/catalog</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/catalog</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://saviman.com/rfq</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/rfq</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://saviman.com/contact</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://saviman.com/cookie-policy</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/donate</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/cookie-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://saviman.com/privacy-policy</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://saviman.com/terms-of-service</loc>
+    <loc>https://antigravit-opencode-56swzuswd-satyendra-yadavas-projects.vercel.app/terms-of-service</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
