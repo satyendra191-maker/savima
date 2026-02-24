@@ -1,316 +1,361 @@
 import React from 'react';
-import { ArrowRight, Users, Globe, Award, Shield, Factory, Clock, Target } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Users, Globe, Award, Shield, Factory, Clock, Target, Zap, CheckCircle, TrendingUp, Wrench, Star, Heart, Leaf } from 'lucide-react';
 
 export const About: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-12 pt-24">
-      {/* Hero */}
-      <section className="relative bg-saviman-900 py-20 mb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">About SAVIMAN</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Delivering precision engineering excellence since 1990. We are a global leader in manufacturing high-quality brass and stainless steel components.
-          </p>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      {/* ============================================
+          HERO BLOCK - Full Width
+          Image: Wide shot of modern CNC machine shop in India (Prompt #1)
+          ============================================ */}
+      <section className="relative py-32 lg:py-40 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1920&q=80" 
+            alt="Modern CNC machine shop floor with high-tech equipment"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/85 to-slate-900/70"></div>
         </div>
-      </section>
-
-      {/* Stats */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10 mb-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { label: 'Years Experience', value: '34+' },
-            { label: 'Countries Served', value: '50+' },
-            { label: 'Happy Clients', value: '500+' },
-            { label: 'Components Made', value: '10M+' },
-          ].map((stat, i) => (
-            <div key={i} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg text-center">
-              <div className="text-4xl font-bold text-brass-500 mb-2">{stat.value}</div>
-              <div className="text-gray-600 dark:text-gray-400">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Mission Vision */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg">
-            <div className="w-14 h-14 bg-brass-100 dark:bg-brass-900/30 rounded-xl flex items-center justify-center mb-6">
-              <Target className="text-brass-600" size={28} />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Mission</h3>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-              To be the most trusted partner for precision component manufacturing worldwide, delivering exceptional quality, innovative solutions, and unmatched value to our clients across automotive, electrical, hydraulic, and industrial sectors.
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+              Precision Manufacturing <span className="text-amber-400">Excellence</span><br />
+              <span className="text-3xl md:text-4xl lg:text-5xl">From Ahmedabad, For the World</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+              World-class <strong>CNC machining in Gujarat</strong> — delivering high-accuracy precision components to global OEMs since 2010. 
+              German & Japanese technology. Indian pricing. Global quality standards.
             </p>
-          </div>
-          <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg">
-            <div className="w-14 h-14 bg-brass-100 dark:bg-brass-900/30 rounded-xl flex items-center justify-center mb-6">
-              <Globe className="text-brass-600" size={28} />
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link 
+                to="/rfq" 
+                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-900 bg-amber-400 hover:bg-amber-500 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+              >
+                Get Instant Quote
+                <ArrowRight className="ml-2" size={22} />
+              </Link>
+              <Link 
+                to="/products" 
+                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white border-2 border-white/30 hover:bg-white/10 rounded-xl transition-all backdrop-blur-sm"
+              >
+                View Our Capabilities
+              </Link>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Vision</h3>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-              To become a global benchmark in precision manufacturing by embracing cutting-edge technology, fostering sustainable practices, and building lasting relationships with clients and communities.
-            </p>
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="bg-white dark:bg-gray-900 py-20 mb-20">
+      {/* ============================================
+          STATS BAR
+          ============================================ */}
+      <section className="relative -mt-16 relative z-20 mb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">Our Core Values</h2>
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { icon: Shield, title: 'Quality', desc: 'Uncompromising commitment to precision and excellence' },
-              { icon: Clock, title: 'Timeliness', desc: 'Delivering on schedule, every single time' },
-              { icon: Users, title: 'Collaboration', desc: 'Working as partners in your success' },
-              { icon: Award, title: 'Innovation', desc: 'Continuous improvement in processes and products' },
-            ].map((value, i) => (
-              <div key={i} className="text-center">
-                <div className="w-16 h-16 bg-brass-50 dark:bg-brass-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  {value?.icon ? <value.icon className="text-brass-600" size={32} /> : <Shield className="text-brass-600" size={32} />}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{value?.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">{value?.desc}</p>
+              { label: 'Years Experience', value: '15+' },
+              { label: 'Countries Served', value: '25+' },
+              { label: 'Happy Clients', value: '200+' },
+              { label: 'Components Made', value: '2M+' },
+            ].map((stat, i) => (
+              <div key={i} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl text-center border border-gray-100 dark:border-gray-800">
+                <div className="text-4xl font-black text-amber-500 mb-2">{stat.value}</div>
+                <div className="text-gray-600 dark:text-gray-400 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">Leadership Team</h2>
-        <div className="grid md:grid-cols-3 gap-8">
+      {/* ============================================
+          OUR STORY / JOURNEY - 150-200 words
+          Image: Team photo (Prompt #5) or Exterior facility (Prompt #7)
+          ============================================ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+              Our <span className="text-amber-500">Story</span>
+            </h2>
+            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p>
+                <strong>Founded in 2010 by Satyendra</strong> with a vision to transform precision manufacturing in India, Saviman began as a small CNC turning unit in Ahmedabad's industrial zone.
+              </p>
+              <p>
+                Recognizing the gap between global quality expectations and domestic capabilities, we invested in <strong>German and Japanese CNC machines</strong> — a bold move that set us apart from the beginning. Our commitment to <strong>±0.005mm tolerances</strong> quickly earned trust among automotive and aerospace suppliers.
+              </p>
+              <p>
+                Today, with 25+ country exports and certifications including <strong>ISO 9001:2015</strong>, we continue to champion "Make in India" excellence — delivering the precision of Germany, the innovation of Japan, and the value of India to manufacturers worldwide.
+              </p>
+            </div>
+          </div>
+          <div className="relative">
+            <img 
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" 
+              alt="Saviman manufacturing facility exterior"
+              className="rounded-2xl shadow-2xl"
+            />
+            <div className="absolute -bottom-6 -left-6 bg-amber-500 text-slate-900 px-6 py-4 rounded-xl shadow-lg">
+              <div className="text-3xl font-black">15+</div>
+              <div className="text-sm font-bold">Years of Excellence</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          MISSION & VISION
+          ============================================ */}
+      <section className="bg-white dark:bg-gray-900 py-20 mb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900/20 dark:to-amber-800/10 p-8 rounded-2xl border border-amber-200 dark:border-amber-800">
+              <div className="w-16 h-16 bg-amber-500 rounded-xl flex items-center justify-center mb-6">
+                <Target className="text-white" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Mission</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+                To empower global manufacturers with <strong>precision-engineered components</strong> that exceed expectations — delivering unmatched quality, competitive Indian pricing, and on-time delivery that makes "Made in India" synonymous with world-class precision.
+              </p>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/10 p-8 rounded-2xl border border-blue-200 dark:border-blue-800">
+              <div className="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
+                <Globe className="text-white" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Vision</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+                To be the most trusted <strong>CNC machining partner</strong> for OEMs worldwide — building India's premier precision manufacturing hub in Gujarat and setting new benchmarks for quality, innovation, and customer success in the industry.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          CORE VALUES - 5 Values as Icon Cards
+          ============================================ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Our Core <span className="text-amber-500">Values</span>
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            The principles that guide every component we manufacture
+          </p>
+        </div>
+        
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {[
-            { name: 'Satyendra Singh', role: 'Managing Director', exp: '30+ years in Manufacturing' },
-            { name: 'Rajesh Kumar', role: 'Head of Engineering', exp: '15+ years in Precision Machining' },
-            { name: 'Priya Sharma', role: 'Quality Manager', exp: 'ISO Certified Lead Auditor' },
-          ].map((member, i) => (
-            <div key={i} className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg">
-              <div className="h-48 bg-gradient-to-br from-brass-400 to-brass-600 flex items-center justify-center">
-                <Users size={64} className="text-white/30" />
+            { icon: Target, title: 'Precision', desc: '±0.005mm tolerance. Every component measured to perfection.', color: 'bg-amber-500' },
+            { icon: Zap, title: 'Innovation', desc: 'Continuous improvement in processes, technology, and techniques.', color: 'bg-blue-600' },
+            { icon: Award, title: 'Quality', desc: 'ISO 9001:2015 certified. Zero-defect delivery commitment.', color: 'bg-green-600' },
+            { icon: Clock, title: 'Reliability', desc: 'On-time delivery. Every project. Guaranteed.', color: 'bg-purple-600' },
+            { icon: Heart, title: 'Customer Success', desc: 'Your goals become our mission. Partnership, not just supply.', color: 'bg-red-500' },
+          ].map((value, i) => (
+            <div key={i} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+              <div className={`w-14 h-14 ${value.color} rounded-xl flex items-center justify-center mx-auto mb-4`}>
+                <value.icon className="text-white" size={28} />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{member.name}</h3>
-                <p className="text-brass-600 font-medium mb-2">{member.role}</p>
-                <p className="text-gray-500 text-sm">{member.exp}</p>
-              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{value.title}</h3>
+              <p className="text-gray-500 dark:text-gray-400 text-sm">{value.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Saviman Global Platform v5 Architecture */}
-      <section className="bg-saviman-900 py-20 mb-20">
+      {/* ============================================
+          WHAT SETS US APART - 6-8 bullet points / 3-column cards
+          Image: Close-up macro of precision machined parts (Prompt #2)
+          ============================================ */}
+      <section className="bg-slate-900 py-20 mb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white text-center mb-4">Saviman Global Platform v5 Architecture</h2>
-          <p className="text-gray-400 text-center mb-12 max-w-3xl mx-auto">Enterprise-grade digital infrastructure powering precision manufacturing operations</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              What Sets <span className="text-amber-400">Saviman Apart</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Why leading OEMs worldwide trust us for their precision component needs
+            </p>
+          </div>
           
-          <div className="space-y-8">
-            {/* Public Layer */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <h3 className="text-xl font-bold text-amber-400 mb-4">Public Layer</h3>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[
-                  { title: 'Domestic UI', desc: 'INR, Local logistics' },
-                  { title: 'International UI', desc: 'USD/EUR, Global logistics' },
-                  { title: '159+ Language Translation', desc: 'Full localization support' },
-                  { title: 'AI Engineer Chatbot', desc: 'Lead Capture & Qualification' },
-                  { title: 'RFQ System', desc: 'Request for Quote workflow' },
-                  { title: 'Real-time Shipment Tracking', desc: 'End-to-end visibility' },
-                  { title: 'Donation Module', desc: 'Education for Vulnerable Children' },
-                  { title: 'Career Portal', desc: 'Resume Upload (PDF), Application Tracking' },
-                  { title: 'Social Media', desc: 'Facebook, Telegram, Twitter/X, LinkedIn' },
-                ].map((item, i) => (
-                  <div key={i} className="bg-saviman-800/50 rounded-xl p-4 border border-white/5">
-                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
-                    <p className="text-sm text-gray-400">{item.desc}</p>
-                  </div>
-                ))}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { title: 'German & Japanese Machines', desc: 'Hass, Mazak, DMG MORI — world-class CNC equipment for unmatched precision', icon: Factory },
+              { title: 'Tightest Tolerances', desc: '±0.005mm precision — meeting aerospace and medical device standards', icon: Target },
+              { title: 'ISO 9001:2015 Certified', desc: 'Rigorous quality management system with full traceability', icon: Award },
+              { title: 'Fast Turnaround', desc: '5-7 day lead times for prototypes. Mass production on schedule.', icon: Clock },
+              { title: 'Competitive Pricing', desc: 'Indian manufacturing costs with global quality benchmarks', icon: TrendingUp },
+              { title: 'End-to-End Solutions', desc: 'From CAD design to finished parts — we handle the entire process', icon: Wrench },
+            ].map((feature, i) => (
+              <div key={i} className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition-all">
+                <div className="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mb-4">
+                  <feature.icon className="text-amber-400" size={24} />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-400 text-sm">{feature.desc}</p>
               </div>
-            </div>
-
-            {/* Application Layer */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <h3 className="text-xl font-bold text-blue-400 mb-4">Application Layer</h3>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { title: 'AI Pricing Engine', desc: 'Dynamic pricing with market intelligence' },
-                  { title: 'Forecasting Engine', desc: 'Demand prediction & planning' },
-                  { title: 'Machine Utilization Tracking', desc: 'Real-time OEE monitoring' },
-                  { title: 'Vendor Performance Scoring', desc: 'Supplier quality metrics' },
-                  { title: 'ISO Compliance Dashboard', desc: '9001:2015, IATF 16949' },
-                  { title: 'Audit Logging System', desc: 'Complete activity trails' },
-                  { title: 'Email Automation', desc: 'Trigger-based communications' },
-                  { title: 'Real-time Dashboard Updates', desc: 'Live data streaming' },
-                ].map((item, i) => (
-                  <div key={i} className="bg-saviman-800/50 rounded-xl p-4 border border-white/5">
-                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
-                    <p className="text-sm text-gray-400">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Role-Based Dashboards */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <h3 className="text-xl font-bold text-green-400 mb-4">Role-Based Dashboards</h3>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[
-                  { title: 'Super Admin', desc: 'Command Center' },
-                  { title: 'Admin', desc: 'Full system oversight' },
-                  { title: 'Sales Manager', desc: 'Pipeline & revenue' },
-                  { title: 'Production Manager', desc: 'Manufacturing operations' },
-                  { title: 'Inventory Manager', desc: 'Stock & materials' },
-                  { title: 'HR Manager', desc: 'Workforce management' },
-                  { title: 'Client Portal', desc: 'Self-service dashboard' },
-                ].map((item, i) => (
-                  <div key={i} className="bg-saviman-800/50 rounded-xl p-4 border border-white/5">
-                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
-                    <p className="text-sm text-gray-400">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Automation Flow */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <h3 className="text-xl font-bold text-purple-400 mb-4">Automation Flow</h3>
-              <div className="flex flex-wrap justify-center items-center gap-3">
-                {['RFQ', 'AI Price Suggestion', 'Quote', 'Production', 'Shipment', 'Tracking', 'Delivery', 'Feedback', 'Analytics'].map((step, i) => (
-                  <React.Fragment key={step}>
-                    <div className="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-lg font-semibold text-sm border border-amber-500/30">
-                      {step}
-                    </div>
-                    {i < 8 && <ArrowRight className="text-gray-500" size={16} />}
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Official Design System Documentation v1.0 */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">Official Design System Documentation v1.0</h2>
-        
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Brand Philosophy */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">1. Brand Philosophy</h3>
-            <ul className="space-y-3">
-              {['Data over decoration', 'Clarity over creativity', 'Structure over animation', 'Trust over trends'].map((item, i) => (
-                <li key={i} className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
-                  <span className="w-2 h-2 bg-brass-500 rounded-full"></span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Color System */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">2. Color System</h3>
-            <div className="space-y-3">
-              {[
-                { name: 'Primary Base', value: '#0B1F3A', class: 'bg-[#0B1F3A]' },
-                { name: 'Secondary', value: '#1F3A5F', class: 'bg-[#1F3A5F]' },
-                { name: 'Surface', value: '#F4F6F8', class: 'bg-[#F4F6F8] border' },
-                { name: 'Accent Blue', value: '#0052CC', class: 'bg-[#0052CC]' },
-                { name: 'Success Green', value: '#1B7F5C', class: 'bg-[#1B7F5C]' },
-                { name: 'Warning Amber', value: '#D9822B', class: 'bg-[#D9822B]' },
-                { name: 'Danger Red', value: '#C23030', class: 'bg-[#C23030]' },
-              ].map((color, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-lg ${color.class}`}></div>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{color.name}</span>
-                  <span className="text-xs text-gray-500 font-mono">{color.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Typography System */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">3. Typography System</h3>
-            <div className="space-y-3">
+      {/* ============================================
+          OUR FACILITIES & TEAM
+          Image: 5-axis machine operator (Prompt #3), Quality lab (Prompt #4)
+          ============================================ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="order-2 lg:order-1">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+              Our Facilities & <span className="text-amber-500">Team</span>
+            </h2>
+            <div className="space-y-6">
               <div>
-                <p className="text-xs text-gray-500 mb-1">Primary Font: Inter</p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                  <Factory className="text-amber-500" size={24} />
+                  State-of-the-Art Facility
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Our 25,000 sq ft facility in Ahmedabad houses <strong>CNC turning centers, 4-axis and 5-axis machining centers, VMCs</strong>, and automated inspection equipment. We run triple-shift operations to meet global demand.
+                </p>
               </div>
-              {[
-                { name: 'H1', size: '24px', weight: 'SemiBold' },
-                { name: 'H2', size: '18px', weight: 'SemiBold' },
-                { name: 'Card Title', size: '16px', weight: 'Medium' },
-                { name: 'Body', size: '14px', weight: 'Regular' },
-                { name: 'Small Label', size: '12px', weight: 'Medium' },
-              ].map((type, i) => (
-                <div key={i} className="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
-                  <span className="font-medium text-gray-700 dark:text-gray-300">{type.name}</span>
-                  <span className="text-sm text-gray-500">{type.size} {type.weight}</span>
-                </div>
-              ))}
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                  <Users className="text-amber-500" size={24} />
+                  Skilled Workforce
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  75+ trained technicians and engineers — including <strong>CNC programmers, quality inspectors, and process engineers</strong>. Regular upskilling on latest manufacturing technologies.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                  <Shield className="text-amber-500" size={24} />
+                  Quality Assurance Lab
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  In-house CMM, surface roughness testers, hardness testers, and spectral analysis. Every component inspected before dispatch.
+                </p>
+              </div>
             </div>
           </div>
-
-          {/* Layout System */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">4. Layout System</h3>
-            <ul className="space-y-3 text-gray-600 dark:text-gray-300">
-              <li className="flex justify-between"><span>12-column grid</span><span className="font-mono text-sm">Yes</span></li>
-              <li className="flex justify-between"><span>Desktop width</span><span className="font-mono text-sm">1440px</span></li>
-              <li className="flex justify-between"><span>Margins/Gutters</span><span className="font-mono text-sm">24px</span></li>
-              <li className="flex justify-between"><span>Spacing</span><span className="font-mono text-sm">8px system</span></li>
-            </ul>
+          <div className="order-1 lg:order-2 grid grid-cols-2 gap-4">
+            <img 
+              src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80" 
+              alt="Quality control technician using CMM machine"
+              className="rounded-2xl shadow-lg w-full h-48 object-cover"
+            />
+            <img 
+              src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=600&q=80" 
+              alt="CNC 5-axis machining center operation"
+              className="rounded-2xl shadow-lg w-full h-48 object-cover mt-8"
+            />
+            <img 
+              src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=600&q=80" 
+              alt="Precision machined components ready for dispatch"
+              className="rounded-2xl shadow-lg w-full h-48 object-cover"
+            />
+            <img 
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" 
+              alt="Modern industrial facility exterior"
+              className="rounded-2xl shadow-lg w-full h-48 object-cover mt-8"
+            />
           </div>
+        </div>
+      </section>
 
-          {/* Component Standards */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">5. Component Standards</h3>
-            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
-              <li><strong>Buttons:</strong> Primary, Secondary, Danger variants</li>
-              <li><strong>Cards:</strong> White background, 8px radius, subtle shadow</li>
-              <li><strong>Tables:</strong> Zebra striping, sticky header, pagination</li>
-              <li><strong>Status Badges:</strong> Active, Pending, Rejected, Draft, Completed</li>
-            </ul>
+      {/* ============================================
+          WHY PARTNER WITH US - Trust Builder
+          ============================================ */}
+      <section className="bg-white dark:bg-gray-900 py-20 mb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Why Partner with <span className="text-amber-500">Saviman</span>
+            </h2>
           </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { title: 'Proven Track Record', desc: '15+ years. 200+ clients. 25+ countries. We deliver what we promise.', icon: Star },
+              { title: 'Technical Expertise', desc: 'Deep knowledge of materials: Aluminum, Stainless Steel, Brass, Titanium, Engineering Plastics.', icon: Wrench },
+              { title: 'Scalable Capacity', desc: 'From 10 prototypes to 100,000+ production runs — we scale with your needs.', icon: TrendingUp },
+              { title: 'Transparent Communication', desc: 'Dedicated project managers. Real-time updates. No surprises.', icon: Clock },
+              { title: 'Sustainability Focus', desc: 'Solar-powered facility. Coolant recycling. Eco-conscious manufacturing.', icon: Leaf },
+              { title: 'Risk-Free Quality', desc: 'Quality guarantee on every order. Rework or replace — no questions asked.', icon: Shield },
+            ].map((reason, i) => (
+              <div key={i} className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center">
+                  <reason.icon className="text-amber-600 dark:text-amber-400" size={24} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">{reason.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{reason.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          {/* Dashboard Architecture */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">6. Dashboard Architecture</h3>
-            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
-              <li>Super Admin Command Center</li>
-              <li>Manufacturing Dashboard</li>
-              <li>Sales Pipeline View</li>
-              <li>Logistics Dispatch Board</li>
-              <li>Finance & Compliance Control Panels</li>
-            </ul>
+      {/* ============================================
+          FINAL CTA SECTION
+          ============================================ */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 to-slate-800"></div>
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-400 rounded-full blur-[150px]"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-[150px]"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to Experience Precision Manufacturing Excellence?
+          </h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Join 200+ global manufacturers who trust Saviman for their most critical components. 
+            Get a quote today — we'll respond within 24 hours.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              to="/rfq" 
+              className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-slate-900 bg-amber-400 hover:bg-amber-500 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+            >
+              Get Instant Quote
+              <ArrowRight className="ml-2" size={22} />
+            </Link>
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white border-2 border-white/30 hover:bg-white/10 rounded-xl transition-all"
+            >
+              Talk to Our Engineers
+            </Link>
           </div>
+          
+          <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+            <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> ISO 9001:2015 Certified</span>
+            <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> 15+ Years Experience</span>
+            <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> 25+ Country Exports</span>
+          </div>
+        </div>
+      </section>
 
-          {/* AI Engine Visual Language */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">7. AI Engine Visual Language</h3>
-            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
-              <li>AI-generated badge indicator</li>
-              <li>Confidence score display</li>
-              <li>Manual override toggle</li>
-              <li>Usage analytics dashboard</li>
-            </ul>
-          </div>
-
-          {/* Client Portal Guidelines */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">8. Client Portal Guidelines</h3>
-            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
-              <li>Lighter theme variation</li>
-              <li>Simplified analytics</li>
-              <li>Order tracking and invoice downloads</li>
-              <li>Certificate and batch history access</li>
-            </ul>
-          </div>
+      {/* ============================================
+          SEO CONTENT - Hidden but valuable for search
+          ============================================ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Precision Manufacturing Ahmedabad | CNC Machining Gujarat</h3>
+          <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+            Saviman is a leading precision manufacturing company in Ahmedabad, Gujarat, India, specializing in CNC turning, CNC milling, VMC, and 5-axis machining services. We manufacture custom precision parts for automotive, aerospace, defense, medical devices, electronics, and general engineering industries. With German and Japanese CNC machines, we achieve ±0.005mm tolerances and are ISO 9001:2015 certified. Our export footprint spans 25+ countries including USA, UK, Germany, Japan, and Australia. Contact us for high-accuracy machined components at competitive Indian pricing with global quality standards.
+          </p>
         </div>
       </section>
     </div>
   );
 };
+
+export default About;
