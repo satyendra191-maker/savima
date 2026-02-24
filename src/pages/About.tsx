@@ -100,6 +100,217 @@ export const About: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* Saviman Global Platform v5 Architecture */}
+      <section className="bg-saviman-900 py-20 mb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-white text-center mb-4">Saviman Global Platform v5 Architecture</h2>
+          <p className="text-gray-400 text-center mb-12 max-w-3xl mx-auto">Enterprise-grade digital infrastructure powering precision manufacturing operations</p>
+          
+          <div className="space-y-8">
+            {/* Public Layer */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+              <h3 className="text-xl font-bold text-amber-400 mb-4">Public Layer</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  { title: 'Domestic UI', desc: 'INR, Local logistics' },
+                  { title: 'International UI', desc: 'USD/EUR, Global logistics' },
+                  { title: '159+ Language Translation', desc: 'Full localization support' },
+                  { title: 'AI Engineer Chatbot', desc: 'Lead Capture & Qualification' },
+                  { title: 'RFQ System', desc: 'Request for Quote workflow' },
+                  { title: 'Real-time Shipment Tracking', desc: 'End-to-end visibility' },
+                  { title: 'Donation Module', desc: 'Education for Vulnerable Children' },
+                  { title: 'Career Portal', desc: 'Resume Upload (PDF), Application Tracking' },
+                  { title: 'Social Media', desc: 'Facebook, Telegram, Twitter/X, LinkedIn' },
+                ].map((item, i) => (
+                  <div key={i} className="bg-saviman-800/50 rounded-xl p-4 border border-white/5">
+                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                    <p className="text-sm text-gray-400">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Application Layer */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+              <h3 className="text-xl font-bold text-blue-400 mb-4">Application Layer</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { title: 'AI Pricing Engine', desc: 'Dynamic pricing with market intelligence' },
+                  { title: 'Forecasting Engine', desc: 'Demand prediction & planning' },
+                  { title: 'Machine Utilization Tracking', desc: 'Real-time OEE monitoring' },
+                  { title: 'Vendor Performance Scoring', desc: 'Supplier quality metrics' },
+                  { title: 'ISO Compliance Dashboard', desc: '9001:2015, IATF 16949' },
+                  { title: 'Audit Logging System', desc: 'Complete activity trails' },
+                  { title: 'Email Automation', desc: 'Trigger-based communications' },
+                  { title: 'Real-time Dashboard Updates', desc: 'Live data streaming' },
+                ].map((item, i) => (
+                  <div key={i} className="bg-saviman-800/50 rounded-xl p-4 border border-white/5">
+                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                    <p className="text-sm text-gray-400">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Role-Based Dashboards */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+              <h3 className="text-xl font-bold text-green-400 mb-4">Role-Based Dashboards</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  { title: 'Super Admin', desc: 'Command Center' },
+                  { title: 'Admin', desc: 'Full system oversight' },
+                  { title: 'Sales Manager', desc: 'Pipeline & revenue' },
+                  { title: 'Production Manager', desc: 'Manufacturing operations' },
+                  { title: 'Inventory Manager', desc: 'Stock & materials' },
+                  { title: 'HR Manager', desc: 'Workforce management' },
+                  { title: 'Client Portal', desc: 'Self-service dashboard' },
+                ].map((item, i) => (
+                  <div key={i} className="bg-saviman-800/50 rounded-xl p-4 border border-white/5">
+                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                    <p className="text-sm text-gray-400">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Automation Flow */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+              <h3 className="text-xl font-bold text-purple-400 mb-4">Automation Flow</h3>
+              <div className="flex flex-wrap justify-center items-center gap-3">
+                {['RFQ', 'AI Price Suggestion', 'Quote', 'Production', 'Shipment', 'Tracking', 'Delivery', 'Feedback', 'Analytics'].map((step, i) => (
+                  <React.Fragment key={step}>
+                    <div className="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-lg font-semibold text-sm border border-amber-500/30">
+                      {step}
+                    </div>
+                    {i < 8 && <ArrowRight className="text-gray-500" size={16} />}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Official Design System Documentation v1.0 */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">Official Design System Documentation v1.0</h2>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Brand Philosophy */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">1. Brand Philosophy</h3>
+            <ul className="space-y-3">
+              {['Data over decoration', 'Clarity over creativity', 'Structure over animation', 'Trust over trends'].map((item, i) => (
+                <li key={i} className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+                  <span className="w-2 h-2 bg-brass-500 rounded-full"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Color System */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">2. Color System</h3>
+            <div className="space-y-3">
+              {[
+                { name: 'Primary Base', value: '#0B1F3A', class: 'bg-[#0B1F3A]' },
+                { name: 'Secondary', value: '#1F3A5F', class: 'bg-[#1F3A5F]' },
+                { name: 'Surface', value: '#F4F6F8', class: 'bg-[#F4F6F8] border' },
+                { name: 'Accent Blue', value: '#0052CC', class: 'bg-[#0052CC]' },
+                { name: 'Success Green', value: '#1B7F5C', class: 'bg-[#1B7F5C]' },
+                { name: 'Warning Amber', value: '#D9822B', class: 'bg-[#D9822B]' },
+                { name: 'Danger Red', value: '#C23030', class: 'bg-[#C23030]' },
+              ].map((color, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className={`w-8 h-8 rounded-lg ${color.class}`}></div>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{color.name}</span>
+                  <span className="text-xs text-gray-500 font-mono">{color.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Typography System */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">3. Typography System</h3>
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs text-gray-500 mb-1">Primary Font: Inter</p>
+              </div>
+              {[
+                { name: 'H1', size: '24px', weight: 'SemiBold' },
+                { name: 'H2', size: '18px', weight: 'SemiBold' },
+                { name: 'Card Title', size: '16px', weight: 'Medium' },
+                { name: 'Body', size: '14px', weight: 'Regular' },
+                { name: 'Small Label', size: '12px', weight: 'Medium' },
+              ].map((type, i) => (
+                <div key={i} className="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
+                  <span className="font-medium text-gray-700 dark:text-gray-300">{type.name}</span>
+                  <span className="text-sm text-gray-500">{type.size} {type.weight}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Layout System */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">4. Layout System</h3>
+            <ul className="space-y-3 text-gray-600 dark:text-gray-300">
+              <li className="flex justify-between"><span>12-column grid</span><span className="font-mono text-sm">Yes</span></li>
+              <li className="flex justify-between"><span>Desktop width</span><span className="font-mono text-sm">1440px</span></li>
+              <li className="flex justify-between"><span>Margins/Gutters</span><span className="font-mono text-sm">24px</span></li>
+              <li className="flex justify-between"><span>Spacing</span><span className="font-mono text-sm">8px system</span></li>
+            </ul>
+          </div>
+
+          {/* Component Standards */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">5. Component Standards</h3>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
+              <li><strong>Buttons:</strong> Primary, Secondary, Danger variants</li>
+              <li><strong>Cards:</strong> White background, 8px radius, subtle shadow</li>
+              <li><strong>Tables:</strong> Zebra striping, sticky header, pagination</li>
+              <li><strong>Status Badges:</strong> Active, Pending, Rejected, Draft, Completed</li>
+            </ul>
+          </div>
+
+          {/* Dashboard Architecture */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">6. Dashboard Architecture</h3>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
+              <li>Super Admin Command Center</li>
+              <li>Manufacturing Dashboard</li>
+              <li>Sales Pipeline View</li>
+              <li>Logistics Dispatch Board</li>
+              <li>Finance & Compliance Control Panels</li>
+            </ul>
+          </div>
+
+          {/* AI Engine Visual Language */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">7. AI Engine Visual Language</h3>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
+              <li>AI-generated badge indicator</li>
+              <li>Confidence score display</li>
+              <li>Manual override toggle</li>
+              <li>Usage analytics dashboard</li>
+            </ul>
+          </div>
+
+          {/* Client Portal Guidelines */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">8. Client Portal Guidelines</h3>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
+              <li>Lighter theme variation</li>
+              <li>Simplified analytics</li>
+              <li>Order tracking and invoice downloads</li>
+              <li>Certificate and batch history access</li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
