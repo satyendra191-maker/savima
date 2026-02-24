@@ -98,19 +98,26 @@ const MegaMenu: React.FC<{ isOpen: boolean, onClose: () => void, onMouseEnter?: 
     if (!isOpen) return null;
 
     const productCategories = [
-        { name: 'Brass Inserts', path: '/products/brass', desc: 'Threaded, press-fit & molding inserts' },
-        { name: 'Precision Turned Parts', path: '/products/precision', desc: 'CNC turned components with high precision' },
-        { name: 'SS Fasteners', path: '/products/steel', desc: 'Stainless steel bolts, nuts & custom fasteners' },
-        { name: 'Hydraulic Fittings', path: '/products/hydraulic', desc: 'Compression & flare fittings for fluid systems' },
+        { name: 'CNC Turned Components', path: '/products?filter=turning', desc: 'Precision turned parts with ±0.005mm tolerance' },
+        { name: 'CNC Milled Parts', path: '/products?filter=milling', desc: '3-axis, 4-axis, 5-axis milling' },
+        { name: 'VMC Machined Parts', path: '/products?filter=vmc', desc: 'Vertical machining center components' },
+        { name: '5-Axis Complex Parts', path: '/products?filter=five-axis', desc: 'Single-setup complex geometries' },
+        { name: 'Precision Shafts & Pins', path: '/products/shafts-pins', desc: 'Ground & polished precision shafts' },
+        { name: 'Bushes & Sleeves', path: '/products/bushings-sleeves', desc: 'Bronze, brass, stainless steel' },
+        { name: 'Flanges & Fittings', path: '/products/flanges-fittings', desc: 'Pipe fittings for oil & gas' },
+        { name: 'Automotive Components', path: '/products/automotive', desc: 'IATF 16949 certified parts' },
+        { name: 'Medical Device Parts', path: '/products/medical', desc: 'ISO 13485 certified components' },
+        { name: 'Aerospace & Defense', path: '/products/aerospace-defense', desc: 'AS9100D certified precision parts' },
+        { name: 'Custom Prototypes', path: '/products/prototypes', desc: 'Rapid prototyping & low-volume' },
     ];
 
     return (
         <div 
-            className="absolute top-full left-0 w-80 bg-white dark:bg-gray-900 shadow-xl border-t-4 border-primary-500 z-40 animate-fade-in-up rounded-b-xl"
+            className="absolute top-full left-0 w-[500px] bg-white dark:bg-gray-900 shadow-xl border-t-4 border-primary-500 z-40 animate-fade-in-up rounded-b-xl"
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         >
-            <div className="py-2">
+            <div className="py-3 grid grid-cols-2 gap-1">
                 {productCategories.map((category) => (
                     <Link
                         key={category.name}
@@ -180,6 +187,7 @@ export const Navbar: React.FC = () => {
         { name: 'Home', path: '/' },
         { name: 'Products', path: '/products', hasMegaMenu: true },
         { name: 'Industries', path: '/industries' },
+        { name: 'Quality', path: '/quality' },
         { name: 'Case Studies', path: '/case-studies' },
         { name: 'Donate', path: '/donate' },
         { name: 'About Us', path: '/about' },
