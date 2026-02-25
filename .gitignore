@@ -29,3 +29,7 @@ test-*.ts
 test-*.js
 test-*.mjs
 test.mjs
+
+# Large media files
+*.webp
+*.mp4
