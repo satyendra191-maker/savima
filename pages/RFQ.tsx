@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Check, ChevronRight, ChevronLeft, Upload, FileText, X } from 'lucide-react';
+import { Check, ChevronRight, ChevronLeft, Upload, FileText, X, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { InquiryService } from '../src/lib/supabase';
 
 export const RFQForm: React.FC = () => {
     const [step, setStep] = useState(1);
@@ -20,6 +21,9 @@ export const RFQForm: React.FC = () => {
         notes: '',
         reference: ''
     });
+    const [loading, setLoading] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,7 +31,22 @@ export const RFQForm: React.FC = () => {
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
-            setFormData({ ...formData, drawing: e.target.files[0] });
+            const selectedFile = e.target.files[0];
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf', 'step', 'stp', 'dwg', 'dxf'];
+            const fileExt = selectedFile.name.split('.').pop()?.toLowerCase();
+
+            if (selectedFile.size > maxSize) {
+                setError("File exceeds 10MB limit.");
+                return;
+            }
+            if (!fileExt || !allowedExtensions.includes(fileExt)) {
+                setError("Invalid file type. Only PDF, STEP, CAD, and image files allowed.");
+                return;
+            }
+
+            setError('');
+            setFormData({ ...formData, drawing: selectedFile });
         }
     };
 
@@ -38,10 +57,98 @@ export const RFQForm: React.FC = () => {
     const nextStep = () => setStep(step + 1);
     const prevStep = () => setStep(step - 1);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        alert("Quote Request Submitted! (Demo)");
+        setLoading(true);
+        setError('');
+
+        try {
+            let attachmentUrl = '';
+
+            // Upload drawing if provided
+            if (formData.drawing) {
+                try {
+                    const url = await InquiryService.uploadAttachment(formData.drawing);
+                    if (url) {
+                        attachmentUrl = url;
+                    }
+                } catch (upErr) {
+                    console.error("Upload failed", upErr);
+                    // Continue but note the upload failure
+                }
+            }
+
+            // Build the message with all RFQ details
+            const message = `
+**RFQ Details:**
+- Category: ${formData.category || 'Not specified'}
+- Material: ${formData.material || 'Not specified'}
+- Quantity: ${formData.quantity || 'Not specified'}
+- Incoterms: ${formData.incoterms}
+- Urgency: ${formData.urgency}
+- Reference: ${formData.reference || 'None'}
+${formData.notes ? `\n**Additional Notes:**\n${formData.notes}` : ''}
+${attachmentUrl ? `\n**Drawing/Attachment:** ${attachmentUrl}` : ''}
+            `.trim();
+
+            // Submit to Supabase
+            await InquiryService.create({
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone || undefined,
+                company: formData.company || undefined,
+                message: message
+            });
+
+            setSubmitted(true);
+            // Reset form
+            setFormData({
+                name: '',
+                email: '',
+                company: '',
+                phone: '',
+                category: '',
+                material: '',
+                quantity: '',
+                drawing: null,
+                incoterms: 'EXW',
+                urgency: 'normal',
+                notes: '',
+                reference: ''
+            });
+            setStep(1);
+        } catch (err: any) {
+            console.error("Submission Error:", err);
+            setError(err.message || 'Failed to submit quote request. Please try again or contact us directly.');
+        } finally {
+            setLoading(false);
+        }
     };
+
+    // Success state
+    if (submitted) {
+        return (
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 pt-24">
+                <div className="max-w-3xl mx-auto px-4">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-8 border border-gray-100 dark:border-slate-800 text-center">
+                        <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+                        </div>
+                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Quote Request Submitted!</h2>
+                        <p className="text-slate-600 dark:text-slate-400 mb-6">
+                            Thank you for your request. Our team will review your requirements and get back to you within 24-48 hours.
+                        </p>
+                        <button
+                            onClick={() => setSubmitted(false)}
+                            className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl"
+                        >
+                            Submit Another Request
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 pt-24">
@@ -60,6 +167,14 @@ export const RFQForm: React.FC = () => {
                         </div>
                     ))}
                 </div>
+
+                {/* Error Message */}
+                {error && (
+                    <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl flex items-center gap-3">
+                        <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />
+                        <span className="text-red-700 dark:text-red-300">{error}</span>
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-8 border border-gray-100 dark:border-slate-800">
 
@@ -163,8 +278,12 @@ export const RFQForm: React.FC = () => {
                                     </select>
                                 </div>
                                 <div className="md:col-span-2">
+                                    <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Reference Number</label>
+                                    <input name="reference" placeholder="Your internal reference number (optional)" value={formData.reference} onChange={handleChange} className="w-full px-4 py-2 rounded-lg border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none" />
+                                </div>
+                                <div className="md:col-span-2">
                                     <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Additional Notes</label>
-                                    <textarea name="notes" rows={4} value={formData.notes} onChange={handleChange} className="w-full px-4 py-2 rounded-lg border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"></textarea>
+                                    <textarea name="notes" rows={4} value={formData.notes} onChange={handleChange} placeholder="Tolerances, certifications, special requirements..." className="w-full px-4 py-2 rounded-lg border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +291,7 @@ export const RFQForm: React.FC = () => {
 
                     <div className="flex justify-between mt-8 pt-6 border-t border-neutral-100 dark:border-neutral-700">
                         {step > 1 ? (
-                            <button type="button" onClick={prevStep} className="flex items-center gap-2 text-neutral-600 dark:text-neutral-300 font-medium hover:text-primary-600">
+                            <button type="button" onClick={prevStep} disabled={loading} className="flex items-center gap-2 text-neutral-600 dark:text-neutral-300 font-medium hover:text-primary-600 disabled:opacity-50">
                                 <ChevronLeft size={20} /> Back
                             </button>
                         ) : <div></div>}
@@ -182,8 +301,21 @@ export const RFQForm: React.FC = () => {
                                 Next Step <ChevronRight size={20} />
                             </button>
                         ) : (
-                            <button type="submit" className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
-                                Submit Request <Check size={20} />
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {loading ? (
+                                    <>
+                                        <Loader2 className="w-5 h-5 animate-spin" />
+                                        Submitting...
+                                    </>
+                                ) : (
+                                    <>
+                                        Submit Request <Check size={20} />
+                                    </>
+                                )}
                             </button>
                         )}
                     </div>

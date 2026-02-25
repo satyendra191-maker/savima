@@ -94,7 +94,7 @@ export const ProductCategoryPage: React.FC<ProductCategoryPageProps> = ({ catego
   const info = categoryInfo[category] || { title: 'Products', description: 'Browse our complete product catalog.', icon: '📦', color: 'text-primary-500', gradient: 'from-primary-500 to-primary-700' };
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-background-dark">
+    <div className="min-h-screen bg-neutral-50 dark:bg-slate-900">
       <div className={`bg-gradient-to-r ${info.gradient} dark:from-primary-700 dark:to-primary-900 py-16 pt-24`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 text-sm text-white/80 mb-4">

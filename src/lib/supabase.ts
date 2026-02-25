@@ -53,6 +53,7 @@ const createMockChain = () => {
 // Create client only if URL is valid and key is present.
 // We cast the mock to 'any' to bypass strict type checks for the complex Supabase client type.
 const shouldUseMock = !isValidSupabaseUrl || !hasValidKey;
+
 export const supabase = shouldUseMock
   ? {
     from: () => createMockChain(),
@@ -402,9 +403,11 @@ export const InquiryService = {
         .from('inquiries')
         .insert([inquiry]);
 
-      if (error) throw error;
-    } catch (e) {
-      console.warn("Inquiries table not available");
+      if (error) {
+        throw error;
+      }
+    } catch (e: any) {
+      // Silently fail - inquiry table may not exist in dev environment
     }
   },
 

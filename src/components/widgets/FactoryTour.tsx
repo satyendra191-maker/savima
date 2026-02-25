@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Play, X, ChevronRight, ChevronLeft, MapPin } from 'lucide-react';
+import { Play, X, ChevronRight, ChevronLeft, MapPin, Factory } from 'lucide-react';
+import { ImageWithFallback, FACTORY_PLACEHOLDER } from '../ui/ImageWithFallback';
 
 const STATIONS = [
   {
@@ -39,21 +40,41 @@ export const FactoryTour: React.FC = () => {
   const nextStation = () => setCurrentStation((prev) => (prev + 1) % STATIONS.length);
   const prevStation = () => setCurrentStation((prev) => (prev - 1 + STATIONS.length) % STATIONS.length);
 
+  // Handle keyboard navigation
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight') nextStation();
+    if (e.key === 'ArrowLeft') prevStation();
+    if (e.key === 'Escape') setIsOpen(false);
+  };
+
   if (!isOpen) {
     return (
-      <div className="relative h-[500px] w-full overflow-hidden group cursor-pointer" onClick={() => setIsOpen(true)}>
-        <img 
-          src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80" 
-          alt="Factory Tour" 
+      <div
+        className="relative h-[300px] sm:h-[400px] md:h-[500px] w-full overflow-hidden group cursor-pointer"
+        onClick={() => setIsOpen(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === 'Enter' && setIsOpen(true)}
+        aria-label="Open virtual factory tour"
+      >
+        <ImageWithFallback
+          src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80"
+          alt="Factory Tour"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          fallbackClassName="w-full h-full"
         />
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-          <div className="text-center text-white">
-            <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm group-hover:bg-brass-500/80 transition-colors">
-              <Play size={40} fill="currentColor" />
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:bg-black/40 transition-colors">
+          <div className="text-center text-white px-4">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm group-hover:bg-brass-500/80 transition-colors">
+              <Play size={32} className="sm:w-10 sm:h-10" fill="currentColor" />
             </div>
-            <h2 className="text-3xl font-bold">Virtual Factory Tour</h2>
-            <p className="mt-2 opacity-80">Click to explore our manufacturing facility</p>
+            <h2
+              className="text-2xl sm:text-3xl font-bold"
+              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
+            >
+              Virtual Factory Tour
+            </h2>
+            <p className="mt-2 opacity-80 text-sm sm:text-base">Click to explore our manufacturing facility</p>
           </div>
         </div>
       </div>
@@ -61,61 +82,74 @@ export const FactoryTour: React.FC = () => {
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-      <button 
-        onClick={() => setIsOpen(false)} 
-        className="absolute top-4 right-4 text-white hover:text-brass-500 z-10"
+    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center" onKeyDown={handleKeyDown}>
+      <button
+        onClick={() => setIsOpen(false)}
+        className="absolute top-4 right-4 p-3 text-white hover:text-brass-500 z-10 bg-black/50 rounded-full"
+        aria-label="Close tour"
       >
-        <X size={40} />
+        <X size={32} />
       </button>
 
       <div className="w-full max-w-6xl mx-4 relative">
         <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
           {/* Main Image */}
-          <div className="relative h-[60vh]">
-            <img 
-              src={STATIONS[currentStation].image} 
-              alt={STATIONS[currentStation].title} 
+          <div className="relative h-[50vh] sm:h-[60vh]">
+            <ImageWithFallback
+              src={STATIONS[currentStation].image}
+              alt={STATIONS[currentStation].title}
               className="w-full h-full object-cover"
+              fallbackClassName="w-full h-full"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
-            
+
             {/* Navigation */}
-            <button 
+            <button
               onClick={prevStation}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-full text-white transition"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm p-2 sm:p-3 rounded-full text-white transition min-w-[44px] min-h-[44px] flex items-center justify-center"
+              aria-label="Previous station"
             >
-              <ChevronLeft size={32} />
+              <ChevronLeft size={28} />
             </button>
-            <button 
+            <button
               onClick={nextStation}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-full text-white transition"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm p-2 sm:p-3 rounded-full text-white transition min-w-[44px] min-h-[44px] flex items-center justify-center"
+              aria-label="Next station"
             >
-              <ChevronRight size={32} />
+              <ChevronRight size={28} />
             </button>
 
             {/* Station Info */}
-            <div className="absolute bottom-0 left-0 w-full p-8 text-white">
-              <div className="flex items-center gap-2 mb-2">
+            <div className="absolute bottom-0 left-0 w-full p-4 sm:p-8 text-white">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span className="bg-brass-500 text-xs font-bold px-2 py-1 rounded">STATION {currentStation + 1}/{STATIONS.length}</span>
                 <span className="flex items-center gap-1 text-sm"><MapPin size={14} /> Jamnagar, Gujarat</span>
               </div>
-              <h2 className="text-3xl font-bold mb-2">{STATIONS[currentStation].title}</h2>
-              <p className="text-gray-300 max-w-2xl">{STATIONS[currentStation].description}</p>
+              <h2
+                className="text-xl sm:text-2xl md:text-3xl font-bold mb-2"
+                style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
+              >
+                {STATIONS[currentStation].title}
+              </h2>
+              <p className="text-gray-300 max-w-2xl text-sm sm:text-base">{STATIONS[currentStation].description}</p>
             </div>
           </div>
 
           {/* Thumbnails */}
-          <div className="bg-gray-800 p-4 flex gap-4 overflow-x-auto">
+          <div className="bg-gray-800 p-3 sm:p-4 flex gap-3 sm:gap-4 overflow-x-auto hide-scrollbar">
             {STATIONS.map((station, index) => (
               <button
                 key={station.id}
                 onClick={() => setCurrentStation(index)}
-                className={`flex-shrink-0 w-32 relative rounded-lg overflow-hidden border-2 transition ${
-                  currentStation === index ? 'border-brass-500' : 'border-transparent opacity-60 hover:opacity-100'
-                }`}
+                className={`flex-shrink-0 w-24 sm:w-32 relative rounded-lg overflow-hidden border-2 transition min-h-[48px] ${currentStation === index ? 'border-brass-500' : 'border-transparent opacity-60 hover:opacity-100'
+                  }`}
+                aria-label={`Go to ${station.title}`}
               >
-                <img src={station.image} alt={station.title} className="w-full h-20 object-cover" />
+                <ImageWithFallback
+                  src={station.image}
+                  alt={station.title}
+                  className="w-full h-16 sm:h-20 object-cover"
+                />
                 <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-1 text-xs text-white truncate">{station.title}</div>
               </button>
             ))}

@@ -67,27 +67,53 @@ export const SavimanLogo: React.FC<{ size?: 'sm' | 'md' | 'lg', onClick?: () => 
 
 const SearchOverlay: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onClose }) => {
     const [query, setQuery] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                onClose();
+            }
+        };
+        if (isOpen) {
+            document.addEventListener('keydown', handleKeyDown);
+        }
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isOpen, onClose]);
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (query.trim()) {
+            navigate(`/products?search=${encodeURIComponent(query.trim())}`);
+            setQuery('');
+            onClose();
+        }
+    };
 
     if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-start justify-center pt-32 animate-fade-in">
             <div className="w-full max-w-2xl px-4">
-                <div className="relative">
-                    <input
-                        autoFocus
-                        type="text"
-                        placeholder="Search products, categories, specs..."
-                        className="w-full bg-white dark:bg-gray-800 text-xl px-6 py-4 rounded-xl shadow-2xl outline-none border-2 border-brass-500"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                    />
-                    <button onClick={onClose} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800 dark:hover:text-white">
-                        <X size={24} />
-                    </button>
-                </div>
+                <form onSubmit={handleSearch}>
+                    <div className="relative">
+                        <input
+                            autoFocus
+                            type="text"
+                            placeholder="Search products, categories, specs..."
+                            className="w-full bg-white dark:bg-gray-800 text-xl px-6 py-4 rounded-xl shadow-2xl outline-none border-2 border-brass-500"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                        />
+                        <button type="button" onClick={onClose} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800 dark:hover:text-white">
+                            <X size={24} />
+                        </button>
+                    </div>
+                </form>
                 <div className="mt-4 bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-4">
-                    <p className="text-gray-500 dark:text-gray-400 text-sm">Start typing to search...</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">Press Enter to search or ESC to close</p>
                 </div>
             </div>
         </div>
@@ -245,6 +271,13 @@ export const Navbar: React.FC = () => {
                         </div>
 
                         <div className="flex items-center gap-2 md:gap-4">
+                            <button
+                                onClick={() => setIsSearchOpen(true)}
+                                className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                aria-label="Search"
+                            >
+                                <Search size={20} />
+                            </button>
                             <DarkModeToggle />
                             <LanguageSwitcher />
 
@@ -483,7 +516,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     ];
 
     return (
-        <div className="min-h-screen flex flex-col bg-neutral-50 dark:bg-background-dark transition-colors duration-300">
+        <div className="min-h-screen flex flex-col bg-neutral-50 dark:bg-slate-900 transition-colors duration-300">
             <ProgressBar />
             <Navbar />
             <AnnouncementBar />
@@ -492,22 +525,22 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             </main>
             <Footer />
 
-            {/* Mobile Bottom Navigation */}
-            <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:    gray-700 z-50 safe-area-pb">
-                <div className="flex items-center justify-around h-14">
+            {/* Mobile Bottom Navigation - Improved touch targets */}
+            <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 z-50 safe-area-pb">
+                <div className="flex items-center justify-around h-16">
                     {(mobileNavItems ?? []).filter(Boolean).map((item) => {
                         const Icon = item?.icon;
                         return (
                             <Link
                                 key={item?.name || Math.random()}
                                 to={item?.href || "/"}
-                                className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${location.pathname === item?.href
-                                    ? 'text-brass-600'
-                                    : 'text-gray-500 dark:text-gray-400'
+                                className={`flex flex-col items-center justify-center gap-1 px-4 py-2 min-w-[48px] min-h-[48px] rounded-lg transition-colors ${location.pathname === item?.href
+                                    ? 'text-brass-600 bg-brass-50 dark:bg-brass-900/20'
+                                    : 'text-gray-500 dark:text-gray-400 active:bg-gray-100 dark:active:bg-gray-800'
                                     }`}
                             >
-                                {Icon ? <Icon size={20} /> : null}
-                                <span className="text-[10px] font-medium">
+                                {Icon ? <Icon size={22} /> : null}
+                                <span className="text-[11px] font-medium">
                                     {item?.name}
                                 </span>
                             </Link>
@@ -517,32 +550,43 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                     <div className="relative">
                         <button
                             onClick={() => setMoreMenuOpen(!moreMenuOpen)}
-                            className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 ${moreMenuOpen ? 'text-brass-600' : 'text-gray-500 dark:text-gray-400'
+                            className={`flex flex-col items-center justify-center gap-1 px-4 py-2 min-w-[48px] min-h-[48px] rounded-lg transition-colors ${moreMenuOpen ? 'text-brass-600 bg-brass-50 dark:bg-brass-900/20' : 'text-gray-500 dark:text-gray-400 active:bg-gray-100 dark:active:bg-gray-800'
                                 }`}
+                            aria-label="More menu"
+                            aria-expanded={moreMenuOpen}
                         >
-                            <MoreHorizontal size={20} />
-                            <span className="text-[10px] font-medium">More</span>
+                            <MoreHorizontal size={22} />
+                            <span className="text-[11px] font-medium">More</span>
                         </button>
 
                         {moreMenuOpen && (
-                            <div className="absolute bottom-full mb-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-2 min-w-[180px]">
-                                {(moreNavItems ?? []).filter(Boolean).map((item) => {
-                                    const Icon = item?.icon;
-                                    return (
-                                        <Link
-                                            key={item?.name || Math.random()}
-                                            to={item?.href || "/"}
-                                            className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${item?.name === 'Donate'
-                                                ? 'text-red-600'
-                                                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                                                }`}
-                                        >
-                                            {Icon ? <Icon size={16} /> : null}
-                                            {item?.name}
-                                        </Link>
-                                    );
-                                })}
-                            </div>
+                            <>
+                                {/* Backdrop to close menu */}
+                                <div
+                                    className="fixed inset-0 z-40"
+                                    onClick={() => setMoreMenuOpen(false)}
+                                    aria-hidden="true"
+                                />
+                                <div className="absolute bottom-full mb-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-2 min-w-[200px] z-50 animate-fade-in-up">
+                                    {(moreNavItems ?? []).filter(Boolean).map((item) => {
+                                        const Icon = item?.icon;
+                                        return (
+                                            <Link
+                                                key={item?.name || Math.random()}
+                                                to={item?.href || "/"}
+                                                onClick={() => setMoreMenuOpen(false)}
+                                                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm min-h-[48px] transition-colors ${item?.name === 'Donate'
+                                                    ? 'text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'
+                                                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                                                    }`}
+                                            >
+                                                {Icon ? <Icon size={18} /> : null}
+                                                {item?.name}
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            </>
                         )}
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import { FactoryTour } from '../src/components/widgets/FactoryTour';
 import { ESG } from '../src/components/widgets/ESG';
 import { Awards } from '../src/components/widgets/Awards';
 import { Milestones } from '../src/components/widgets/Milestones';
+import { ImageWithFallback } from '../src/components/ui/ImageWithFallback';
 
 export const Home: React.FC = () => {
   return (
@@ -50,28 +51,28 @@ export const Home: React.FC = () => {
             {[
               {
                 name: 'Brass Inserts',
-                img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600', // Real brass finish hardware
+                img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
                 desc: 'Precision brass knurled inserts for plastic injection molding, superior torque & pull-out resistance.',
                 specs: ['CW614N Brass', '±0.01mm Tolerance', 'RoHS Compliant'],
                 path: '/products/brass'
               },
               {
                 name: 'Precision Turned Parts',
-                img: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?w=600', // Actual machined components
+                img: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=600&q=80',
                 desc: 'CNC turned components with tight tolerances, ideal for automotive & electronics.',
                 specs: ['5-Axis CNC', '±0.005mm', 'Custom Designs'],
                 path: '/products/other'
               },
               {
                 name: 'SS Fasteners',
-                img: 'https://images.unsplash.com/photo-16297316323ec-449301934960?w=600', // Nuts and Bolts Industrial
+                img: 'https://images.unsplash.com/photo-16297316323ec-449301934960?auto=format&fit=crop&w=600&q=80',
                 desc: 'Stainless steel nuts, bolts, anchor bolts & custom fasteners for industrial applications.',
                 specs: ['SS 304/316/316L', 'High Tensile', 'ISO Certified'],
                 path: '/products/steel'
               },
               {
                 name: 'Hydraulic Fittings',
-                img: 'https://images.unsplash.com/photo-1504917595217-d4dc5f649776?w=600', // Hydraulic Fittings Asset
+                img: 'https://images.unsplash.com/photo-1504917595217-d4dc5f649776?auto=format&fit=crop&w=600&q=80',
                 desc: 'Zero-leakage hydraulic fittings for oil & gas, marine & heavy industrial use.',
                 specs: ['SS 316L', '10,000 PSI', 'ISO 8434-1'],
                 path: '/products/steel'
@@ -79,7 +80,11 @@ export const Home: React.FC = () => {
             ].map((cat, i) => (
               <Link key={i} to={cat.path} className="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-gray-100 dark:border-gray-800">
                 <div className="h-48 overflow-hidden relative">
-                  <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <ImageWithFallback
+                    src={cat.img}
+                    alt={cat.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
                 <div className="p-5">
@@ -131,17 +136,20 @@ export const Home: React.FC = () => {
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-saviman-400 rounded-full blur-[150px]"></div>
         </div>
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter">
+          <h2
+            className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter"
+            style={{ textShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+          >
             Drive Your <span className="text-gradient-gold">Manufacturing</span> Innovation
           </h2>
           <p className="text-gray-300 mb-12 text-xl max-w-2xl mx-auto leading-relaxed">
             Join 500+ global brands who trust Saviman for mission-critical precision components.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link to="/contact" className="btn-primary text-xl px-12 py-5">
+            <Link to="/contact" className="btn-primary text-xl px-12 py-5 min-h-[52px]">
               Consult an Engineer
             </Link>
-            <Link to="/infrastructure" className="flex items-center justify-center gap-3 px-12 py-5 rounded-xl border-2 border-white/20 text-white hover:bg-white/10 transition-all font-bold text-xl backdrop-blur-md">
+            <Link to="/infrastructure" className="flex items-center justify-center gap-3 px-12 py-5 min-h-[52px] rounded-xl border-2 border-white/20 text-white hover:bg-white/10 transition-all font-bold text-xl backdrop-blur-md">
               Virtual Factory Tour
             </Link>
           </div>

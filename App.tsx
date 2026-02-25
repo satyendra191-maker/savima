@@ -23,11 +23,13 @@ import { PrivacyPolicy } from './src/pages/PrivacyPolicy';
 import { TermsOfService } from './src/pages/TermsOfService';
 import { NotFound } from './src/pages/NotFound';
 import { Donate } from './src/pages/Donate';
+import { Tracking } from './src/pages/Tracking';
+import BackendTest from './src/pages/BackendTest';
 import { Login } from './pages/admin/Login';
 import { ToastProvider } from './src/admin/components';
-import { 
-  CMSLayout, 
-  CMSDashboard, 
+import {
+  CMSLayout,
+  CMSDashboard,
 } from './src/pages/admin/CMS';
 import {
   AdminProductsPage,
@@ -101,10 +103,12 @@ const AppRoutes = () => {
         <Route path="/infrastructure" element={<Infrastructure />} />
         <Route path="/quality" element={<Quality />} />
         <Route path="/donate" element={<Donate />} />
+        <Route path="/tracking" element={<Tracking />} />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/rfq" element={<RFQForm />} />
+        {import.meta.env.DEV && <Route path="/test" element={<BackendTest />} />}
         <Route path="*" element={<NotFound />} />
       </Route>
 

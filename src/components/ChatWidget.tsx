@@ -100,7 +100,7 @@ export default function ChatWidget() {
     // Lead Capture Flow
     if (leadStep !== 'complete') {
       const updated = { ...leadData };
-      let nextStep: typeof leadStep = leadStep;
+      let nextStep: 'name' | 'company' | 'email' | 'phone' | 'requirements' | 'complete' = leadStep;
       let responseText = '';
 
       if (leadStep === 'name') {

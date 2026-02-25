@@ -107,7 +107,7 @@ export class ErrorBoundary extends Component<Props, State> {
 export class SuspenseFallback extends React.Component<{ children?: ReactNode }> {
   render() {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-50 dark:bg-background-dark">
+      <div className="min-h-screen flex items-center justify-center bg-neutral-50 dark:bg-slate-900">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-brass-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">Loading...</p>

@@ -1,46 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Users, Globe, Award, Shield, Factory, Clock, Target, Zap, CheckCircle, TrendingUp, Wrench, Star, Heart, Leaf } from 'lucide-react';
+import { getFormattedStats, getYearsExperience, COMPANY_STATS } from '../config/company';
+
+// Image component with fallback
+const ImageWithFallback: React.FC<{
+  src: string;
+  alt: string;
+  className?: string;
+}> = ({ src, alt, className }) => {
+  const [error, setError] = useState(false);
+
+  return error ? (
+    <div className={`${className} bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center`}>
+      <Factory className="w-16 h-16 text-slate-500" />
+    </div>
+  ) : (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      onError={() => setError(true)}
+      loading="lazy"
+    />
+  );
+};
 
 export const About: React.FC = () => {
+  const stats = getFormattedStats();
+  const yearsExperience = getYearsExperience();
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* ============================================
           HERO BLOCK - Full Width
-          Image: Wide shot of modern CNC machine shop in India (Prompt #1)
           ============================================ */}
       <section className="relative py-32 lg:py-40 overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image with fallback */}
         <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1920&q=80" 
+          <ImageWithFallback
+            src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1920&q=80"
             alt="Modern CNC machine shop floor with high-tech equipment"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/85 to-slate-900/70"></div>
         </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+            <h1
+              className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6"
+              style={{ textShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+            >
               Precision Manufacturing <span className="text-amber-400">Excellence</span><br />
               <span className="text-3xl md:text-4xl lg:text-5xl">From Jamnagar, For the World</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              World-class <strong>CNC machining in Gujarat</strong> — delivering high-accuracy precision components to global OEMs since 2010. 
+            <p
+              className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed"
+              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
+            >
+              World-class <strong className="text-white">CNC machining in Gujarat</strong> — delivering high-accuracy precision components to global OEMs since 1990.
               German & Japanese technology. Indian pricing. Global quality standards.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link 
-                to="/rfq" 
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-900 bg-amber-400 hover:bg-amber-500 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+              <Link
+                to="/rfq"
+                className="inline-flex items-center justify-center px-8 py-4 min-h-[52px] text-lg font-bold text-slate-900 bg-amber-400 hover:bg-amber-500 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
               >
                 Get Instant Quote
                 <ArrowRight className="ml-2" size={22} />
               </Link>
-              <Link 
-                to="/products" 
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white border-2 border-white/30 hover:bg-white/10 rounded-xl transition-all backdrop-blur-sm"
+              <Link
+                to="/products"
+                className="inline-flex items-center justify-center px-8 py-4 min-h-[52px] text-lg font-bold text-white border-2 border-white/30 hover:bg-white/10 rounded-xl transition-all backdrop-blur-sm"
               >
                 View Our Capabilities
               </Link>
@@ -50,16 +82,16 @@ export const About: React.FC = () => {
       </section>
 
       {/* ============================================
-          STATS BAR
+          STATS BAR - Using centralized config
           ============================================ */}
       <section className="relative -mt-16 relative z-20 mb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: 'Years Experience', value: '15+' },
-              { label: 'Countries Served', value: '25+' },
-              { label: 'Happy Clients', value: '200+' },
-              { label: 'Components Made', value: '2M+' },
+              { label: 'Years Experience', value: stats.yearsExperience },
+              { label: 'Countries Served', value: stats.countriesServed },
+              { label: 'Happy Clients', value: stats.happyClients },
+              { label: 'Components Made', value: COMPANY_STATS.componentsMade },
             ].map((stat, i) => (
               <div key={i} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl text-center border border-gray-100 dark:border-gray-800">
                 <div className="text-4xl font-black text-amber-500 mb-2">{stat.value}</div>
@@ -71,8 +103,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* ============================================
-          OUR STORY / JOURNEY - 150-200 words
-          Image: Team photo (Prompt #5) or Exterior facility (Prompt #7)
+          OUR STORY / JOURNEY
           ============================================ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -82,24 +113,24 @@ export const About: React.FC = () => {
             </h2>
             <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
               <p>
-                <strong>Founded in 2010 by Satyendra</strong> with a vision to transform precision manufacturing in India, Saviman began as a small CNC turning unit in Jamnagar's industrial zone.
+                <strong>Founded in 1990</strong> with a vision to transform precision manufacturing in India, Saviman began as a small CNC turning unit in Jamnagar's industrial zone.
               </p>
               <p>
                 Recognizing the gap between global quality expectations and domestic capabilities, we invested in <strong>German and Japanese CNC machines</strong> — a bold move that set us apart from the beginning. Our commitment to <strong>±0.005mm tolerances</strong> quickly earned trust among automotive and aerospace suppliers.
               </p>
               <p>
-                Today, with 25+ country exports and certifications including <strong>ISO 9001:2015</strong>, we continue to champion "Make in India" excellence — delivering the precision of Germany, the innovation of Japan, and the value of India to manufacturers worldwide.
+                Today, with {stats.countriesServed} country exports and certifications including <strong>ISO 9001:2015</strong>, we continue to champion "Make in India" excellence — delivering the precision of Germany, the innovation of Japan, and the value of India to manufacturers worldwide.
               </p>
             </div>
           </div>
           <div className="relative">
-            <img 
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" 
+            <ImageWithFallback
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
               alt="Saviman manufacturing facility exterior"
-              className="rounded-2xl shadow-2xl"
+              className="rounded-2xl shadow-2xl w-full"
             />
             <div className="absolute -bottom-6 -left-6 bg-amber-500 text-slate-900 px-6 py-4 rounded-xl shadow-lg">
-              <div className="text-3xl font-black">15+</div>
+              <div className="text-3xl font-black">{stats.yearsExperience}</div>
               <div className="text-sm font-bold">Years of Excellence</div>
             </div>
           </div>
@@ -146,7 +177,7 @@ export const About: React.FC = () => {
             The principles that guide every component we manufacture
           </p>
         </div>
-        
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {[
             { icon: Target, title: 'Precision', desc: '±0.005mm tolerance. Every component measured to perfection.', color: 'bg-amber-500' },
@@ -167,8 +198,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* ============================================
-          WHAT SETS US APART - 6-8 bullet points / 3-column cards
-          Image: Close-up macro of precision machined parts (Prompt #2)
+          WHAT SETS US APART
           ============================================ */}
       <section className="bg-slate-900 py-20 mb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -180,7 +210,7 @@ export const About: React.FC = () => {
               Why leading OEMs worldwide trust us for their precision component needs
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { title: 'German & Japanese Machines', desc: 'Hass, Mazak, DMG MORI — world-class CNC equipment for unmatched precision', icon: Factory },
@@ -204,7 +234,6 @@ export const About: React.FC = () => {
 
       {/* ============================================
           OUR FACILITIES & TEAM
-          Image: 5-axis machine operator (Prompt #3), Quality lab (Prompt #4)
           ============================================ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -219,7 +248,7 @@ export const About: React.FC = () => {
                   State-of-the-Art Facility
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Our 25,000 sq ft facility in Jamnagar houses <strong>CNC turning centers, 4-axis and 5-axis machining centers, VMCs</strong>, and automated inspection equipment. We run triple-shift operations to meet global demand.
+                  Our {COMPANY_STATS.facilitySize.toLocaleString()} sq ft facility in Jamnagar houses <strong>CNC turning centers, 4-axis and 5-axis machining centers, VMCs</strong>, and automated inspection equipment. We run triple-shift operations to meet global demand.
                 </p>
               </div>
               <div>
@@ -228,7 +257,7 @@ export const About: React.FC = () => {
                   Skilled Workforce
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  75+ trained technicians and engineers — including <strong>CNC programmers, quality inspectors, and process engineers</strong>. Regular upskilling on latest manufacturing technologies.
+                  {COMPANY_STATS.workforce}+ trained technicians and engineers — including <strong>CNC programmers, quality inspectors, and process engineers</strong>. Regular upskilling on latest manufacturing technologies.
                 </p>
               </div>
               <div>
@@ -243,23 +272,23 @@ export const About: React.FC = () => {
             </div>
           </div>
           <div className="order-1 lg:order-2 grid grid-cols-2 gap-4">
-            <img 
-              src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80" 
+            <ImageWithFallback
+              src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80"
               alt="Quality control technician using CMM machine"
               className="rounded-2xl shadow-lg w-full h-48 object-cover"
             />
-            <img 
-              src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=600&q=80" 
+            <ImageWithFallback
+              src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=600&q=80"
               alt="CNC 5-axis machining center operation"
               className="rounded-2xl shadow-lg w-full h-48 object-cover mt-8"
             />
-            <img 
-              src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=600&q=80" 
+            <ImageWithFallback
+              src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=600&q=80"
               alt="Precision machined components ready for dispatch"
               className="rounded-2xl shadow-lg w-full h-48 object-cover"
             />
-            <img 
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" 
+            <ImageWithFallback
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80"
               alt="Modern industrial facility exterior"
               className="rounded-2xl shadow-lg w-full h-48 object-cover mt-8"
             />
@@ -277,10 +306,10 @@ export const About: React.FC = () => {
               Why Partner with <span className="text-amber-500">Saviman</span>
             </h2>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: 'Proven Track Record', desc: '15+ years. 200+ clients. 25+ countries. We deliver what we promise.', icon: Star },
+              { title: 'Proven Track Record', desc: `${yearsExperience}+ years. ${stats.happyClients} clients. ${stats.countriesServed} countries. We deliver what we promise.`, icon: Star },
               { title: 'Technical Expertise', desc: 'Deep knowledge of materials: Aluminum, Stainless Steel, Brass, Titanium, Engineering Plastics.', icon: Wrench },
               { title: 'Scalable Capacity', desc: 'From 10 prototypes to 100,000+ production runs — we scale with your needs.', icon: TrendingUp },
               { title: 'Transparent Communication', desc: 'Dedicated project managers. Real-time updates. No surprises.', icon: Clock },
@@ -310,35 +339,38 @@ export const About: React.FC = () => {
           <div className="absolute top-0 right-0 w-96 h-96 bg-amber-400 rounded-full blur-[150px]"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-[150px]"></div>
         </div>
-        
+
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2
+            className="text-3xl md:text-4xl font-bold text-white mb-6"
+            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
+          >
             Ready to Experience Precision Manufacturing Excellence?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Join 200+ global manufacturers who trust Saviman for their most critical components. 
+            Join {stats.happyClients} global manufacturers who trust Saviman for their most critical components.
             Get a quote today — we'll respond within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              to="/rfq" 
-              className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-slate-900 bg-amber-400 hover:bg-amber-500 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+            <Link
+              to="/rfq"
+              className="inline-flex items-center justify-center px-10 py-5 min-h-[52px] text-lg font-bold text-slate-900 bg-amber-400 hover:bg-amber-500 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
               Get Instant Quote
               <ArrowRight className="ml-2" size={22} />
             </Link>
-            <Link 
-              to="/contact" 
-              className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white border-2 border-white/30 hover:bg-white/10 rounded-xl transition-all"
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center px-10 py-5 min-h-[52px] text-lg font-bold text-white border-2 border-white/30 hover:bg-white/10 rounded-xl transition-all"
             >
               Talk to Our Engineers
             </Link>
           </div>
-          
+
           <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
             <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> ISO 9001:2015 Certified</span>
-            <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> 15+ Years Experience</span>
-            <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> 25+ Country Exports</span>
+            <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> {stats.yearsExperience} Years Experience</span>
+            <span className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /> {stats.countriesServed} Country Exports</span>
           </div>
         </div>
       </section>
@@ -350,7 +382,7 @@ export const About: React.FC = () => {
         <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-8">
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Precision Manufacturing Jamnagar | CNC Machining Gujarat</h3>
           <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-            Saviman is a leading precision manufacturing company in Jamnagar, Gujarat, India, specializing in CNC turning, CNC milling, VMC, and 5-axis machining services. We manufacture custom precision parts for automotive, aerospace, defense, medical devices, electronics, and general engineering industries. With German and Japanese CNC machines, we achieve ±0.005mm tolerances and are ISO 9001:2015 certified. Our export footprint spans 25+ countries including USA, UK, Germany, Japan, and Australia. Contact us for high-accuracy machined components at competitive Indian pricing with global quality standards.
+            Saviman is a leading precision manufacturing company in Jamnagar, Gujarat, India, specializing in CNC turning, CNC milling, VMC, and 5-axis machining services. We manufacture custom precision parts for automotive, aerospace, defense, medical devices, electronics, and general engineering industries. With German and Japanese CNC machines, we achieve ±0.005mm tolerances and are ISO 9001:2015 certified. Our export footprint spans {stats.countriesServed} countries including USA, UK, Germany, Japan, and Australia. Contact us for high-accuracy machined components at competitive Indian pricing with global quality standards.
           </p>
         </div>
       </section>

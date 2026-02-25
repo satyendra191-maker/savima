@@ -45,70 +45,110 @@
   /* Base styles */
   html {
     scroll-behavior: smooth;
+    /* Prevent horizontal overflow on mobile */
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-[var(--bg-primary)] text-[var(--text-primary)];
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    /* Prevent horizontal overflow */
+    overflow-x: hidden;
+    /* Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Headings - Always dark in light mode, light in dark mode */
-  h1, h2, h3, h4, h5, h6 {
+  /* Headings - Ensure proper contrast */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply text-[var(--text-primary)];
+    /* Ensure headings have good contrast */
+    color: var(--text-primary);
   }
 
-  /* Paragraphs */
+  /* Paragraphs - Ensure readable contrast */
   p {
     @apply text-[var(--text-secondary)];
   }
 
-  /* Links */
+  /* Links - Ensure visible and accessible */
   a {
     @apply text-[var(--primary)] hover:text-[var(--accent)];
+    /* Ensure links are visible */
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  /* Focus styles for accessibility */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-brass-500 ring-offset-2;
   }
 
   /* Cards */
   .card {
     @apply bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg;
   }
+
+  /* Image handling */
+  img {
+    /* Prevent images from overflowing */
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 @layer components {
+
   /* ── BUTTONS ── */
   .btn-primary {
     @apply bg-[#0B1F3A] text-white px-4 py-2 rounded-md font-medium hover:bg-[#1F3A5F] transition-colors;
+    /* Ensure minimum touch target */
+    min-height: 44px;
   }
-  
+
   .btn-secondary {
     @apply border-2 border-[#1F3A5F] text-[#1F3A5F] px-4 py-2 rounded-md font-medium hover:bg-[#1F3A5F] hover:text-white transition-colors;
+    min-height: 44px;
   }
-  
+
   .btn-danger {
     @apply bg-[#C23030] text-white px-4 py-2 rounded-md font-medium hover:bg-[#A02828] transition-colors;
+    min-height: 44px;
   }
 
   /* ── FORM INPUTS ── */
   .input-field {
     @apply w-full px-4 py-2 rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent;
+    /* Ensure minimum touch target */
+    min-height: 44px;
   }
 
   /* ── BADGES ── */
   .badge-success {
     @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 px-2 py-1 rounded-full text-xs font-medium;
   }
-  
+
   .badge-warning {
     @apply bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400 px-2 py-1 rounded-full text-xs font-medium;
   }
-  
+
   .badge-danger {
     @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 px-2 py-1 rounded-full text-xs font-medium;
   }
-  
+
   .badge-info {
     @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 px-2 py-1 rounded-full text-xs font-medium;
   }
-  
+
   .badge-default {
     @apply bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300 px-2 py-1 rounded-full text-xs font-medium;
   }
@@ -122,15 +162,15 @@
   .table-header {
     @apply bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-100 text-xs font-semibold uppercase tracking-wider;
   }
-  
+
   .table-row {
     @apply border-b border-slate-200 dark:border-slate-700;
   }
-  
+
   .table-row-alt {
     @apply bg-slate-50 dark:bg-slate-800/50;
   }
-  
+
   .table-cell {
     @apply px-4 py-3 text-sm text-slate-700 dark:text-slate-300;
   }
@@ -138,23 +178,66 @@
   /* ── NAVIGATION ── */
   .nav-link {
     @apply text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 font-medium transition-colors;
+    /* Ensure touch target size */
+    min-height: 44px;
+    @apply flex items-center;
   }
-  
+
   .nav-link-active {
     @apply text-amber-600 dark:text-amber-400 font-semibold;
+  }
+
+  /* ── TEXT OVER IMAGES ── */
+  /* Use this class for text displayed over images to ensure readability */
+  .text-over-image {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    @apply text-white;
+  }
+
+  /* Gradient overlay for image backgrounds with text */
+  .image-text-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent;
+  }
+
+  /* ── SCROLLBAR STYLING ── */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.slate.400') transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-slate-400 rounded-full;
+  }
+
+  .dark .scrollbar-thin {
+    scrollbar-color: theme('colors.slate.600') transparent;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-slate-600;
   }
 }
 
 @layer utilities {
-  /* Text colors for both modes */
+
+  /* Text colors for both modes - WCAG AA compliant contrast */
   .text-content-primary {
     @apply text-slate-900 dark:text-white;
   }
-  
+
   .text-content-secondary {
     @apply text-slate-600 dark:text-slate-300;
   }
-  
+
   .text-content-muted {
     @apply text-slate-500 dark:text-slate-400;
   }
@@ -163,19 +246,93 @@
   .bg-content {
     @apply bg-white dark:bg-slate-800;
   }
-  
+
   .bg-surface {
     @apply bg-slate-100 dark:bg-slate-900;
+  }
+
+  /* Surface dark background */
+  .bg-surface-dark {
+    @apply bg-slate-800 dark:bg-slate-900;
   }
 
   /* Border utilities */
   .border-content {
     @apply border-slate-200 dark:border-slate-700;
   }
-  /* Animation Delays */
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
+
+  /* Text gradient gold */
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600;
+  }
+
+  /* Soft shadows */
+  .shadow-soft {
+    @apply shadow-md;
+  }
+
+  .shadow-soft-lg {
+    @apply shadow-xl;
+  }
+
+  /* Animation Delays - Using Tailwind's delay utilities */
+  /* Use: delay-100, delay-200, delay-300, etc. */
+  /* These are now defined in tailwind.config.js transitionDelay */
+
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Touch target minimum size for accessibility */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Safe area insets for mobile devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Prevent text selection on interactive elements */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Improve text legibility */
+  .text-legible {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* High contrast text for dark backgrounds */
+  .text-high-contrast {
+    @apply text-white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Focus visible only for keyboard navigation */
+  .focus-visible-only:focus:not(:focus-visible) {
+    outline: none;
+  }
 }

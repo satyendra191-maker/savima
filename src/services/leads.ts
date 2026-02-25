@@ -195,13 +195,18 @@ export const AIGeneratedLeadsService = {
   },
 
   async create(lead: Partial<AIGeneratedLead>) {
+    console.log('%c🤖 AIGeneratedLeadsService.create() called', 'color: #8b5cf6; font-weight: bold;', lead);
     const { data, error } = await supabase
       .from('ai_generated_leads')
       .insert([lead])
       .select()
       .single();
 
-    if (error) handleError(error, 'creating AI lead');
+    if (error) {
+      console.error('%c❌ AI Lead insert error:', 'color: #ef4444;', error);
+      handleError(error, 'creating AI lead');
+    }
+    console.log('%c✅ AI Lead saved successfully!', 'color: #22c55e;', data);
     return data;
   },
 

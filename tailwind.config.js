@@ -177,6 +177,7 @@ export default {
         'slide-in-right': 'slideInRight 0.5s ease-out forwards',
         'scale-in': 'scaleIn 0.3s ease-out forwards',
         'bounce-soft': 'bounceSoft 2s infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         fadeIn: {
@@ -199,6 +200,26 @@ export default {
           '0%, 100%': { transform: 'translateY(-5%)' },
           '50%': { transform: 'translateY(0)' },
         }
+      },
+      // Animation delays - moved from CSS to Tailwind config
+      transitionDelay: {
+        '100': '100ms',
+        '200': '200ms',
+        '300': '300ms',
+        '400': '400ms',
+        '500': '500ms',
+        '600': '600ms',
+        '700': '700ms',
+        '800': '800ms',
+        '900': '900ms',
+        '1000': '1000ms',
+      },
+      // Minimum touch target size for accessibility (44x44px)
+      minHeight: {
+        'touch': '44px',
+      },
+      minWidth: {
+        'touch': '44px',
       },
     },
   },

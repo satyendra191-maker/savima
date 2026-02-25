@@ -23,3 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Test scripts
+test-*.ts
+test-*.js
+test-*.mjs
+test.mjs
