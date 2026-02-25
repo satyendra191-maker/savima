@@ -51,28 +51,28 @@ export const Home: React.FC = () => {
             {[
               {
                 name: 'Brass Inserts',
-                img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
+                img: '/images/product-brass.svg',
                 desc: 'Precision brass knurled inserts for plastic injection molding, superior torque & pull-out resistance.',
                 specs: ['CW614N Brass', '±0.01mm Tolerance', 'RoHS Compliant'],
                 path: '/products/brass'
               },
               {
                 name: 'Precision Turned Parts',
-                img: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=600&q=80',
+                img: '/images/product-brass.svg',
                 desc: 'CNC turned components with tight tolerances, ideal for automotive & electronics.',
                 specs: ['5-Axis CNC', '±0.005mm', 'Custom Designs'],
                 path: '/products/other'
               },
               {
                 name: 'SS Fasteners',
-                img: 'https://images.unsplash.com/photo-16297316323ec-449301934960?auto=format&fit=crop&w=600&q=80',
+                img: '/images/product-brass.svg',
                 desc: 'Stainless steel nuts, bolts, anchor bolts & custom fasteners for industrial applications.',
                 specs: ['SS 304/316/316L', 'High Tensile', 'ISO Certified'],
                 path: '/products/steel'
               },
               {
                 name: 'Hydraulic Fittings',
-                img: 'https://images.unsplash.com/photo-1504917595217-d4dc5f649776?auto=format&fit=crop&w=600&q=80',
+                img: '/images/product-brass.svg',
                 desc: 'Zero-leakage hydraulic fittings for oil & gas, marine & heavy industrial use.',
                 specs: ['SS 316L', '10,000 PSI', 'ISO 8434-1'],
                 path: '/products/steel'

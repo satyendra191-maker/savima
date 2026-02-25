@@ -50,21 +50,14 @@ export const Hero: React.FC = () => {
         {/* Strong gradient overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/90 to-navy-900/70 z-10"></div>
 
-        {/* Background image with loading state */}
-        {!imageError ? (
-          <img
-            src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1920&q=80"
-            alt="Precision Manufacturing"
-            className={`absolute inset-0 w-full h-full object-cover opacity-50 transition-opacity duration-500 ${imageLoaded ? 'opacity-50' : 'opacity-0'}`}
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageError(true)}
-          />
-        ) : (
-          <div
-            className="absolute inset-0 bg-gradient-to-br from-navy-800 to-navy-900"
-            aria-hidden="true"
-          />
-        )}
+        {/* Background image - using local placeholder for reliability */}
+        <img
+          src="/images/hero-factory.svg"
+          alt="Precision Manufacturing"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-60' : 'opacity-0'}`}
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageError(true)}
+        />
 
         {/* Animated Grid */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] animate-pulse z-0"></div>

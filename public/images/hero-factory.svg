@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect fill="#0f172a" width="1920" height="1080"/>
+  <rect fill="#1e293b" x="0" y="600" width="1920" height="480"/>
+  <circle fill="#d4af37" cx="200" cy="200" r="80" opacity="0.3"/>
+  <circle fill="#d4af37" cx="1720" cy="300" r="120" opacity="0.2"/>
+  <rect fill="#334155" x="400" y="400" width="300" height="200" rx="10"/>
+  <rect fill="#475569" x="450" y="450" width="200" height="100" rx="5"/>
+  <rect fill="#64748b" x="800" y="350" width="400" height="250" rx="10"/>
+  <rect fill="#94a3b8" x="900" y="450" width="200" height="100" rx="5"/>
+  <polygon fill="#d4af37" points="960,200 1020,280 900,280"/>
+  <rect fill="#475569" x="1300" y="400" width="250" height="180" rx="10"/>
+  <line x1="0" y1="600" x2="1920" y2="600" stroke="#d4af37" stroke-width="2"/>
+  <text x="960" y="750" font-family="Arial" font-size="36" fill="#94a3b8" text-anchor="middle">SAVIMAN INDUSTRIES</text>
+  <text x="960" y="800" font-family="Arial" font-size="24" fill="#64748b" text-anchor="middle">Precision Brass & Stainless Steel Manufacturing</text>
+</svg>
